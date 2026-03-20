@@ -1,0 +1,177 @@
+# CLAUDE.md — Project Briefing
+
+Read this at the start of every session before touching any file.
+
+---
+
+## What this project is
+
+A professional reference architecture document set for a Class IIa medical device software company. It is being prepared by Tim Halmshaw (Principal Engineer, coming from HSBC Mobile Platform) as part of a CEO recruitment process at **Lifelight / xim Ltd**. The intended audience is the CTO, and potentially the wider engineering team.
+
+The documents must be technically credible, professionally presented, and demonstrate that Tim understands both where the company currently is and where it needs to get to. This is not a theoretical exercise — it reflects real conversations from real interviews.
+
+The repo is framed generically (not Lifelight-branded) so it can be shared professionally without appearing presumptuous. All content should read as "reference architecture for a Class IIa medical device company with these characteristics" rather than "here is what Lifelight should do."
+
+---
+
+## The company — what you need to know
+
+**Product:** Lifelight by xim Ltd, Southampton. A smartphone-based contactless blood pressure monitor. The phone camera captures micro colour changes in facial skin (remote photoplethysmography / rPPG) using the green colour spectrum. The RGB signal is sent to the cloud, processed by ML algorithms, and returns systolic/diastolic BP and pulse rate. No cuff, no hardware, no contact.
+
+**Regulatory status:** CE Class IIa under EU MDR (BP and heart rate). Pursuing FDA 510(k) or De Novo in the US. ISO 13485:2016 QMS in place. NHS Digital Toolkit compliant. ORCHA certified. Cyber Essentials Plus.
+
+**Current tech stack:**
+- Mobile SDK: iOS and Android (native, both platforms)
+- Signal processing and ML inference: Python / Flask web application
+- Cloud: Microsoft Azure
+- Deployment: new container instance per assessment (approx. 7p per assessment)
+- ML pipeline: data scientist-led, likely notebooks/scripts, no formal model versioning
+- CI/CD: not matured — "data scientist releasing software"
+- Monitoring/observability: minimal
+- Documentation: minimal to none
+- Testing: third-party engaged, not integrated into pipeline
+
+**Engineering team:** Approximately one person per discipline. Mobile engineer, data scientist/ML engineer, backend engineer, possibly DevOps. Small, specialist, research-background team.
+
+**Goals Tim is coming in to address:**
+1. Mature the CI/CD and release process to FDA-submission standard
+2. Reduce per-assessment cost (container-per-request is expensive and fragile)
+3. Introduce AI agents to multiply team throughput
+4. Build ML pipeline maturity (model versioning, experiment tracking, controlled releases)
+5. Position the company for acquisition — clean engineering story, auditable processes
+6. Replatform onto something resilient, maintainable, and scalable without disrupting existing NHS commitments
+
+---
+
+## Key technical decisions already made
+
+See DECISIONS.md for the full log. Summary:
+
+- **Azure, not AWS** — already on Azure, migration cost not justified
+- **GitHub Actions, not Jenkins or Azure DevOps** — better developer experience, managed infrastructure, native audit trail
+- **GitHub Issues + Projects, not Jira** — leaner, faster, traceability chain stays in GitHub
+- **Qualio for eQMS** — purpose-built for medical device companies, ISO 13485 ready, e-signatures
+- **TestRail for test management** — standalone, integrates with GitHub, regulated environment standard
+- **MLflow for ML experiment tracking** — open source, Azure-compatible, model registry capability
+- **Generic repo framing** — not Lifelight-branded, shareable as reference architecture
+
+---
+
+## The four priority phases
+
+**Phase 1 — Stabilise and make auditable (months 1–3)**
+Wrap existing system in proper engineering process. Source control discipline, reproducible builds, deployment records, model versioning. AI agents introduced here to maximise immediate value.
+
+**Phase 2 — Reduce cost and improve resilience (months 2–4)**
+Replace per-container pattern with inference service (warm pool or Azure ML endpoints). Target: under 1p per assessment. Also improves availability — container spin-up failures currently cause assessment failures.
+
+**Phase 3 — ML pipeline maturity (months 3–6)**
+MLflow or Azure ML for experiment tracking, model registry, versioned deployments. Directly unblocks FDA submission — can now demonstrate controlled model releases with full change history.
+
+**Phase 4 — Platform and developer experience (months 4–8)**
+SDK versioning strategy, B2B developer portal, Backstage for internal use, full observability stack. Acquirer-readiness layer.
+
+---
+
+## Trust zones (AI access model)
+
+**Zone 1 — Development:** AI has broad read/write on feature branches. Coding assistance, test generation, ADR drafting.
+
+**Zone 2 — Review and CI gate:** AI reads code, writes PR comments only. Review agent, compliance agent, traceability checks.
+
+**Zone 3 — Operations:** AI reads metrics and logs, writes GitHub Issues only. Incident summarisation, anomaly flagging.
+
+No agent can merge PRs, push to main/release branches, write to Qualio, modify infrastructure, or silence alerts. Ever.
+
+---
+
+## AI agents in this stack
+
+Four agents, each with a fixed identity and scoped permissions:
+
+1. **Code Review Agent** — triggered on PR, posts structured review (CRITICAL/WARNING/INFO), cannot approve or block
+2. **Compliance Agent** — triggered on PR, posts traceability report (req → test → execution), cannot block merge
+3. **Documentation Agent** — triggered on merge/release, drafts changelog and release records, cannot write to Qualio
+4. **Ops Agent** — triggered by alerts, queries Grafana/Loki, creates GitHub Issues, cannot remediate
+5. **ML Validation Agent** — triggered when ML-related files change, flags if change constitutes a design change requiring regulatory review
+
+---
+
+## Writing conventions
+
+- **Tone:** Professional, direct, technically credible. Not sales-y. Not academic. How a senior engineer briefs a CTO.
+- **Tense:** Present tense for target state ("the pipeline produces..."), past/current tense for current state ("currently, releases are...")
+- **Headers:** Use H2 for major sections, H3 for subsections. No H1 inside content files (reserved for the file title).
+- **Tables:** Use for comparisons, tool choices with rationale, compliance mappings. Keep concise.
+- **Regulatory references:** Always cite the specific clause (e.g. IEC 62304 §8.1, ISO 13485 §4.2). Do not make vague regulatory claims.
+- **Current state:** Always describe honestly and without judgment. The science is proven — the engineering wrapper is what needs work.
+- **Lifelight specifics:** Reference as "the company" or "the product" not by name. Exception: ADRs and compliance docs where specificity matters.
+- **File length:** Keep individual files under 300 lines. If a section grows beyond that, split it.
+- **No duplication:** If something is covered in another file, link to it. Do not repeat it.
+
+---
+
+## File structure
+
+```
+medtech-platform-docs/
+├── CLAUDE.md                          ← you are here
+├── DECISIONS.md                       ← key decisions log
+├── README.md                          ← human entry point
+├── SETUP-ISSUES.md                    ← GitHub Issues to create
+├── docs/
+│   ├── SKILLS.md                      ← general docs conventions
+│   ├── platform-overview.md           ← narrative "on a page"
+│   ├── current-state.md               ← honest current assessment
+│   ├── roadmap.md                     ← prioritised path to target
+│   ├── zones/
+│   │   ├── SKILLS.md
+│   │   ├── zone-1-development.md
+│   │   ├── zone-2-review-gate.md
+│   │   └── zone-3-operations.md
+│   ├── layers/
+│   │   ├── SKILLS.md
+│   │   ├── 01-requirements-risk.md
+│   │   ├── 02-design-ux.md
+│   │   ├── 03-qms-documentation.md
+│   │   ├── 04-source-control.md
+│   │   ├── 05-ci-cd-pipeline.md
+│   │   ├── 06-ml-pipeline.md
+│   │   ├── 07-testing-verification.md
+│   │   ├── 08-infrastructure.md
+│   │   ├── 09-observability.md
+│   │   └── 10-developer-experience.md
+│   ├── agents/
+│   │   ├── SKILLS.md
+│   │   ├── agent-code-review.md
+│   │   ├── agent-compliance.md
+│   │   ├── agent-documentation.md
+│   │   ├── agent-ops.md
+│   │   └── agent-ml-validation.md
+│   ├── compliance/
+│   │   ├── SKILLS.md
+│   │   ├── iso-13485-mapping.md
+│   │   ├── fda-510k-readiness.md
+│   │   ├── iec-62304-mapping.md
+│   │   └── gdpr-dsp-toolkit.md
+│   └── architecture/
+│       ├── SKILLS.md
+│       ├── cost-model.md
+│       └── decisions/
+│           └── ADR-001-azure-platform.md
+└── assets/
+    ├── platform-overview.html
+    └── current-vs-target.html
+```
+
+---
+
+## How to work across sessions
+
+1. Read this file first
+2. Read the SKILLS.md in the folder you're working in
+3. Check DECISIONS.md before making any tool or architectural choice
+4. Check open GitHub Issues to know what's in progress and what's next
+5. Use str_replace for edits — never rewrite a whole file unless it's a new file
+6. Keep files under 300 lines — split if needed
+7. Close the relevant GitHub Issue when a file is complete and Tim has reviewed it

@@ -1,0 +1,103 @@
+# DECISIONS.md — Key Decision Log
+
+Every significant architectural, tool, or process decision is recorded here with rationale. Before making a new choice, check here first to avoid relitigating settled decisions.
+
+---
+
+## Format
+
+Each entry: **Decision** | **Date** | **Rationale** | **Alternatives considered**
+
+---
+
+## Platform and Infrastructure
+
+### DEC-001 — Azure as the cloud platform
+**Date:** Session 1  
+**Decision:** Azure is the target cloud platform, not AWS or GCP.  
+**Rationale:** The company is already running on Azure. Migrating cloud providers would be a major distraction with no clinical or regulatory benefit. Azure has strong healthcare compliance posture (ISO 27001, SOC 2, HIPAA BAA available).  
+**Alternatives considered:** AWS (rejected — migration cost, no existing footprint), GCP (rejected — same reasons).
+
+---
+
+### DEC-002 — GitHub Actions as CI/CD, not Jenkins or Azure DevOps
+**Date:** Session 1  
+**Decision:** GitHub Actions for all CI/CD pipelines.  
+**Rationale:** Managed infrastructure — no server to validate as a computerised system under 21 CFR Part 11. Native integration with GitHub repos means the audit trail (every workflow run, every step, every artefact) is automatic. Better developer experience than Jenkins. Azure DevOps is an option given the Azure footprint but adds a second Microsoft tool without significant benefit over GitHub Actions.  
+**Alternatives considered:** Jenkins (rejected — infrastructure overhead, requires validation as computerised system), Azure DevOps Pipelines (rejected — GitHub Actions achieves same outcome with less context switching).
+
+---
+
+## Planning and Requirements
+
+### DEC-003 — GitHub Issues + Projects, not Jira
+**Date:** Session 1  
+**Decision:** GitHub Issues with custom templates and GitHub Projects for planning.  
+**Rationale:** Keeps the entire traceability chain (issue → branch → PR → build → deploy) within one system with one audit trail. Jira is slow, adds separate user management, and requires synchronisation with GitHub. At 20 people the complexity is not justified. Tim's experience at HSBC confirms Jira's overhead at scale.  
+**Alternatives considered:** Jira (rejected — overhead, separate system, Tim's prior negative experience), Linear (rejected — less established compliance story).
+
+---
+
+## Quality Management
+
+### DEC-004 — Qualio as eQMS
+**Date:** Session 1  
+**Decision:** Qualio for the Quality Management System.  
+**Rationale:** Purpose-built for medical device companies. ISO 13485 ready out of the box. Provides e-signatures (21 CFR Part 11), CAPA, NCR, training records, controlled document workflows. Far less engineering effort than building compliance workflows on top of Confluence or Notion.  
+**Alternatives considered:** Confluence (rejected — requires custom approval workflow plugins, not purpose-built), Veeva QMS (rejected — enterprise pricing, overkill at 20 people), Greenlight Guru (viable alternative if Qualio pricing is an issue).
+
+---
+
+## Testing
+
+### DEC-005 — TestRail for test management
+**Date:** Session 1  
+**Decision:** TestRail as the dedicated test management tool.  
+**Rationale:** Standalone (not tied to Jira), integrates with GitHub via API, well-established in regulated environments, generates traceability matrix directly. Third-party testing engagement can be given TestRail access to submit results, closing the traceability loop without manual data entry.  
+**Alternatives considered:** Xray for Jira (rejected — requires Jira as host, DEC-003 rules out Jira), Zephyr (viable but less established than TestRail in regulated contexts).
+
+---
+
+## ML Pipeline
+
+### DEC-006 — MLflow for experiment tracking and model registry
+**Date:** Session 1  
+**Decision:** MLflow as the ML experiment tracking and model registry solution.  
+**Rationale:** Open source, Azure-compatible, provides experiment tracking, model versioning, and a model registry. Directly addresses the FDA submission requirement to demonstrate controlled model releases. Data scientist-friendly — low adoption barrier. Can be self-hosted on Azure or use Azure ML's built-in MLflow compatibility.  
+**Alternatives considered:** Azure ML (viable — native Azure integration, but higher cost and more complex for a small team), DVC (viable for data versioning but less strong on model registry), Weights & Biases (good UX but SaaS-only, data residency concerns for clinical data).
+
+---
+
+## Documentation and Developer Experience
+
+### DEC-007 — Generic repo framing, not Lifelight-branded
+**Date:** Session 1  
+**Decision:** All documents framed as reference architecture for "a Class IIa medical device company" not explicitly as Lifelight/xim Ltd documentation.  
+**Rationale:** The repo may be shared publicly or with the CTO before Tim has a formal role. Lifelight-branded internal documentation created externally could appear presumptuous. Generic framing allows the repo to function as a professional portfolio piece that happens to match Lifelight's exact situation.  
+**Alternatives considered:** Lifelight-branded (rejected — professional risk), fully anonymised with no specific details (rejected — too vague to be credible).
+
+---
+
+### DEC-008 — Backstage as phase 2, GitHub Pages as phase 1
+**Date:** Session 1  
+**Decision:** GitHub Pages for immediate documentation publishing. Backstage introduced in phase 4 when team size and service count justify it.  
+**Rationale:** Backstage requires real infrastructure and operational overhead. At phase 1 with a small team and few services, the value doesn't justify the setup cost. GitHub Pages is immediate, free, and the TechDocs content is the same markdown — so Backstage can be introduced later without rewriting anything.  
+**Alternatives considered:** Backstage from day one (rejected — overhead not justified at phase 1), Confluence (rejected — separate system, DEC-004 gives Qualio that role for controlled docs).
+
+---
+
+## Repo and Workflow
+
+### DEC-009 — CLAUDE.md + per-folder SKILLS.md for session continuity
+**Date:** Session 1  
+**Decision:** CLAUDE.md at repo root contains full project briefing. Each folder has a SKILLS.md with section-specific conventions. DECISIONS.md logs all choices.  
+**Rationale:** Claude has no memory between sessions. These files provide the context needed to work accurately across multiple sessions without drift, duplication, or relitigating settled decisions. Combined with str_replace editing (never full-file rewrites), this keeps document quality high over time.  
+**Alternatives considered:** Relying on chat history (rejected — unreliable across sessions), single large context file (rejected — unwieldy, harder to maintain).
+
+---
+
+### DEC-010 — GitHub Issues as task board, not TODO.md
+**Date:** Session 1  
+**Decision:** GitHub Issues with labels (content / decision / review) and milestones per phase as the task tracking mechanism.  
+**Rationale:** Sits next to the files, visible to stakeholders, closeable on completion. A well-organised Issues board on a professional repo is itself a signal of engineering maturity — consistent with the message the whole project is trying to send.  
+**Alternatives considered:** TODO.md (rejected — flat list, not communicable, no status tracking), Notion board (rejected — separate system).
