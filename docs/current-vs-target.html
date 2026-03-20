@@ -9,35 +9,39 @@
 
   :root {
     --white: #ffffff;
-    --cream: #fffdf4;
+    --off-white: #f7f8fa;
     --grey-50: #f1f3f6;
     --grey-100: rgba(216,219,222,0.2);
-    --ink: #09213a;
-    --grey-700: #7f8b97;
-    --grey-200: #d8dbde;
-    --navy: #09213a;
-    --navy-mid: #0f2a4a;
-    --navy-light: #dce8f5;
-    --teal: #07646a;
-    --teal-mid: #04bca9;
+    --ink: #0d1b2a;
+    --grey-700: #6b7280;
+    --grey-200: #d1d5db;
+    --navy: #0d1b2a;
+    --navy-mid: #1a2940;
+    --navy-light: #e2e8f0;
+    --teal: #0b7a8a;
+    --teal-mid: #14b8a6;
     --teal-light: #e0f4f0;
-    --coral: #ff9452;
-    --coral-light: #fff0e6;
+    --brand: #00c389;
+    --brand-dark: #00a074;
+    --coral: #f97316;
+    --coral-light: #fff7ed;
     --blue: #3797c4;
     --blue-light: #e4f2f8;
-    --green: #1a7a4a;
-    --green-light: #d8f0e4;
-    --amber: #8a5a00;
-    --amber-light: #fef3d8;
-    --red: #8a1a2a;
-    --red-light: #fde8ea;
+    --green: #15803d;
+    --green-light: #dcfce7;
+    --amber: #92400e;
+    --amber-light: #fef3c7;
+    --red: #991b1b;
+    --red-light: #fee2e2;
+    --purple: #6d28d9;
+    --purple-light: #ede9fe;
   }
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   body {
     font-family: 'DM Sans', system-ui, sans-serif;
-    background: #e8e5df;
+    background: #e8ecf0;
     color: var(--ink);
     line-height: 1.5;
     -webkit-font-smoothing: antialiased;
@@ -46,7 +50,7 @@
   .page {
     max-width: 1100px;
     margin: 40px auto;
-    background: var(--cream);
+    background: var(--white);
     box-shadow: 0 1px 8px rgba(0,0,0,0.08);
   }
 
@@ -55,13 +59,13 @@
     background: var(--navy);
     color: var(--white);
     padding: 36px 48px 32px;
-  }
+    border-bottom: 3px solid var(--brand);
   .eyebrow {
     font-family: 'DM Mono', monospace;
     font-size: 10px;
     letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: var(--teal-mid);
+    color: var(--brand);
     margin-bottom: 10px;
   }
   .header h1 {
@@ -119,8 +123,8 @@
     border-bottom: 1px solid var(--grey-200);
   }
   .comp-header-target {
-    background: var(--teal-light);
-    color: var(--teal);
+    background: var(--brand-light, #e6fff5);
+    color: var(--brand-dark, #00a074);
     border-bottom: 1px solid var(--grey-200);
   }
 
@@ -139,7 +143,7 @@
     border-right: 1px solid var(--grey-200);
   }
   .comp-cell-target {
-    background: var(--cream);
+    background: var(--white);
     color: var(--ink);
   }
   .comp-row:last-child .comp-cell { border-bottom: none; }
@@ -154,7 +158,7 @@
     margin-bottom: 4px;
   }
   .comp-cell-target .comp-label {
-    color: var(--teal);
+    color: var(--brand-dark, #00a074);
   }
 
   /* ── PILLS ── */
@@ -188,7 +192,7 @@
   .t-purple .dot { background: var(--purple); }
   .t-red    { background: var(--red-light);    border-color: #d8a0a8; color: var(--red);    }
   .t-red    .dot { background: var(--red); }
-  .t-coral  { background: var(--coral-light);  border-color: #f0c8a0; color: #b35a20;       }
+  .t-coral  { background: var(--coral-light);  border-color: #f0c8a0; color: #9a3412;       }
   .t-coral  .dot { background: var(--coral); }
   .t-blue   { background: var(--blue-light);   border-color: #a0cce0; color: #1a6890;       }
   .t-blue   .dot { background: var(--blue); }
@@ -217,7 +221,7 @@
   .impact-value {
     font-size: 26px;
     font-weight: 700;
-    color: var(--teal);
+    color: var(--brand-dark, #00a074);
     margin-bottom: 2px;
   }
   .impact-label {
@@ -448,7 +452,7 @@
 
   <!-- FOOTER -->
   <div class="footer">
-    <div class="footer-status">DRAFT · FOR INTERNAL REVIEW · NOT A CONTROLLED DOCUMENT · v0.2</div>
+    <div class="footer-status">DRAFT · FOR INTERNAL REVIEW · NOT A CONTROLLED DOCUMENT · v0.3</div>
     <div class="footer-status">Phase 1–4 · 8-month programme</div>
   </div>
 

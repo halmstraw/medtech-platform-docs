@@ -2,7 +2,7 @@
 
 Read this before creating or editing any file in `assets/`.
 
-All visuals in this project follow a consistent professional corporate register — the same style used in HSBC Mobile Platform documentation. The aesthetic is clean, structured, and information-dense. Not a slide deck. Not a marketing brochure. A document a senior engineer would hand to a CTO.
+All visuals in this project follow a consistent professional corporate register. The aesthetic is clean, structured, and information-dense. Not a slide deck. Not a marketing brochure. A document a senior engineer would hand to a CTO.
 
 ---
 

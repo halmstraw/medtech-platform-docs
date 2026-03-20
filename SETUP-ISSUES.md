@@ -41,7 +41,7 @@ In GitHub → Issues → Milestones, create:
 - Milestone: `Phase 1 — Stabilise`
 - Body: Single-page HTML architecture diagram showing full target state stack. Current version exists from earlier session — needs refining to reflect Azure (not AWS), ML pipeline layer, and Lifelight-specific context. Reference the HSBC-style doc format.
 
-**#2 — Create current vs target state visual (assets/current-vs-target.html)**
+**#2 — Create current vs target state visual (docs/current-vs-target.html)**
 - Label: `content`
 - Milestone: `Phase 1 — Stabilise`
 - Body: Side-by-side or before/after visual showing current state (Flask, manual releases, no observability) versus target state. Should be compelling for a CTO who needs to understand the gap quickly.

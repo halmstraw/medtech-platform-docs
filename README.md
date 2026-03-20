@@ -87,7 +87,7 @@ The platform is designed for a small, specialist engineering team (approximately
 ## Visual assets
 
 - [Platform overview diagram](docs/platform-overview.html) — single-page architecture reference
-- [Current vs target state](assets/current-vs-target.html) — the gap and the path
+- [Current vs target state](docs/current-vs-target.html) — the gap and the path
 
 ---
 
