@@ -49,7 +49,7 @@ We're working on: [paste GitHub Issue title and number]
 
 See `assets/DESIGN-LANGUAGE.md` for the full reference.
 
-Summary: All visuals use the professional corporate register established in the first session — dark navy header (`#09213a`), warm cream body (`#fffdf4`), teal accent (`#04bca9`), coral highlight (`#ff9452`), blue info (`#3797c4`), colour-coded tool pills, DM Sans / DM Mono typography, clean structured layout matching the HSBC platform documentation style. Any new HTML visual must match the existing `assets/platform-overview.html` in tone and quality.
+Summary: All visuals use a professional corporate register aligned with the Lifelight brand — deep charcoal header (`#0d1b2a`), clean white body (`#ffffff`), brand green accent (`#00c389`), orange highlight (`#f97316`), blue info (`#3797c4`), colour-coded tool pills, DM Sans / DM Mono typography, clean structured layout. Any new HTML visual must match the existing `docs/platform-overview.html` in tone and quality.
 
 ---
 

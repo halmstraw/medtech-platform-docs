@@ -36,7 +36,7 @@ In GitHub → Issues → Milestones, create:
 
 ### Visual assets (highest priority — anchor everything else)
 
-**#1 — Create platform overview visual (assets/platform-overview.html)**
+**#1 — Create platform overview visual (docs/platform-overview.html)**
 - Label: `content`
 - Milestone: `Phase 1 — Stabilise`
 - Body: Single-page HTML architecture diagram showing full target state stack. Current version exists from earlier session — needs refining to reflect Azure (not AWS), ML pipeline layer, and Lifelight-specific context. Reference the HSBC-style doc format.
