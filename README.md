@@ -1,4 +1,7 @@
 # AI-Native Regulated Software Platform
+
+Disclaimer - This site is created as a proof of knowledge to aide job applications.  It is not intended to be used.
+
 ## Reference Architecture for a Class IIa Medical Device Company
 
 > A professional reference architecture covering end-to-end software delivery for a regulated medical device company — compliance, AI augmentation, and least-privilege access control integrated from day one.
