@@ -9,8 +9,10 @@ All visuals in this project follow a consistent professional corporate register 
 ## Aesthetic reference
 
 The reference document is the HSBC Mobile Platform Definition screenshot shared in session 1. Key characteristics:
-- White background with structured panel layout
-- Dark header bar with white text
+- Warm cream background (`#fffdf4`) with structured panel layout
+- Dark navy header bar (`#09213a`) with white text and teal accent (`#04bca9`)
+- Coral (`#ff9452`) for highlights, active states, and AI-related badges
+- Blue (`#3797c4`) for info and link accents
 - Colour-coded sections with clear labelling
 - Dense but readable — uses space efficiently
 - Every element earns its place — no decorative flourishes
@@ -42,24 +44,33 @@ The `assets/platform-overview.html` produced in session 1 is the canonical examp
 ```css
 /* Backgrounds */
 --white:        #ffffff;
---off-white:    #f8f9fb;
+--cream:        #fffdf4;   /* primary page background — warm off-white */
 --grey-50:      #f1f3f6;
---grey-100:     #e4e8ef;
+--grey-100:     #d8dbde33; /* light borders, dividers (with transparency) */
 
 /* Text */
---ink:          #0d1b2a;
---grey-700:     #3d4f63;
---grey-400:     #8896aa;
+--ink:          #09213a;   /* body text — matches navy for cohesion */
+--grey-700:     #7f8b97;   /* secondary text, labels */
+--grey-400:     #7f8b97;   /* dim text (same as 700 for this palette) */
+--grey-200:     #d8dbde;   /* borders, dividers */
 
 /* Primary — Navy (GitHub ecosystem, headers, primary actions) */
---navy:         #0f2a4a;
---navy-mid:     #1a4068;
+--navy:         #09213a;
+--navy-mid:     #0f2a4a;
 --navy-light:   #dce8f5;
 
 /* Teal (Observability tools) */
---teal:         #0b7a8a;
---teal-light:   #e0f4f6;
---teal-mid:     #5bbecb;
+--teal:         #07646a;   /* dark teal */
+--teal-mid:     #04bca9;   /* bright teal accent */
+--teal-light:   #e0f4f0;
+
+/* Coral (Highlights, CTAs, active states, AI badges) */
+--coral:        #ff9452;
+--coral-light:  #fff0e6;
+
+/* Blue (Info, links, secondary accent) */
+--blue:         #3797c4;
+--blue-light:   #e4f2f8;
 
 /* Green (Regulated / QMS tools) */
 --green:        #1a7a4a;
@@ -82,8 +93,8 @@ The `assets/platform-overview.html` produced in session 1 is the canonical examp
 --red-mid:      #d04060;
 
 /* Trust zones */
---zone1:        #0f2a4a;   /* Development — Navy */
---zone2:        #0b5a6a;   /* Review/CI — Teal-navy */
+--zone1:        #09213a;   /* Development — Navy */
+--zone2:        #07646a;   /* Review/CI — Teal */
 --zone3:        #1a5a3a;   /* Operations — Green */
 ```
 
@@ -122,7 +133,7 @@ Every tool reference in architecture diagrams uses a colour-coded pill. Colour i
 /* Colour variants */
 .t-navy   { background: var(--navy-light);   border-color: #b0c8e0; color: var(--navy);   }
 .t-navy   .dot { background: var(--navy); }
-.t-teal   { background: var(--teal-light);   border-color: #a8d8e0; color: var(--teal);   }
+.t-teal   { background: var(--teal-light);   border-color: #a8d8d0; color: var(--teal);   }
 .t-teal   .dot { background: var(--teal); }
 .t-green  { background: var(--green-light);  border-color: #a8d8be; color: var(--green);  }
 .t-green  .dot { background: var(--green); }
@@ -132,6 +143,10 @@ Every tool reference in architecture diagrams uses a colour-coded pill. Colour i
 .t-purple .dot { background: var(--purple); }
 .t-red    { background: var(--red-light);    border-color: #d8a0a8; color: var(--red);    }
 .t-red    .dot { background: var(--red); }
+.t-coral  { background: var(--coral-light);  border-color: #f0c8a0; color: #b35a20;       }
+.t-coral  .dot { background: var(--coral); }
+.t-blue   { background: var(--blue-light);   border-color: #a0cce0; color: #1a6890;       }
+.t-blue   .dot { background: var(--blue); }
 ```
 
 ---
@@ -146,7 +161,8 @@ Every tool reference in architecture diagrams uses a colour-coded pill. Colour i
 | Infrastructure / Azure | Amber | Terraform, AKS, Azure Key Vault, ACR, Azure Monitor |
 | Design | Purple | Figma, Storybook |
 | Security / Monitoring | Red | Snyk, SonarCloud, SBOM tools |
-| AI / Agents | Purple | Claude, MCP servers, agent tooling |
+| AI / Agents | Coral | Claude, MCP servers, agent tooling |
+| Info / Links | Blue | Documentation links, informational callouts |
 
 ---
 
@@ -156,8 +172,9 @@ All single-page architecture documents follow this structure:
 
 ```
 ┌─────────────────────────────────────────────────────┐
-│  HEADER — dark navy, white text, reg badges         │
-│  Title + subtitle + regulatory framework chips      │
+│  HEADER — dark navy (#09213a), white text, reg badges  │
+│  Title + subtitle + regulatory framework chips          │
+│  Teal accent (#04bca9) on eyebrow text                  │
 ├────────────────────────────────┬────────────────────┤
 │                                │                    │
 │  MAIN COLUMN (~75% width)      │  SIDEBAR (~25%)    │
@@ -172,7 +189,7 @@ All single-page architecture documents follow this structure:
 └─────────────────────────────────────────────────────┘
 ```
 
-Page width: 1100px, centred, white background, subtle shadow.
+Page width: 1100px, centred, cream background (`#fffdf4`), subtle shadow.
 
 ---
 
@@ -212,7 +229,7 @@ Monospace uppercase labels used to introduce sections:
   color: var(--grey-400);
   margin-bottom: 10px;
   padding-bottom: 6px;
-  border-bottom: 1px solid var(--grey-100);
+  border-bottom: 1px solid var(--grey-200);
 }
 ```
 
@@ -222,8 +239,8 @@ Monospace uppercase labels used to introduce sections:
 
 Three-column coloured band used to show the zone model:
 
-- Zone 1 (Development): `background: #0f2a4a`
-- Zone 2 (Review/CI): `background: #0b5a6a`
+- Zone 1 (Development): `background: #09213a`
+- Zone 2 (Review/CI): `background: #07646a`
 - Zone 3 (Operations): `background: #1a5a3a`
 
 All white text. Zone name in small monospace uppercase. Zone title in 12px semibold. Items as a list with `›` prefix.

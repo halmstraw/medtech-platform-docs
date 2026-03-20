@@ -49,7 +49,7 @@ We're working on: [paste GitHub Issue title and number]
 
 See `assets/DESIGN-LANGUAGE.md` for the full reference.
 
-Summary: All visuals use the professional corporate register established in the first session — dark navy header (`#0f2a4a`), white body, colour-coded tool pills, IBM Plex or DM Sans typography, clean structured layout matching the HSBC platform documentation style. Any new HTML visual must match the existing `assets/platform-overview.html` in tone and quality.
+Summary: All visuals use the professional corporate register established in the first session — dark navy header (`#09213a`), warm cream body (`#fffdf4`), teal accent (`#04bca9`), coral highlight (`#ff9452`), blue info (`#3797c4`), colour-coded tool pills, DM Sans / DM Mono typography, clean structured layout matching the HSBC platform documentation style. Any new HTML visual must match the existing `assets/platform-overview.html` in tone and quality.
 
 ---
 
@@ -170,8 +170,8 @@ medtech-platform-docs/
 ├── SETUP-ISSUES.md                    ← GitHub Issues to create
 ├── docs/
 │   ├── SKILLS.md                      ← general docs conventions
-│   ├── platform-overview.md           ← narrative "on a page"
-│   ├── current-state.md               ← honest current assessment
+│   ├── platform-overview.html         ← narrative "on a page"
+│   ├── current-vs-target.html               ← honest current assessment
 │   ├── roadmap.md                     ← prioritised path to target
 │   ├── zones/
 │   │   ├── SKILLS.md
@@ -209,8 +209,7 @@ medtech-platform-docs/
 │       └── decisions/
 │           └── ADR-001-azure-platform.md
 └── assets/
-    ├── platform-overview.html
-    └── current-vs-target.html
+    ├── DESIGN-LANGUAGE.md
 ```
 
 ---

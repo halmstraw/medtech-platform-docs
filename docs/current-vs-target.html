@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Current State vs Target State</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap');
+
+  :root {
+    --white: #ffffff;
+    --cream: #fffdf4;
+    --grey-50: #f1f3f6;
+    --grey-100: rgba(216,219,222,0.2);
+    --ink: #09213a;
+    --grey-700: #7f8b97;
+    --grey-200: #d8dbde;
+    --navy: #09213a;
+    --navy-mid: #0f2a4a;
+    --navy-light: #dce8f5;
+    --teal: #07646a;
+    --teal-mid: #04bca9;
+    --teal-light: #e0f4f0;
+    --coral: #ff9452;
+    --coral-light: #fff0e6;
+    --blue: #3797c4;
+    --blue-light: #e4f2f8;
+    --green: #1a7a4a;
+    --green-light: #d8f0e4;
+    --amber: #8a5a00;
+    --amber-light: #fef3d8;
+    --red: #8a1a2a;
+    --red-light: #fde8ea;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', system-ui, sans-serif;
+    background: #e8e5df;
+    color: var(--ink);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page {
+    max-width: 1100px;
+    margin: 40px auto;
+    background: var(--cream);
+    box-shadow: 0 1px 8px rgba(0,0,0,0.08);
+  }
+
+  /* ── HEADER ── */
+  .header {
+    background: var(--navy);
+    color: var(--white);
+    padding: 36px 48px 32px;
+  }
+  .eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--teal-mid);
+    margin-bottom: 10px;
+  }
+  .header h1 {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 6px;
+  }
+  .header-sub {
+    font-size: 14px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.7);
+  }
+
+  /* ── BODY ── */
+  .content {
+    padding: 32px 48px 40px;
+  }
+
+  .sl {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--grey-700);
+    margin-bottom: 12px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--grey-200);
+  }
+  .sl:not(:first-child) { margin-top: 32px; }
+
+  /* ── COMPARISON GRID ── */
+  .comp-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    border: 1px solid var(--grey-200);
+    border-radius: 3px;
+    overflow: hidden;
+    margin-bottom: 24px;
+  }
+  .comp-header {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 10px 20px;
+    font-weight: 500;
+  }
+  .comp-header-current {
+    background: var(--grey-50);
+    color: var(--grey-700);
+    border-right: 1px solid var(--grey-200);
+    border-bottom: 1px solid var(--grey-200);
+  }
+  .comp-header-target {
+    background: var(--teal-light);
+    color: var(--teal);
+    border-bottom: 1px solid var(--grey-200);
+  }
+
+  .comp-row {
+    display: contents;
+  }
+  .comp-cell {
+    padding: 14px 20px;
+    font-size: 12.5px;
+    line-height: 1.55;
+    border-bottom: 1px solid var(--grey-100);
+  }
+  .comp-cell-current {
+    background: var(--white);
+    color: var(--grey-700);
+    border-right: 1px solid var(--grey-200);
+  }
+  .comp-cell-target {
+    background: var(--cream);
+    color: var(--ink);
+  }
+  .comp-row:last-child .comp-cell { border-bottom: none; }
+
+  .comp-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9.5px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+  .comp-cell-target .comp-label {
+    color: var(--teal);
+  }
+
+  /* ── PILLS ── */
+  .pills { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 6px; }
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-family: 'DM Mono', monospace;
+    font-size: 10.5px;
+    font-weight: 500;
+    padding: 3px 8px;
+    border-radius: 2px;
+    border: 1px solid;
+    white-space: nowrap;
+  }
+  .pill .dot {
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .t-navy   { background: var(--navy-light);   border-color: #b0c8e0; color: var(--navy);   }
+  .t-navy   .dot { background: var(--navy); }
+  .t-teal   { background: var(--teal-light);   border-color: #a8d8d0; color: var(--teal);   }
+  .t-teal   .dot { background: var(--teal); }
+  .t-green  { background: var(--green-light);  border-color: #a8d8be; color: var(--green);  }
+  .t-green  .dot { background: var(--green); }
+  .t-amber  { background: var(--amber-light);  border-color: #e0c880; color: var(--amber);  }
+  .t-amber  .dot { background: var(--amber); }
+  .t-purple { background: var(--purple-light); border-color: #c0a8e8; color: var(--purple); }
+  .t-purple .dot { background: var(--purple); }
+  .t-red    { background: var(--red-light);    border-color: #d8a0a8; color: var(--red);    }
+  .t-red    .dot { background: var(--red); }
+  .t-coral  { background: var(--coral-light);  border-color: #f0c8a0; color: #b35a20;       }
+  .t-coral  .dot { background: var(--coral); }
+  .t-blue   { background: var(--blue-light);   border-color: #a0cce0; color: #1a6890;       }
+  .t-blue   .dot { background: var(--blue); }
+
+  .pill-dim {
+    background: var(--grey-50);
+    border-color: var(--grey-200);
+    color: var(--grey-700);
+  }
+  .pill-dim .dot { background: var(--grey-700); }
+
+  /* ── IMPACT CALLOUT ── */
+  .impact {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 16px;
+    margin-top: 8px;
+  }
+  .impact-card {
+    background: var(--white);
+    border: 1px solid var(--grey-200);
+    border-radius: 3px;
+    padding: 16px 18px;
+    text-align: center;
+  }
+  .impact-value {
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--teal);
+    margin-bottom: 2px;
+  }
+  .impact-label {
+    font-size: 11px;
+    color: var(--grey-700);
+  }
+  .impact-detail {
+    font-family: 'DM Mono', monospace;
+    font-size: 9.5px;
+    color: var(--grey-700);
+    margin-top: 4px;
+  }
+
+  /* ── ARROW ── */
+  .arrow-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 0 8px;
+  }
+  .arrow-line {
+    flex: 1;
+    height: 1px;
+    background: var(--grey-200);
+  }
+  .arrow-text {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--coral);
+    padding: 0 16px;
+    font-weight: 500;
+  }
+
+  /* ── FOOTER ── */
+  .footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 48px;
+    border-top: 1px solid var(--grey-200);
+  }
+  .footer-status {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    color: var(--grey-700);
+    letter-spacing: 0.08em;
+  }
+
+  @media print {
+    body { background: none; }
+    .page { box-shadow: none; margin: 0; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="eyebrow">Gap Analysis</div>
+    <h1>Current State vs Target State</h1>
+    <div class="header-sub">Honest engineering assessment — where we are, where we need to be, and what changes</div>
+  </div>
+
+  <!-- BODY -->
+  <div class="content">
+
+    <div class="sl">Engineering Comparison</div>
+
+    <div class="comp-grid">
+
+      <div class="comp-header comp-header-current">Current State</div>
+      <div class="comp-header comp-header-target">Target State</div>
+
+      <!-- CI/CD -->
+      <div class="comp-cell comp-cell-current">
+        <div class="comp-label">CI/CD &amp; Releases</div>
+        Manual releases performed by a data scientist. No formal build records. No reproducible builds from source. Container-per-assessment pattern.
+        <div class="pills">
+          <span class="pill pill-dim"><span class="dot"></span>Manual deploy</span>
+        </div>
+      </div>
+      <div class="comp-cell comp-cell-target">
+        <div class="comp-label">CI/CD &amp; Releases</div>
+        GitHub Actions pipeline: build → test → scan → deploy with approval gates. Immutable workflow logs. Every artefact traceable to commit. IEC 62304 §8.1 compliant.
+        <div class="pills">
+          <span class="pill t-navy"><span class="dot"></span>GitHub Actions</span>
+          <span class="pill t-amber"><span class="dot"></span>ACR</span>
+        </div>
+      </div>
+
+      <!-- Source Control -->
+      <div class="comp-cell comp-cell-current">
+        <div class="comp-label">Source Control</div>
+        Code in source control but minimal branch discipline. No signed commits, no CODEOWNERS, no branch protection rules enforced.
+        <div class="pills">
+          <span class="pill pill-dim"><span class="dot"></span>Basic Git</span>
+        </div>
+      </div>
+      <div class="comp-cell comp-cell-target">
+        <div class="comp-label">Source Control</div>
+        Trunk-based development with short-lived feature branches. Branch protection, signed commits, CODEOWNERS file. Full audit trail satisfying ISO 13485 §4.2.
+        <div class="pills">
+          <span class="pill t-navy"><span class="dot"></span>GitHub</span>
+          <span class="pill t-red"><span class="dot"></span>Snyk</span>
+          <span class="pill t-red"><span class="dot"></span>SonarCloud</span>
+        </div>
+      </div>
+
+      <!-- ML Pipeline -->
+      <div class="comp-cell comp-cell-current">
+        <div class="comp-label">ML Pipeline</div>
+        Data scientist-led workflow. Likely notebooks and scripts. No formal model versioning, experiment tracking, or controlled release process for ML artefacts.
+        <div class="pills">
+          <span class="pill pill-dim"><span class="dot"></span>Notebooks</span>
+          <span class="pill pill-dim"><span class="dot"></span>Scripts</span>
+        </div>
+      </div>
+      <div class="comp-cell comp-cell-target">
+        <div class="comp-label">ML Pipeline</div>
+        MLflow for experiment tracking and model registry. Versioned model deployments with full change history. Controlled releases directly enabling FDA submission evidence.
+        <div class="pills">
+          <span class="pill t-teal"><span class="dot"></span>MLflow</span>
+          <span class="pill t-amber"><span class="dot"></span>Azure ML</span>
+        </div>
+      </div>
+
+      <!-- Testing -->
+      <div class="comp-cell comp-cell-current">
+        <div class="comp-label">Testing &amp; Verification</div>
+        Third-party testing engagement. Results not integrated into build pipeline. No formal traceability matrix from requirement to test execution.
+        <div class="pills">
+          <span class="pill pill-dim"><span class="dot"></span>External testers</span>
+        </div>
+      </div>
+      <div class="comp-cell comp-cell-target">
+        <div class="comp-label">Testing &amp; Verification</div>
+        TestRail for test management. Traceability matrix: requirement → test case → execution → result. Third-party testers submit directly to TestRail.
+        <div class="pills">
+          <span class="pill t-green"><span class="dot"></span>TestRail</span>
+          <span class="pill t-navy"><span class="dot"></span>GitHub Actions</span>
+        </div>
+      </div>
+
+      <!-- QMS -->
+      <div class="comp-cell comp-cell-current">
+        <div class="comp-label">QMS &amp; Documentation</div>
+        ISO 13485 QMS in place. Minimal engineering documentation. No controlled document workflow integrated with development process.
+        <div class="pills">
+          <span class="pill pill-dim"><span class="dot"></span>Manual QMS</span>
+        </div>
+      </div>
+      <div class="comp-cell comp-cell-target">
+        <div class="comp-label">QMS &amp; Documentation</div>
+        Qualio eQMS with e-signatures, CAPA, training records. Controlled document workflows. GitHub Pages for engineering docs auto-synced from markdown.
+        <div class="pills">
+          <span class="pill t-green"><span class="dot"></span>Qualio</span>
+          <span class="pill t-navy"><span class="dot"></span>GitHub Pages</span>
+        </div>
+      </div>
+
+      <!-- Infrastructure -->
+      <div class="comp-cell comp-cell-current">
+        <div class="comp-label">Infrastructure</div>
+        Azure cloud. New container instance spun up per assessment (~7p each). Container spin-up failures cause assessment failures. No IaC. Minimal monitoring.
+        <div class="pills">
+          <span class="pill pill-dim"><span class="dot"></span>Azure</span>
+          <span class="pill pill-dim"><span class="dot"></span>Container Instances</span>
+        </div>
+      </div>
+      <div class="comp-cell comp-cell-target">
+        <div class="comp-label">Infrastructure</div>
+        Terraform IaC. AKS for container orchestration with warm inference pool. Target: &lt;1p per assessment. Full observability with Grafana, Prometheus, Loki stack.
+        <div class="pills">
+          <span class="pill t-amber"><span class="dot"></span>Terraform</span>
+          <span class="pill t-amber"><span class="dot"></span>AKS</span>
+          <span class="pill t-teal"><span class="dot"></span>Grafana</span>
+        </div>
+      </div>
+
+      <!-- Observability -->
+      <div class="comp-cell comp-cell-current">
+        <div class="comp-label">Observability</div>
+        Minimal monitoring. No centralised logging. No structured alerting. Incident response is reactive and manual.
+      </div>
+      <div class="comp-cell comp-cell-target">
+        <div class="comp-label">Observability</div>
+        Full stack: Grafana dashboards, Prometheus metrics, Loki logs, Sentry errors, PagerDuty on-call. Ops Agent creates GitHub Issues from alerts automatically.
+        <div class="pills">
+          <span class="pill t-teal"><span class="dot"></span>Grafana</span>
+          <span class="pill t-teal"><span class="dot"></span>Sentry</span>
+          <span class="pill t-teal"><span class="dot"></span>PagerDuty</span>
+          <span class="pill t-coral"><span class="dot"></span>Ops Agent</span>
+        </div>
+      </div>
+
+    </div><!-- /comp-grid -->
+
+    <div class="arrow-divider">
+      <div class="arrow-line"></div>
+      <div class="arrow-text">Measurable Impact ↓</div>
+      <div class="arrow-line"></div>
+    </div>
+
+    <div class="sl" style="margin-top:8px;">Key Outcomes</div>
+
+    <div class="impact">
+      <div class="impact-card">
+        <div class="impact-value">&lt; 1p</div>
+        <div class="impact-label">Per-assessment cost</div>
+        <div class="impact-detail">Down from ~7p</div>
+      </div>
+      <div class="impact-card">
+        <div class="impact-value">100%</div>
+        <div class="impact-label">Build traceability</div>
+        <div class="impact-detail">Commit → artefact → deploy</div>
+      </div>
+      <div class="impact-card">
+        <div class="impact-value">FDA</div>
+        <div class="impact-label">Submission readiness</div>
+        <div class="impact-detail">Controlled ML releases</div>
+      </div>
+    </div>
+
+  </div><!-- /content -->
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="footer-status">DRAFT · FOR INTERNAL REVIEW · NOT A CONTROLLED DOCUMENT · v0.2</div>
+    <div class="footer-status">Phase 1–4 · 8-month programme</div>
+  </div>
+
+</div><!-- /page -->
+</body>
+</html>
