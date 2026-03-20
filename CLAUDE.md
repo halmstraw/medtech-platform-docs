@@ -4,6 +4,55 @@ Read this at the start of every session before touching any file.
 
 ---
 
+## Session startup — copy this prompt
+
+Use this to begin any new session:
+
+```
+Read CLAUDE.md, DECISIONS.md, and docs/SKILLS.md.
+Repo is at: /Users/timhalmshaw/dev/med-startup/medtech-platform-docs
+Use Desktop Commander for all file operations — not the filesystem tool.
+For edits to existing files use edit_block (str_replace), never rewrite the whole file.
+We're working on: [paste GitHub Issue title and number]
+```
+
+---
+
+## Tools and environment
+
+**Machine:** Tim's Mac (timhalmshaw). Claude has Desktop Commander MCP access.
+
+**Allowed paths for Desktop Commander:**
+- `/Users/timhalmshaw/dev/` — primary working directory, repo lives here
+- `/Users/timhalmshaw/Documents/`
+
+**Do not use** the `filesystem` tool — it is locked to Desktop and Downloads only and will fail.
+
+**File operation rules:**
+- Read files: `desktop-commander:read_file`
+- Write new files: `desktop-commander:write_file`
+- Edit existing files: `desktop-commander:edit_block` — surgical str_replace only. Never rewrite a whole file unless it is genuinely new or the change exceeds ~50% of content.
+- Create directories: `desktop-commander:create_directory`
+- List contents: `desktop-commander:list_directory`
+- Shell commands: `desktop-commander:execute_command`
+
+**Critical editing discipline:**
+- Always `read_file` before editing — edit_block requires exact string matching and stale context causes failures
+- Make one focused change per edit_block call
+- Never rewrite a file to make a small change — find the exact block and replace only that
+
+**OptiPlex (homebridgehub):** Tim's home Debian server, Tailscale IP 100.80.15.123, code-server on port 8443. Not directly accessible from Claude — changes sync via GitHub push/pull.
+
+---
+
+## Visual design language
+
+See `assets/DESIGN-LANGUAGE.md` for the full reference.
+
+Summary: All visuals use the professional corporate register established in the first session — dark navy header (`#0f2a4a`), white body, colour-coded tool pills, IBM Plex or DM Sans typography, clean structured layout matching the HSBC platform documentation style. Any new HTML visual must match the existing `assets/platform-overview.html` in tone and quality.
+
+---
+
 ## What this project is
 
 A professional reference architecture document set for a Class IIa medical device software company. It is being prepared by Tim Halmshaw (Principal Engineer, coming from HSBC Mobile Platform) as part of a CEO recruitment process at **Lifelight / xim Ltd**. The intended audience is the CTO, and potentially the wider engineering team.
