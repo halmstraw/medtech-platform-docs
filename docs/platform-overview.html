@@ -1,0 +1,1220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI-Native Regulated Software Stack — Platform Overview</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap');
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --white: #ffffff;
+  --off-white: #f8f9fb;
+  --grey-50: #f1f3f6;
+  --grey-100: #e4e8ef;
+  --grey-200: #c8d0dc;
+  --grey-400: #8896aa;
+  --grey-700: #3d4f63;
+  --grey-900: #111c2d;
+  --ink: #0d1b2a;
+
+  --teal: #0b7a8a;
+  --teal-light: #e0f4f6;
+  --teal-mid: #5bbecb;
+
+  --navy: #0f2a4a;
+  --navy-mid: #1a4068;
+  --navy-light: #dce8f5;
+
+  --green: #1a7a4a;
+  --green-light: #d8f0e4;
+  --green-mid: #4ab87a;
+
+  --amber: #8a5a00;
+  --amber-light: #fef3d8;
+  --amber-mid: #f0a830;
+
+  --red: #8a1a2a;
+  --red-light: #fde8ea;
+  --red-mid: #d04060;
+
+  --purple: #5a2a8a;
+  --purple-light: #ede8f8;
+  --purple-mid: #9060d0;
+
+  --zone1: #0f2a4a;
+  --zone2: #0b5a6a;
+  --zone3: #1a5a3a;
+}
+
+body {
+  font-family: 'DM Sans', system-ui, sans-serif;
+  background: #e8ecf0;
+  color: var(--ink);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  padding: 32px 16px;
+}
+
+.page {
+  width: 1100px;
+  background: var(--white);
+  box-shadow: 0 4px 40px rgba(0,0,0,0.12);
+}
+
+/* ─── HEADER ─────────────────────────────────────────── */
+.page-header {
+  background: var(--navy);
+  color: white;
+  padding: 28px 36px 24px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 24px;
+  align-items: start;
+}
+
+.header-left .eyebrow {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--teal-mid);
+  margin-bottom: 8px;
+}
+
+.header-left h1 {
+  font-size: 26px;
+  font-weight: 700;
+  line-height: 1.15;
+  color: white;
+  margin-bottom: 6px;
+}
+
+.header-left .subtitle {
+  font-size: 13px;
+  font-weight: 300;
+  color: rgba(255,255,255,0.65);
+  line-height: 1.5;
+  max-width: 520px;
+}
+
+.header-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+}
+
+.reg-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  justify-content: flex-end;
+}
+
+.reg-chip {
+  font-family: 'DM Mono', monospace;
+  font-size: 9.5px;
+  padding: 3px 8px;
+  border-radius: 2px;
+  border: 1px solid rgba(255,255,255,0.25);
+  color: rgba(255,255,255,0.85);
+  letter-spacing: 0.06em;
+}
+
+.meta {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  color: rgba(255,255,255,0.35);
+  letter-spacing: 0.08em;
+  text-align: right;
+}
+
+/* ─── BODY LAYOUT ─────────────────────────────────────── */
+.body {
+  display: grid;
+  grid-template-columns: 1fr 260px;
+  gap: 0;
+}
+
+/* ─── MAIN COLUMN ─────────────────────────────────────── */
+.main {
+  padding: 24px 28px 28px 36px;
+  border-right: 1px solid var(--grey-100);
+}
+
+/* ─── BUSINESS CONTEXT ─────────────────────────────────── */
+.context-box {
+  background: var(--navy-light);
+  border-left: 3px solid var(--navy);
+  padding: 14px 18px;
+  margin-bottom: 20px;
+}
+
+.context-box .box-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--navy-mid);
+  margin-bottom: 7px;
+}
+
+.context-box p {
+  font-size: 12px;
+  line-height: 1.65;
+  color: var(--grey-700);
+}
+
+.context-box p strong { color: var(--navy); }
+
+/* ─── SECTION HEADERS ─────────────────────────────────── */
+.section-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--grey-400);
+  margin-bottom: 10px;
+  margin-top: 20px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--grey-100);
+}
+
+/* ─── TRUST ZONES DIAGRAM ─────────────────────────────── */
+.zones-wrapper { margin-bottom: 20px; }
+
+.zones-diagram {
+  display: flex;
+  gap: 0;
+  border: 1px solid var(--grey-200);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.zone {
+  flex: 1;
+  padding: 12px 14px;
+  border-right: 1px solid rgba(255,255,255,0.3);
+}
+
+.zone:last-child { border-right: none; }
+
+.zone-1 { background: var(--zone1); }
+.zone-2 { background: var(--zone2); }
+.zone-3 { background: var(--zone3); }
+
+.zone-name {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.5);
+  margin-bottom: 4px;
+}
+
+.zone-title {
+  font-size: 12px;
+  font-weight: 600;
+  color: white;
+  margin-bottom: 8px;
+}
+
+.zone-items {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.zone-items li {
+  font-size: 10.5px;
+  color: rgba(255,255,255,0.7);
+  padding-left: 10px;
+  position: relative;
+  line-height: 1.4;
+}
+
+.zone-items li::before {
+  content: '›';
+  position: absolute;
+  left: 0;
+  color: rgba(255,255,255,0.4);
+}
+
+.zone-ai {
+  margin-top: 8px;
+  padding-top: 7px;
+  border-top: 1px solid rgba(255,255,255,0.15);
+  font-size: 10px;
+  color: rgba(255,255,255,0.5);
+  font-style: italic;
+}
+
+.zone-ai span {
+  color: rgba(255,255,255,0.85);
+  font-style: normal;
+  font-weight: 500;
+}
+
+/* ─── ARCHITECTURE LAYERS ─────────────────────────────── */
+.layers-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 20px;
+}
+
+.layer-row {
+  display: grid;
+  grid-template-columns: 28px 1fr;
+  gap: 0;
+  border: 1px solid var(--grey-100);
+  border-radius: 3px;
+  overflow: hidden;
+  min-height: 44px;
+}
+
+.layer-num {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  font-weight: 500;
+  color: white;
+}
+
+.layer-content {
+  padding: 8px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.layer-title {
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.layer-tools {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+/* Tool pills */
+.tool-pill {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 8px;
+  border-radius: 2px;
+  font-size: 10px;
+  font-weight: 500;
+  border: 1px solid transparent;
+  white-space: nowrap;
+}
+
+.tool-pill .dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.t-navy   { background: var(--navy-light);   border-color: #b0c8e0; color: var(--navy); }
+.t-navy .dot { background: var(--navy); }
+.t-teal   { background: var(--teal-light);   border-color: #a8d8e0; color: var(--teal); }
+.t-teal .dot { background: var(--teal); }
+.t-green  { background: var(--green-light);  border-color: #a8d8be; color: var(--green); }
+.t-green .dot { background: var(--green); }
+.t-amber  { background: var(--amber-light);  border-color: #e0c880; color: var(--amber); }
+.t-amber .dot { background: var(--amber); }
+.t-purple { background: var(--purple-light); border-color: #c0a8e8; color: var(--purple); }
+.t-purple .dot { background: var(--purple); }
+.t-red    { background: var(--red-light);    border-color: #d8a0a8; color: var(--red); }
+.t-red .dot { background: var(--red); }
+
+/* Layer accent colours */
+.ln-navy   .layer-num { background: var(--navy); }
+.ln-green  .layer-num { background: var(--green); }
+.ln-purple .layer-num { background: var(--purple); }
+.ln-red    .layer-num { background: var(--red); }
+.ln-teal   .layer-num { background: var(--teal); }
+.ln-amber  .layer-num { background: var(--amber); }
+
+/* ─── CHANGE FLOW ─────────────────────────────────────── */
+.flow-section { margin-bottom: 8px; }
+
+.flow-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.flow-step {
+  display: grid;
+  grid-template-columns: 28px 140px 1fr auto;
+  gap: 0 10px;
+  align-items: start;
+  padding: 7px 0;
+  border-bottom: 1px solid var(--grey-50);
+}
+
+.flow-step:last-child { border-bottom: none; }
+
+.flow-num {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--grey-400);
+  text-align: center;
+  padding-top: 1px;
+}
+
+.flow-phase {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.flow-phase-name {
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.flow-phase-tool {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  color: var(--grey-400);
+}
+
+.flow-desc {
+  font-size: 11px;
+  line-height: 1.5;
+  color: var(--grey-700);
+}
+
+.flow-who {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.who-badge {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  padding: 2px 7px;
+  border-radius: 2px;
+  white-space: nowrap;
+}
+
+.who-human { background: var(--navy-light); color: var(--navy); }
+.who-ai    { background: var(--purple-light); color: var(--purple); }
+.who-auto  { background: var(--grey-50); color: var(--grey-700); }
+
+/* ─── SIDEBAR ─────────────────────────────────────────── */
+.sidebar {
+  padding: 24px 20px 28px;
+  background: var(--off-white);
+}
+
+.sidebar-section {
+  margin-bottom: 20px;
+}
+
+.sidebar-title {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--grey-400);
+  margin-bottom: 10px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid var(--grey-100);
+}
+
+/* Agent cards */
+.agent-card {
+  background: var(--white);
+  border: 1px solid var(--grey-100);
+  border-radius: 3px;
+  padding: 10px 12px;
+  margin-bottom: 6px;
+}
+
+.agent-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.agent-icon {
+  width: 26px;
+  height: 26px;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  flex-shrink: 0;
+}
+
+.agent-info { flex: 1; }
+
+.agent-name {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.agent-trigger {
+  font-family: 'DM Mono', monospace;
+  font-size: 8.5px;
+  color: var(--grey-400);
+}
+
+.agent-body ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.agent-body li {
+  font-size: 10px;
+  color: var(--grey-700);
+  padding-left: 10px;
+  position: relative;
+  line-height: 1.45;
+}
+
+.agent-body li::before {
+  content: '›';
+  position: absolute;
+  left: 0;
+  color: var(--grey-200);
+}
+
+.agent-body li.cannot {
+  color: var(--red);
+  font-weight: 500;
+}
+
+.agent-body li.cannot::before {
+  content: '✕';
+  color: var(--red-mid);
+  font-size: 8px;
+}
+
+/* Governance grid */
+.gov-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.gov-item {
+  display: flex;
+  gap: 8px;
+  align-items: start;
+}
+
+.gov-who {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  padding: 2px 6px;
+  border-radius: 2px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.gov-h { background: var(--navy-light); color: var(--navy); }
+.gov-a { background: var(--purple-light); color: var(--purple); }
+
+.gov-desc {
+  font-size: 10.5px;
+  color: var(--grey-700);
+  line-height: 1.45;
+}
+
+/* Compliance list */
+.compliance-list {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.compliance-item {
+  display: flex;
+  gap: 8px;
+  align-items: start;
+}
+
+.reg {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  padding: 2px 6px;
+  border-radius: 2px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.r1 { background: var(--navy-light); color: var(--navy); }
+.r2 { background: var(--green-light); color: var(--green); }
+.r3 { background: var(--teal-light); color: var(--teal); }
+.r4 { background: var(--amber-light); color: var(--amber); }
+
+.reg-desc {
+  font-size: 10.5px;
+  color: var(--grey-700);
+  line-height: 1.45;
+}
+
+/* Cost table */
+.cost-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.cost-table td {
+  font-size: 10.5px;
+  padding: 4px 0;
+  border-bottom: 1px solid var(--grey-50);
+  color: var(--grey-700);
+}
+
+.cost-table td:last-child {
+  text-align: right;
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  color: var(--ink);
+}
+
+.cost-total td {
+  font-weight: 600;
+  color: var(--ink) !important;
+  border-top: 2px solid var(--grey-200);
+  border-bottom: none;
+  padding-top: 6px;
+}
+
+/* ─── FOOTER ──────────────────────────────────────────── */
+.page-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 36px;
+  border-top: 1px solid var(--grey-100);
+  background: var(--off-white);
+}
+
+.footer-left {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  color: var(--grey-400);
+}
+
+.legend-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+}
+
+.footer-right {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  color: var(--grey-400);
+  letter-spacing: 0.08em;
+}
+
+/* Print / PDF support */
+@media print {
+  body { background: white; padding: 0; }
+  .page { box-shadow: none; width: 100%; }
+}
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- ═══ HEADER ════════════════════════════════════════════════════ -->
+  <div class="page-header">
+    <div class="header-left">
+      <div class="eyebrow">Reference Architecture</div>
+      <h1>AI-Native Regulated Software Stack</h1>
+      <div class="subtitle">Target-state platform architecture for a Class IIa medical device company. Azure-hosted, GitHub-native, AI-augmented development lifecycle with full regulatory traceability.</div>
+    </div>
+    <div class="header-right">
+      <div class="reg-chips">
+        <span class="reg-chip">IEC 62304</span>
+        <span class="reg-chip">ISO 13485</span>
+        <span class="reg-chip">ISO 14971</span>
+        <span class="reg-chip">EU MDR</span>
+        <span class="reg-chip">FDA 510(k)</span>
+        <span class="reg-chip">21 CFR Part 11</span>
+        <span class="reg-chip">IEC 62366-1</span>
+      </div>
+      <div class="meta">v0.2 · March 2026</div>
+    </div>
+  </div>
+
+  <!-- ═══ BODY ══════════════════════════════════════════════════════ -->
+  <div class="body">
+
+    <!-- ── MAIN COLUMN ────────────────────────────────────────────── -->
+    <div class="main">
+
+      <!-- Business context -->
+      <div class="context-box">
+        <div class="box-label">Business Context</div>
+        <p>
+          <strong>Product:</strong> Smartphone-based contactless vital signs monitor using remote photoplethysmography (rPPG). The phone camera captures micro colour changes in facial skin via the green spectrum; the RGB signal is processed by cloud ML algorithms to return systolic/diastolic BP and pulse rate. No cuff, no hardware, no contact.
+          <strong>Current state:</strong> Python/Flask inference, Azure-hosted, new container instance per assessment (~7p/assessment). ML pipeline is data-scientist-led with no formal model versioning. CI/CD not matured. 
+          <strong>Target:</strong> FDA-submission-ready engineering, under 1p per assessment, auditable ML pipeline, acquisition-ready.
+        </p>
+      </div>
+
+      <!-- Trust zones -->
+      <div class="section-label">Trust Zones — AI Access Model</div>
+      <div class="zones-wrapper">
+        <div class="zones-diagram">
+          <div class="zone zone-1">
+            <div class="zone-name">Zone 1</div>
+            <div class="zone-title">Development</div>
+            <ul class="zone-items">
+              <li>Coding assistance on feature branches</li>
+              <li>Test generation and stub creation</li>
+              <li>Draft ADRs and documentation</li>
+            </ul>
+            <div class="zone-ai">AI: <span>broad read/write on feature branches</span></div>
+          </div>
+          <div class="zone zone-2">
+            <div class="zone-name">Zone 2</div>
+            <div class="zone-title">Review &amp; CI Gate</div>
+            <ul class="zone-items">
+              <li>PR review commentary</li>
+              <li>Compliance traceability check</li>
+              <li>ML model change detection</li>
+            </ul>
+            <div class="zone-ai">AI: <span>read code, write PR comments only</span></div>
+          </div>
+          <div class="zone zone-3">
+            <div class="zone-name">Zone 3</div>
+            <div class="zone-title">Operations</div>
+            <ul class="zone-items">
+              <li>Incident summarisation</li>
+              <li>Anomaly and drift flagging</li>
+              <li>PMS data correlation</li>
+            </ul>
+            <div class="zone-ai">AI: <span>read metrics/logs, write Issues only</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Architecture layer stack -->
+      <div class="section-label">Architecture Layers — Target State</div>
+      <div class="layers-stack">
+
+        <!-- Layer 01: Requirements & Risk -->
+        <div class="layer-row ln-navy">
+          <div class="layer-num">01</div>
+          <div class="layer-content">
+            <div class="layer-title">Requirements &amp; Risk Management</div>
+            <div class="layer-tools">
+              <span class="tool-pill t-navy"><span class="dot"></span>GitHub Issues</span>
+              <span class="tool-pill t-navy"><span class="dot"></span>GitHub Projects</span>
+              <span class="tool-pill t-green"><span class="dot"></span>Qualio (Risk File)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Layer 02: Design & UX -->
+        <div class="layer-row ln-purple">
+          <div class="layer-num">02</div>
+          <div class="layer-content">
+            <div class="layer-title">Design &amp; UX</div>
+            <div class="layer-tools">
+              <span class="tool-pill t-purple"><span class="dot"></span>Figma</span>
+              <span class="tool-pill t-green"><span class="dot"></span>Qualio (Usability File)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Layer 03: QMS & Documentation -->
+        <div class="layer-row ln-green">
+          <div class="layer-num">03</div>
+          <div class="layer-content">
+            <div class="layer-title">QMS &amp; Controlled Documentation</div>
+            <div class="layer-tools">
+              <span class="tool-pill t-green"><span class="dot"></span>Qualio</span>
+              <span class="tool-pill t-navy"><span class="dot"></span>ADRs in-repo</span>
+              <span class="tool-pill t-navy"><span class="dot"></span>GitHub Pages</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Layer 04: Source Control -->
+        <div class="layer-row ln-navy">
+          <div class="layer-num">04</div>
+          <div class="layer-content">
+            <div class="layer-title">Source Control &amp; Configuration Management</div>
+            <div class="layer-tools">
+              <span class="tool-pill t-navy"><span class="dot"></span>GitHub</span>
+              <span class="tool-pill t-navy"><span class="dot"></span>Branch Protection Rulesets</span>
+              <span class="tool-pill t-red"><span class="dot"></span>Signed Commits</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Layer 05: CI/CD Pipeline -->
+        <div class="layer-row ln-navy">
+          <div class="layer-num">05</div>
+          <div class="layer-content">
+            <div class="layer-title">CI/CD Pipeline</div>
+            <div class="layer-tools">
+              <span class="tool-pill t-navy"><span class="dot"></span>GitHub Actions</span>
+              <span class="tool-pill t-red"><span class="dot"></span>Snyk</span>
+              <span class="tool-pill t-red"><span class="dot"></span>SonarCloud</span>
+              <span class="tool-pill t-red"><span class="dot"></span>Syft + CycloneDX</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Layer 06: ML Pipeline -->
+        <div class="layer-row ln-purple">
+          <div class="layer-num">06</div>
+          <div class="layer-content">
+            <div class="layer-title">ML Pipeline &amp; Model Lifecycle</div>
+            <div class="layer-tools">
+              <span class="tool-pill t-purple"><span class="dot"></span>MLflow</span>
+              <span class="tool-pill t-purple"><span class="dot"></span>Model Registry</span>
+              <span class="tool-pill t-amber"><span class="dot"></span>Azure ML Endpoints</span>
+              <span class="tool-pill t-purple"><span class="dot"></span>Experiment Tracking</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Layer 07: Testing & Verification -->
+        <div class="layer-row ln-green">
+          <div class="layer-num">07</div>
+          <div class="layer-content">
+            <div class="layer-title">Testing &amp; Verification</div>
+            <div class="layer-tools">
+              <span class="tool-pill t-green"><span class="dot"></span>TestRail</span>
+              <span class="tool-pill t-navy"><span class="dot"></span>Playwright</span>
+              <span class="tool-pill t-green"><span class="dot"></span>Traceability Matrix</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Layer 08: Infrastructure -->
+        <div class="layer-row ln-amber">
+          <div class="layer-num">08</div>
+          <div class="layer-content">
+            <div class="layer-title">Infrastructure &amp; Environments</div>
+            <div class="layer-tools">
+              <span class="tool-pill t-amber"><span class="dot"></span>Azure (AKS)</span>
+              <span class="tool-pill t-amber"><span class="dot"></span>Terraform</span>
+              <span class="tool-pill t-amber"><span class="dot"></span>Azure Key Vault</span>
+              <span class="tool-pill t-amber"><span class="dot"></span>ACR</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Layer 09: Observability -->
+        <div class="layer-row ln-teal">
+          <div class="layer-num">09</div>
+          <div class="layer-content">
+            <div class="layer-title">Observability &amp; Post-Market Surveillance</div>
+            <div class="layer-tools">
+              <span class="tool-pill t-teal"><span class="dot"></span>Grafana Cloud</span>
+              <span class="tool-pill t-teal"><span class="dot"></span>Prometheus</span>
+              <span class="tool-pill t-teal"><span class="dot"></span>Loki</span>
+              <span class="tool-pill t-teal"><span class="dot"></span>Sentry</span>
+              <span class="tool-pill t-teal"><span class="dot"></span>PagerDuty</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Layer 10: Developer Experience -->
+        <div class="layer-row ln-navy">
+          <div class="layer-num">10</div>
+          <div class="layer-content">
+            <div class="layer-title">Developer Experience &amp; Platform</div>
+            <div class="layer-tools">
+              <span class="tool-pill t-navy"><span class="dot"></span>Backstage (Phase 4)</span>
+              <span class="tool-pill t-navy"><span class="dot"></span>GitHub Pages</span>
+              <span class="tool-pill t-navy"><span class="dot"></span>Renovate</span>
+              <span class="tool-pill t-navy"><span class="dot"></span>ADR Process</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Change ticket flow -->
+      <div class="section-label">Change Ticket Flow — End to End</div>
+      <div class="flow-section">
+        <div class="flow-steps">
+
+          <div class="flow-step">
+            <div class="flow-num">01</div>
+            <div class="flow-phase">
+              <div class="flow-phase-name">Requirement</div>
+              <div class="flow-phase-tool">GitHub Issues</div>
+            </div>
+            <div class="flow-desc">Issue created with structured template: req-id, risk-class (ISO 14971), sw-class (IEC 62304), design-input-ref to Qualio DHF.</div>
+            <div class="flow-who">
+              <span class="who-badge who-human">Human</span>
+            </div>
+          </div>
+
+          <div class="flow-step">
+            <div class="flow-num">02</div>
+            <div class="flow-phase">
+              <div class="flow-phase-name">Development</div>
+              <div class="flow-phase-tool">Feature Branch</div>
+            </div>
+            <div class="flow-desc">Engineer works on feature branch. Zone 1 AI assists with code generation, test stubs, and draft documentation. Branch named with issue number.</div>
+            <div class="flow-who">
+              <span class="who-badge who-human">Human</span>
+              <span class="who-badge who-ai">AI assist</span>
+            </div>
+          </div>
+
+          <div class="flow-step">
+            <div class="flow-num">03</div>
+            <div class="flow-phase">
+              <div class="flow-phase-name">Pull Request</div>
+              <div class="flow-phase-tool">GitHub</div>
+            </div>
+            <div class="flow-desc">PR raised against main. Linked to originating issue. Structured description template with change type, risk impact, and test plan.</div>
+            <div class="flow-who">
+              <span class="who-badge who-human">Human</span>
+            </div>
+          </div>
+
+          <div class="flow-step">
+            <div class="flow-num">04</div>
+            <div class="flow-phase">
+              <div class="flow-phase-name">CI Pipeline</div>
+              <div class="flow-phase-tool">GitHub Actions</div>
+            </div>
+            <div class="flow-desc">Lint, unit tests, Snyk scan, SonarCloud analysis, Playwright E2E, TestRail results posted, SBOM generated. All results archived as build artefacts.</div>
+            <div class="flow-who">
+              <span class="who-badge who-auto">Automated</span>
+            </div>
+          </div>
+
+          <div class="flow-step">
+            <div class="flow-num">05</div>
+            <div class="flow-phase">
+              <div class="flow-phase-name">AI Review</div>
+              <div class="flow-phase-tool">Review · Compliance · ML Agents</div>
+            </div>
+            <div class="flow-desc">Review agent posts findings by severity. Compliance agent posts traceability report. ML validation agent flags if change constitutes a design change. All Zone 2 — comment only.</div>
+            <div class="flow-who">
+              <span class="who-badge who-ai">AI only</span>
+            </div>
+          </div>
+
+          <div class="flow-step">
+            <div class="flow-num">06</div>
+            <div class="flow-phase">
+              <div class="flow-phase-name">Human Review</div>
+              <div class="flow-phase-tool">GitHub PR</div>
+            </div>
+            <div class="flow-desc">Two engineers review diff and agent reports. Engineer addresses findings. Lead confirms risk register is updated if applicable. Both approve.</div>
+            <div class="flow-who">
+              <span class="who-badge who-human">Human ×2</span>
+            </div>
+          </div>
+
+          <div class="flow-step">
+            <div class="flow-num">07</div>
+            <div class="flow-phase">
+              <div class="flow-phase-name">Merge &amp; Deploy</div>
+              <div class="flow-phase-tool">GitHub · AKS</div>
+            </div>
+            <div class="flow-desc">Human merges to main. Container built, image pushed to ACR, SBOM signed, deployed to staging via Terraform/AKS. Sentry release created. Docs agent drafts changelog PR.</div>
+            <div class="flow-who">
+              <span class="who-badge who-human">Human</span>
+              <span class="who-badge who-auto">Auto deploy</span>
+            </div>
+          </div>
+
+          <div class="flow-step">
+            <div class="flow-num">08</div>
+            <div class="flow-phase">
+              <div class="flow-phase-name">Release Record</div>
+              <div class="flow-phase-tool">Qualio · GitHub</div>
+            </div>
+            <div class="flow-desc">Docs agent drafts Software Release Record. Release manager reviews, uploads to Qualio, routes for e-signature approval. Production deployment requires manual gate.</div>
+            <div class="flow-who">
+              <span class="who-badge who-ai">AI draft</span>
+              <span class="who-badge who-human">Human approve</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ── SIDEBAR ────────────────────────────────────────────────── -->
+    <div class="sidebar">
+
+      <!-- AI Agents -->
+      <div class="sidebar-section">
+        <div class="sidebar-title">AI Agents</div>
+
+        <div class="agent-card">
+          <div class="agent-header">
+            <div class="agent-icon" style="background:var(--navy-light);color:var(--navy);">&#x1F50D;</div>
+            <div class="agent-info">
+              <div class="agent-name">Code Review Agent</div>
+              <div class="agent-trigger">Trigger: PR opened / updated</div>
+            </div>
+          </div>
+          <div class="agent-body">
+            <ul>
+              <li>Reviews diff for quality and security patterns</li>
+              <li>Posts findings: CRITICAL / WARNING / INFO</li>
+              <li>Checks compliance field checklist</li>
+              <li class="cannot">Cannot approve or block PR</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="agent-card">
+          <div class="agent-header">
+            <div class="agent-icon" style="background:var(--green-light);color:var(--green);">&#x2713;</div>
+            <div class="agent-info">
+              <div class="agent-name">Compliance Agent</div>
+              <div class="agent-trigger">Trigger: PR raised</div>
+            </div>
+          </div>
+          <div class="agent-body">
+            <ul>
+              <li>Verifies req &rarr; test &rarr; execution chain</li>
+              <li>Flags risk class inconsistencies</li>
+              <li>Posts traceability report to PR</li>
+              <li class="cannot">Cannot block merge</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="agent-card">
+          <div class="agent-header">
+            <div class="agent-icon" style="background:var(--teal-light);color:var(--teal);">&#x1F4C4;</div>
+            <div class="agent-info">
+              <div class="agent-name">Documentation Agent</div>
+              <div class="agent-trigger">Trigger: merge to main / release</div>
+            </div>
+          </div>
+          <div class="agent-body">
+            <ul>
+              <li>Drafts CHANGELOG from merged PRs</li>
+              <li>Drafts Software Release Record</li>
+              <li>Raises PR for human review</li>
+              <li class="cannot">Cannot write to Qualio directly</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="agent-card">
+          <div class="agent-header">
+            <div class="agent-icon" style="background:var(--red-light);color:var(--red);">&#x26A1;</div>
+            <div class="agent-info">
+              <div class="agent-name">Ops Agent</div>
+              <div class="agent-trigger">Trigger: PagerDuty / Grafana alert</div>
+            </div>
+          </div>
+          <div class="agent-body">
+            <ul>
+              <li>Queries Grafana for related metrics</li>
+              <li>Queries Loki for log context</li>
+              <li>Creates GitHub incident issue</li>
+              <li class="cannot">Cannot remediate or silence alerts</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="agent-card">
+          <div class="agent-header">
+            <div class="agent-icon" style="background:var(--purple-light);color:var(--purple);">&#x1F9EA;</div>
+            <div class="agent-info">
+              <div class="agent-name">ML Validation Agent</div>
+              <div class="agent-trigger">Trigger: ML file change detected</div>
+            </div>
+          </div>
+          <div class="agent-body">
+            <ul>
+              <li>Detects model weight / pipeline changes</li>
+              <li>Flags if change is a design change</li>
+              <li>Posts regulatory review recommendation</li>
+              <li class="cannot">Cannot approve or block merge</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Governance -->
+      <div class="sidebar-section">
+        <div class="sidebar-title">Governance &amp; Operating Model</div>
+        <div class="gov-grid">
+          <div class="gov-item">
+            <span class="gov-who gov-h">Human</span>
+            <span class="gov-desc">All PR merges, releases, Qualio document approvals</span>
+          </div>
+          <div class="gov-item">
+            <span class="gov-who gov-h">Human</span>
+            <span class="gov-desc">Risk register updates and residual risk sign-off</span>
+          </div>
+          <div class="gov-item">
+            <span class="gov-who gov-h">Human</span>
+            <span class="gov-desc">Production deployment gate approval</span>
+          </div>
+          <div class="gov-item">
+            <span class="gov-who gov-h">Human</span>
+            <span class="gov-desc">ML model release approval and registry promotion</span>
+          </div>
+          <div class="gov-item">
+            <span class="gov-who gov-a">Agent</span>
+            <span class="gov-desc">PR review commentary (advisory, not blocking)</span>
+          </div>
+          <div class="gov-item">
+            <span class="gov-who gov-a">Agent</span>
+            <span class="gov-desc">Traceability report on every PR</span>
+          </div>
+          <div class="gov-item">
+            <span class="gov-who gov-a">Agent</span>
+            <span class="gov-desc">Incident issue creation with Grafana context</span>
+          </div>
+          <div class="gov-item">
+            <span class="gov-who gov-a">Agent</span>
+            <span class="gov-desc">ML design change detection and flagging</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Compliance -->
+      <div class="sidebar-section">
+        <div class="sidebar-title">Regulatory Coverage</div>
+        <div class="compliance-list">
+          <div class="compliance-item">
+            <span class="reg r1">62304 §8</span>
+            <span class="reg-desc">GitHub tags, SBOM, signed images &rarr; configuration management</span>
+          </div>
+          <div class="compliance-item">
+            <span class="reg r2">13485 §4.2</span>
+            <span class="reg-desc">Qualio controlled documents with e-signatures</span>
+          </div>
+          <div class="compliance-item">
+            <span class="reg r3">MDR Art.83</span>
+            <span class="reg-desc">Grafana + PagerDuty incidents &rarr; PMS system</span>
+          </div>
+          <div class="compliance-item">
+            <span class="reg r4">FDA Cyber</span>
+            <span class="reg-desc">Syft SBOM on every build, signed with cosign</span>
+          </div>
+          <div class="compliance-item">
+            <span class="reg r1">14971</span>
+            <span class="reg-desc">Risk class field on every issue; risk file in Qualio</span>
+          </div>
+          <div class="compliance-item">
+            <span class="reg r2">21 CFR 11</span>
+            <span class="reg-desc">Azure Monitor + GitHub audit log + Qualio e-signatures</span>
+          </div>
+          <div class="compliance-item">
+            <span class="reg r3">62366-1</span>
+            <span class="reg-desc">Figma version history + Qualio usability file</span>
+          </div>
+          <div class="compliance-item">
+            <span class="reg r4">62304 §5.3</span>
+            <span class="reg-desc">ADRs in-repo + Backstage software catalogue</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cost -->
+      <div class="sidebar-section">
+        <div class="sidebar-title">Indicative Monthly Cost</div>
+        <table class="cost-table">
+          <tr><td>GitHub Team (×20)</td><td>£75</td></tr>
+          <tr><td>Qualio (eQMS)</td><td>£700</td></tr>
+          <tr><td>TestRail Cloud</td><td>£250</td></tr>
+          <tr><td>Snyk Team</td><td>£250</td></tr>
+          <tr><td>Grafana Cloud Pro</td><td>£50</td></tr>
+          <tr><td>Sentry + PagerDuty</td><td>£105</td></tr>
+          <tr><td>Figma Professional</td><td>£60</td></tr>
+          <tr><td>Azure (AKS, ACR, ML)</td><td>£500</td></tr>
+          <tr><td>MLflow (self-hosted)</td><td>£0</td></tr>
+          <tr><td>Anthropic API (agents)</td><td>£200</td></tr>
+          <tr class="cost-total"><td>Total estimate</td><td>~£2,190</td></tr>
+        </table>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ═══ FOOTER ════════════════════════════════════════════════════ -->
+  <div class="page-footer">
+    <div class="footer-left">
+      <div class="legend-item">
+        <div class="legend-dot" style="background:var(--navy)"></div>
+        GitHub ecosystem
+      </div>
+      <div class="legend-item">
+        <div class="legend-dot" style="background:var(--green)"></div>
+        Regulated / QMS
+      </div>
+      <div class="legend-item">
+        <div class="legend-dot" style="background:var(--teal)"></div>
+        Observability
+      </div>
+      <div class="legend-item">
+        <div class="legend-dot" style="background:var(--amber)"></div>
+        Infrastructure / Azure
+      </div>
+      <div class="legend-item">
+        <div class="legend-dot" style="background:var(--purple)"></div>
+        AI / Design
+      </div>
+      <div class="legend-item">
+        <div class="legend-dot" style="background:var(--red)"></div>
+        Security
+      </div>
+    </div>
+    <div class="footer-right">DRAFT · FOR INTERNAL REVIEW · NOT A CONTROLLED DOCUMENT · v0.2</div>
+  </div>
+
+</div>
+</body>
+</html>
