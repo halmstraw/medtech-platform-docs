@@ -8,7 +8,31 @@
       "Read(//home/automation/.ssh/**)",
       "Bash(ssh -T git@github.com)",
       "Bash(grep -l \"TODO\\\\|stub\\\\|placeholder\\\\|STUB\" /home/automation/dev/training/medtech-platform-docs/docs/layers/*.md)",
-      "Bash(git checkout:*)"
+      "Bash(git checkout:*)",
+      "Bash(GH_TOKEN=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 gh pr list --repo halmstraw/medtech-platform-docs --state all --json number,title)",
+      "Bash(curl -s -H \"Authorization: token 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\" \"https://api.github.com/repos/halmstraw/medtech-platform-docs/pulls?state=all&per_page=100\")",
+      "Bash(python3 -c \"import json,sys; prs=json.load\\(sys.stdin\\); [print\\(p[''''number''''], p[''''title'''']\\) for p in prs]\")",
+      "Bash(curl -s -H \"Authorization: token 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\" -H \"Content-Type: application/json\" -d '{\"\"query\"\":\"\"{ repository\\(owner: \\\\\"\"halmstraw\\\\\"\", name: \\\\\"\"medtech-platform-docs\\\\\"\"\\) { pullRequest31: pullRequest\\(number: 31\\) { id } pullRequest35: pullRequest\\(number: 35\\) { id } } }\"\"}' https://api.github.com/graphql)",
+      "Bash(curl -s -H \"Authorization: token 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\" -H \"Content-Type: application/json\" -d '{\"\"query\"\":\"\"mutation { deletePullRequest\\(input: {pullRequestId: \\\\\"\"PR_kwDORsFDC87MIi-I\\\\\"\"}\\) { clientMutationId } }\"\"}' https://api.github.com/graphql)",
+      "Bash(__NEW_LINE_ce5354ac2007789a__ curl:*)",
+      "Bash(curl -s -X PATCH -H \"Authorization: token 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\" -H \"Content-Type: application/json\" -d '{\"\"\"\"state\"\"\"\":\"\"\"\"closed\"\"\"\"}' \"https://api.github.com/repos/halmstraw/medtech-platform-docs/issues/1\")",
+      "Bash(python3 -c \"import json,sys; r=json.load\\(sys.stdin\\); print\\(r[''''state''''], r[''''title'''']\\)\")",
+      "Bash(curl -s -H \"Authorization: token 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\" \"https://api.github.com/repos/halmstraw/medtech-platform-docs/issues?state=open&per_page=100\")",
+      "Bash(curl -s -H \"Authorization: token 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\" -H \"Content-Type: application/json\" -d '{\"\"\"\"query\"\"\"\":\"\"\"\"{ user\\(login: \\\\\"\"\"\"halmstraw\\\\\"\"\"\"\\) { projectsV2\\(first: 10\\) { nodes { id number title fields\\(first: 20\\) { nodes { ... on ProjectV2Field { id name } ... on ProjectV2SingleSelectField { id name options { id name } } ... on ProjectV2IterationField { id name } } } } } } }\"\"\"\"}' https://api.github.com/graphql)",
+      "Bash(curl -s -H \"Authorization: token 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\" -H \"Content-Type: application/json\" -d '{\"\"\"\"query\"\"\"\":\"\"\"\"{ node\\(id: \\\\\"\"\"\"PVT_kwHOAV6W2s4BSTmi\\\\\"\"\"\"\\) { ... on ProjectV2 { items\\(first: 100\\) { nodes { id content { ... on Issue { number title } } } } } } }\"\"\"\"}' https://api.github.com/graphql)",
+      "Bash(python3 -c \":*)",
+      "Bash(curl -s -H \"Authorization: token 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\" -H \"Content-Type: application/json\" -d '{\"\"\"\"query\"\"\"\":\"\"\"\"{ node\\(id: \\\\\"\"\"\"PVTI_lAHOAV6W2s4BSTmizgn7PtM\\\\\"\"\"\"\\) { ... on ProjectV2Item { id type content { ... on Issue { number title state } ... on DraftIssue { title body } } } } }\"\"\"\"}' https://api.github.com/graphql)",
+      "Bash(python3 -c \"import json,sys; print\\(json.dumps\\(json.load\\(sys.stdin\\), indent=2\\)\\)\" __NEW_LINE_2faed9c4d31ebc5d__ curl -s -H \"Authorization: token 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\" -H \"Content-Type: application/json\" -d '{\"\"\"\"query\"\"\"\":\"\"\"\"{ node\\(id: \\\\\"\"\"\"PVTI_lAHOAV6W2s4BSTmizgoNRMU\\\\\"\"\"\"\\) { ... on ProjectV2Item { id type content { ... on Issue { number title state } ... on DraftIssue { title body } } } } }\"\"\"\"}' https://api.github.com/graphql)",
+      "Bash(python3 -c \"import json,sys; print\\(json.dumps\\(json.load\\(sys.stdin\\), indent=2\\)\\)\")",
+      "Bash(for item_id in \"PVTI_lAHOAV6W2s4BSTmizgn7PtM\" \"PVTI_lAHOAV6W2s4BSTmizgoNRMU\")",
+      "Bash(do curl:*)",
+      "Bash(python3 -c \"import json,sys; r=json.load\\(sys.stdin\\); print\\(r\\)\" done)",
+      "Bash(python3 -c \"import json,sys; r=json.load\\(sys.stdin\\); print\\(f''''#{r[\"\"number\"\"]} {r[\"\"title\"\"]} — {r[\"\"html_url\"\"]}''''\\)\")",
+      "Bash(sed -i 's|<h3>Requirements \\\\&amp; Risk</h3>|<h3>Requirements \\\\&amp; Risk<span class=\"\"status-dot in-progress\"\" title=\"\"Not started\"\"></span></h3>|' /home/automation/dev/training/medtech-platform-docs/docs/platform-overview.html)",
+      "Bash(__NEW_LINE_0bfe69706ede78be__ sed:*)",
+      "Bash(__NEW_LINE_0bfe69706ede78be__ for:*)",
+      "Bash(do)",
+      "Bash(sed -i \"s|<h3>$layer</h3>|<h3>$layer<span class=\"\"status-dot in-progress\"\" title=\"\"Not started\"\"></span></h3>|\" /home/automation/dev/training/medtech-platform-docs/docs/platform-overview.html)"
     ]
   }
 }
