@@ -31,18 +31,24 @@ PO maintaining the backlog between sprints.
 
 ## Issue template
 
-One template, used for all issue types. Not all fields apply to every type — an epic
-needs business value and dependencies filled; a task may only need AC and risk class.
+Four variants share a common core. All fields in the core are mandatory for DoR. Type-specific
+fields are mandatory for that type only.
+
+### Core fields (all types)
 
 ```markdown
 ## Type
-<!-- Epic / Story / Task / Spike -->
+<!-- Epic / Story / Task / Spike / Bug -->
 
 ## Why
 <!-- Business value or problem statement. What does this solve and for whom? -->
 
 ## Acceptance criteria
 <!-- Numbered list. Each criterion must be testable. -->
+
+## Non-functional requirements
+<!-- Performance, security, availability, regulatory constraints. "None" is acceptable
+     only for internal housekeeping tasks. -->
 
 ## Risk class
 <!-- A / B / C / Not yet assessed — set by Product Owner before sprint entry -->
@@ -66,6 +72,55 @@ needs business value and dependencies filled; a task may only need AC and risk c
 <!-- Added at sprint entry when test case is created -->
 ```
 
+### Story — additional fields
+
+Stories describe functionality from the user or B2B partner perspective. Include the
+user story statement above the acceptance criteria:
+
+```markdown
+## User story
+As a [role]
+I want [capability]
+So that [benefit]
+```
+
+### Spike — additional fields
+
+Spikes are time-boxed analysis tasks. They produce a decision or a set of stories —
+not shippable code. Include:
+
+```markdown
+## Analysis context
+<!-- What question needs answering? What is currently unknown? -->
+
+## Expected outcome
+<!-- Decision made / stories created / technical approach agreed -->
+
+## Timebox
+<!-- Maximum sprint allocation — spikes do not carry over -->
+```
+
+### Bug — additional fields
+
+Bugs must include reproduction evidence. Without it they cannot be triaged.
+
+```markdown
+## Steps to reproduce
+<!-- Numbered sequence from a clean state -->
+
+## Current behaviour
+<!-- What happens -->
+
+## Expected behaviour
+<!-- What should happen -->
+
+## Environment
+<!-- OS, device model, app version, SDK version -->
+
+## Evidence
+<!-- Screenshots, videos, log extracts — attach to issue -->
+```
+
 ---
 
 ## Definition of Ready
@@ -76,6 +131,10 @@ checks these criteria when an issue is moved to a sprint milestone:
 - [ ] Type set
 - [ ] "Why" completed — business value or problem statement present
 - [ ] Acceptance criteria defined and testable
+- [ ] Non-functional requirements stated (or explicitly noted as none)
+- [ ] User story statement present (Stories only)
+- [ ] Analysis context and expected outcome present (Spikes only)
+- [ ] Reproduction steps and environment present (Bugs only)
 - [ ] Risk class set by the Product Owner
 - [ ] Design change flag set (Yes / No / TBD not acceptable for sprint entry)
 - [ ] Source label applied
