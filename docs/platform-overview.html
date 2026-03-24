@@ -497,6 +497,18 @@
       <div class="layer">
         <div class="layer-num">05</div>
         <div class="layer-body">
+          <h3>Delivery Process</h3>
+          <p>Sprint-based cadence with a regulatory Definition of Done — every ticket requires risk class, traceability link, and passing tests before closing. Retrospective records feed ISO 13485 CAPA. Sprints connect to GitHub Projects milestones and release branches.</p>
+          <div class="pills">
+            <span class="pill t-navy"><span class="dot"></span>GitHub Projects</span>
+            <span class="pill t-green"><span class="dot"></span>Qualio</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="layer">
+        <div class="layer-num">06</div>
+        <div class="layer-body">
           <h3>CI/CD Pipeline</h3>
           <p>GitHub Actions produces immutable workflow run logs. Build → test → scan → deploy with approval gates for production. Every artefact traceable to commit.</p>
           <div class="pills">
@@ -508,7 +520,7 @@
       </div>
 
       <div class="layer">
-        <div class="layer-num">06</div>
+        <div class="layer-num">07</div>
         <div class="layer-body">
           <h3>ML Pipeline</h3>
           <p>MLflow for experiment tracking and model registry. Versioned model deployments with full change history — directly enables FDA controlled release evidence.</p>
@@ -521,7 +533,7 @@
       </div>
 
       <div class="layer">
-        <div class="layer-num">07</div>
+        <div class="layer-num">08</div>
         <div class="layer-body">
           <h3>Testing &amp; Verification</h3>
           <p>TestRail as dedicated test management. Traceability matrix: requirement → test case → execution → result. Third-party testers submit directly.</p>
@@ -534,7 +546,7 @@
       </div>
 
       <div class="layer">
-        <div class="layer-num">08</div>
+        <div class="layer-num">09</div>
         <div class="layer-body">
           <h3>Infrastructure</h3>
           <p>Azure with Terraform IaC. AKS for container orchestration, replacing per-assessment container spin-up. Key Vault for secrets.</p>
@@ -548,7 +560,7 @@
       </div>
 
       <div class="layer">
-        <div class="layer-num">09</div>
+        <div class="layer-num">10</div>
         <div class="layer-body">
           <h3>Observability</h3>
           <p>Grafana + Prometheus for metrics, Loki for logs, Sentry for error tracking. PagerDuty for on-call routing. Full stack visibility.</p>
@@ -562,7 +574,47 @@
       </div>
 
       <div class="layer">
-        <div class="layer-num">10</div>
+        <div class="layer-num">11</div>
+        <div class="layer-body">
+          <h3>Mobile Architecture</h3>
+          <p>iOS (Swift/SwiftUI) and Android (Kotlin) SDK built on MVVM and Clean Architecture. rPPG signal capture isolated behind a platform-agnostic abstraction layer. Semantic versioning and B2B compatibility matrix for partner integrations.</p>
+          <div class="pills">
+            <span class="pill t-purple"><span class="dot"></span>Swift / SwiftUI</span>
+            <span class="pill t-purple"><span class="dot"></span>Kotlin</span>
+            <span class="pill t-coral"><span class="dot"></span>Fastlane</span>
+            <span class="pill t-navy"><span class="dot"></span>GitHub Actions</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="layer">
+        <div class="layer-num">12</div>
+        <div class="layer-body">
+          <h3>Security Architecture</h3>
+          <p>STRIDE threat modelling applied to the rPPG assessment flow. Data classification, encryption at rest and in transit, on-device anonymisation before cloud transmission. SBOM as FDA cybersecurity artefact. Builds on Cyber Essentials Plus baseline.</p>
+          <div class="pills">
+            <span class="pill t-red"><span class="dot"></span>Snyk</span>
+            <span class="pill t-amber"><span class="dot"></span>Key Vault</span>
+            <span class="pill t-green"><span class="dot"></span>SBOM (Syft)</span>
+            <span class="pill t-red"><span class="dot"></span>Trivy</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="layer">
+        <div class="layer-num">13</div>
+        <div class="layer-body">
+          <h3>AI Engineering Strategy</h3>
+          <p>Anthropic API as primary agentic framework. LLM tooling selected for data residency, audit trail, and no training on proprietary code. Trust zone model governs all agent activity. Guardrails prevent AI-generated code entering production without human review.</p>
+          <div class="pills">
+            <span class="pill t-coral"><span class="dot"></span>Claude API</span>
+            <span class="pill t-navy"><span class="dot"></span>GitHub Actions</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="layer">
+        <div class="layer-num">14</div>
         <div class="layer-body">
           <h3>Developer Experience</h3>
           <p>GitHub Pages for documentation (phase 1), Backstage for internal developer portal (phase 4). SDK versioning strategy for B2B partners.</p>
@@ -574,9 +626,9 @@
       </div>
 
       <div class="layer">
-        <div class="layer-num">11</div>
+        <div class="layer-num">15</div>
         <div class="layer-body">
-          <h3>Maintenance Automation</h3>
+          <h3>Maintenance &amp; Automation</h3>
           <p>Automated dependency updates, vulnerability scanning, SBOM generation, and secret rotation — keeping the platform secure and current without dev time. Patch-level security fixes auto-merge; changes touching clinical dependencies are flagged for review.</p>
           <div class="pills">
             <span class="pill t-navy"><span class="dot"></span>Renovate / Dependabot</span>
@@ -707,7 +759,7 @@
       <div class="legend-item"><div class="legend-dot" style="background:var(--coral)"></div>AI Agents</div>
       <div class="legend-item"><div class="legend-dot" style="background:var(--blue)"></div>Info / Links</div>
     </div>
-    <div class="footer-status">DRAFT · FOR INTERNAL REVIEW · NOT A CONTROLLED DOCUMENT · v0.2</div>
+    <div class="footer-status">DRAFT · FOR INTERNAL REVIEW · NOT A CONTROLLED DOCUMENT · v0.3</div>
   </div>
 
 </div><!-- /page -->
