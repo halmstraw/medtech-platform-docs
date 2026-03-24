@@ -1,6 +1,6 @@
 # Layer: 05 — Delivery Process
 
-<!-- STATUS: STUB — not yet written -->
+<!-- STATUS: COMPLETE -->
 <!-- Read docs/layers/SKILLS.md before writing this file -->
 
 ## Purpose
@@ -11,62 +11,146 @@ process is not just an operational concern: it is compliance evidence. IEC 62304
 requires a documented software development plan, and the sprint cadence, DoD criteria,
 and retrospective records collectively constitute that plan in action.
 
-## Current state
+---
 
-Delivery is ad hoc. No formal sprint structure. No documented definition of done.
-Releases are driven by the data scientist or individual engineers without a coordinated
-cadence or governance checkpoint.
+## Target state
 
-## Tooling decisions
+1-week sprints. Every sprint produces a release candidate tagged in GitHub. Whether that
+candidate is promoted to production is a separate human gate — but the pipeline always
+produces shippable software. This discipline is intentional: early-phase work is volatile,
+and 1-week sprints limit the blast radius when priorities shift while maintaining a
+continuous evidence trail of controlled releases.
+
+Ceremonies are kept lightweight for a small team:
+
+| Ceremony | Cadence | Duration | Format |
+|---|---|---|---|
+| Sprint planning | Weekly (Monday) | 45 min | GitHub Projects board review, milestone set |
+| Daily standup | Daily | 15 min | Async via Slack or brief sync |
+| Sprint review + retrospective | Weekly (Friday) | 45 min | Combined PO session — show and tell then retro |
+
+The combined Friday session is facilitated by the Documentation agent (see AI agent
+involvement below). Engineers arrive without preparation — the agent has done it.
+
+---
+
+## Tool choices
 
 | Need | Tool | Rationale |
 |---|---|---|
-| Sprint boards and backlog | GitHub Projects (iterations) | Native to GitHub, keeps planning in the same audit trail as code |
-| Burndown and velocity | GitHub Insights | Built into GitHub Projects, no additional tool needed |
+| Sprint boards and backlog | GitHub Projects (iterations) | Native to GitHub, planning stays in the same audit trail as code |
+| Burndown and velocity | GitHub Insights | Built into GitHub Projects, no additional tool required |
 | Definition of Done | PR template checklist | Enforced at merge point, version controlled, includes regulatory fields |
-| Retrospectives | Notion page → actions to GitHub Issues | Low friction, actions land in the issue tracker automatically |
-| Async standup and comms | Slack + GitHub integration | Surfaces PR, CI, and deployment events in relevant channels |
+| Sprint review and retro prep | Documentation agent | Pre-populates show and tell and retro board from closed issues and sprint data |
+| Retro actions | GitHub Issues (`retro-action` label) | Actions land directly in the issue tracker, trackable and closeable |
+| Sprint summary | GitHub milestone + `#sprint` Slack | Agent posts ahead of Friday session, visible to whole team |
 | Release notifications | GitHub Actions → Slack webhook | Automated, no manual broadcast needed |
 
-**Why no separate Scrum tool:** GitHub Projects covers sprint boards, burndown, and roadmap for a team this size. Adding Jira, Linear, or Shortcut creates a second system with no audit trail connection to GitHub. The compliance cost of split records outweighs any UX benefit.
+**Why no separate Scrum tool:** GitHub Projects covers sprint boards, burndown, and
+roadmap for a team this size. Adding Jira, Linear, or Shortcut creates a second system
+with no audit trail connection to GitHub. The compliance cost of split records outweighs
+any UX benefit.
 
-**Why not a dedicated retrospective tool:** EasyRetro and similar tools produce outputs that don't connect to the issue tracker. Retrospective actions belong in GitHub Issues (labelled `retro-action`) where they are trackable and closeable. The facilitation board can be a shared Notion page — ephemeral is fine, the actions are what matter.
+---
 
-## Slack workspace conventions
+## Definition of Done
 
-Slack is a communication tool, not a decision record. The following conventions apply:
+Every issue must satisfy the following before it is moved to Done. These are enforced
+via the PR template checklist:
 
-- Architectural decisions → DECISIONS.md and ADRs, not Slack threads
-- Process decisions → GitHub Issues, not Slack
-- Sprint actions → GitHub Issues labelled `retro-action`
-- Slack is inspectable informally but is not compliance evidence
+**Acceptance criteria**
+- [ ] Acceptance criteria are 100% met and confirmed with the Product Owner
+- [ ] All functional and non-functional requirements completed
+- [ ] No open to-dos remain in the work item
+- [ ] Risk class set on the issue by the Product Owner prior to sprint entry
 
-**Recommended channel structure:**
+**Code quality**
+- [ ] Code peer-reviewed and approved by at least one engineer
+- [ ] No open CRITICAL findings from the Code Review agent
+- [ ] Static analysis (SonarCloud) reports no new issues
+- [ ] Code merged into the sprint branch; build and deployment pipeline passing
 
-| Channel | Purpose | Key integrations |
-|---|---|---|
-| `#engineering-general` | Team communication | — |
-| `#deployments` | Release and deploy notifications | GitHub Actions webhook |
-| `#ci-alerts` | Build failures, Snyk findings | GitHub Actions, Snyk |
-| `#incidents` | Production alerts and response | PagerDuty, Grafana |
-| `#pr-reviews` | PR opened, review requested | GitHub |
-| `#sprint` | Sprint ceremony reminders, velocity posts | GitHub Projects (manual or automated) |
+**Testing**
+- [ ] All required tests written and passing (unit, integration, regression)
+- [ ] TestRail execution linked and result recorded
+- [ ] Traceability link present (GitHub Issue → test case → execution)
+- [ ] No high or critical severity defects open (or explicitly accepted by PO with rationale recorded)
+- [ ] No performance degradation from previous version
 
-**GitHub + Slack integration:** Install the official GitHub Slack app. Configure per-channel subscriptions so noise is routed correctly — `#pr-reviews` does not need deployment alerts, `#incidents` does not need PR activity.
+**Documentation**
+- [ ] Documentation created or updated if behaviour changed
+- [ ] Release-related documents updated and consistent
 
-**Agent notifications:** The ops agent creates GitHub Issues on alert. A separate GitHub → Slack integration surfaces that issue creation in `#incidents` automatically — no additional agent work required.
+**Housekeeping**
+- [ ] Temporary environments, test data, or configurations cleaned up
 
-## Key areas to cover when writing
+**Sign-off**
+- [ ] User story accepted by the Product Owner
+- [ ] Feature demonstrated at sprint review
 
-- Scrum implementation: sprint length (recommend 2 weeks), ceremonies, roles
-- Definition of Done checklist items — must include: risk-class field set, traceability
-  link present, tests passing in TestRail, no open CRITICAL agent findings
-- Velocity tracking via GitHub Insights closed issues per sprint
-- Retrospectives: Notion facilitation board, actions to GitHub Issues
-- How sprint milestones connect to release branches in GitHub
-- AI agent involvement: documentation agent can draft sprint summary from closed issues
+---
+
+## AI agent involvement
+
+The **Documentation agent** owns sprint ceremony preparation:
+
+- At sprint close, queries GitHub for all issues closed in the milestone
+- Builds a show and tell narrative from issue titles, descriptions, and linked PRs
+- Generates a retro board pre-populated from sprint data: carried-over issues, CI
+  failures during the sprint, CRITICAL agent findings raised and resolved
+- Posts the sprint summary as a comment on the closing milestone
+- Posts the sprint summary to the `#sprint` Slack channel ahead of the Friday session
+
+Engineers and the PO arrive at the Friday session with context already prepared. The
+retro facilitation is lightweight — the agent surfaces the data, humans draw the
+conclusions and agree actions.
+
+Retro actions are captured as GitHub Issues with the `retro-action` label during the
+session.
+
+---
+
+## Human responsibilities
+
+The following must remain human-owned and cannot be delegated to an agent:
+
+- **Sprint planning decisions** — what enters the sprint, what is deferred
+- **Risk classification** — the Product Owner sets the IEC 62304 software safety class
+  (A, B, or C) on every issue before it enters a sprint. This determines the testing
+  rigour required to satisfy the DoD
+- **Product Owner acceptance** — AC confirmed and story accepted by the PO
+- **Production release sign-off** — every sprint produces a release candidate; promotion
+  to production requires explicit human approval
+- **Retrospective action decisions** — the agent surfaces data, humans decide actions
+
+---
 
 ## Regulatory hooks
 
-- IEC 62304 §5.1 — Software development planning
-- ISO 13485 §8.5.1 — Continual improvement (retrospective actions as CAPA input)
+**IEC 62304 §5.1 — Software development planning**
+The sprint cadence, DoD checklist, and milestone records constitute the software
+development plan in action. GitHub Projects iteration records and closed milestone
+histories are retained as immutable evidence of the plan being followed.
+
+**ISO 13485 §8.5.1 — Continual improvement**
+Retrospective actions captured as `retro-action` GitHub Issues provide a traceable
+continual improvement record. Each action is raised, assigned, and closed in the same
+system as all other work — creating an auditable CAPA input trail without a separate
+process.
+
+---
+
+## Connections
+
+**Feeds in from:**
+- Layer 01 (Requirements and risk) — GitHub Issues enter the sprint backlog from the
+  requirements layer. Risk class must be set by the PO before an issue is sprint-ready.
+
+**Feeds into:**
+- Layer 06 (CI/CD pipeline) — every sprint milestone closure triggers a release
+  candidate build. The pipeline produces the tagged artefact; this layer defines the
+  cadence that drives it.
+- Layer 08 (Testing and verification) — the DoD requires TestRail execution linked and
+  passing. Sprint velocity data informs test planning capacity.
+- Layer 03 (QMS and documentation) — retrospective `retro-action` issues feed into the
+  ISO 13485 CAPA process managed in Qualio.

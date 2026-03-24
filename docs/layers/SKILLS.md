@@ -9,13 +9,12 @@ Read this before working on any file in `docs/layers/`.
 Every layer file follows the same structure:
 
 1. **Purpose** — what this layer does and why it exists
-2. **Current state** — honest description of where a typical team at this stage is (1–3 sentences)
-3. **Target state** — the recommended tooling and configuration
-4. **Tool choices** — the specific tools selected, with rationale and alternatives considered
-5. **AI agent involvement** — which agent(s) interact with this layer, and how
-6. **Human responsibilities** — what must remain human-owned
-7. **Regulatory hooks** — specific clauses this layer addresses, with evidence it produces
-8. **Connections** — what feeds into this layer and what this layer produces for the next
+2. **Target state** — the recommended tooling and configuration
+3. **Tool choices** — the specific tools selected, with rationale and alternatives considered
+4. **AI agent involvement** — which agent(s) interact with this layer, and how
+5. **Human responsibilities** — what must remain human-owned
+6. **Regulatory hooks** — specific clauses this layer addresses, with evidence it produces
+7. **Connections** — what feeds into this layer and what this layer produces for the next
 
 ## Regulatory hooks section format
 
