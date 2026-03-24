@@ -72,6 +72,27 @@ fields are mandatory for that type only.
 <!-- Added at sprint entry when test case is created -->
 ```
 
+### Epic — additional fields
+
+Epics represent a significant piece of work spanning potentially multiple sprints.
+They act as the source of truth for a feature — all stories, tasks, and bugs link
+back to the parent epic for traceability.
+
+```markdown
+## Strategic objective / OKR
+<!-- Which business objective does this epic advance?
+     e.g. "Phase 1 — Stabilise and make auditable"
+          "FDA 510(k) submission readiness"
+          "Reduce per-assessment cost to under 1p"
+          "Acquirer readiness — clean engineering story" -->
+
+## Scope
+<!-- What is in scope and explicitly what is out of scope -->
+
+## Dependencies
+<!-- Links to blocking epics or external dependencies -->
+```
+
 ### Story — additional fields
 
 Stories describe functionality from the user or B2B partner perspective. Include the
