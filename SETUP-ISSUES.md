@@ -36,12 +36,12 @@ In GitHub → Issues → Milestones, create:
 
 ### Visual assets (highest priority — anchor everything else)
 
-**#1 — Create platform overview visual (assets/platform-overview.html)**
+**#1 — Create platform overview visual (docs/platform-overview.html)**
 - Label: `content`
 - Milestone: `Phase 1 — Stabilise`
 - Body: Single-page HTML architecture diagram showing full target state stack. Current version exists from earlier session — needs refining to reflect Azure (not AWS) and ML pipeline layer.
 
-**#2 — Create current vs target state visual (assets/current-vs-target.html)**
+**#2 — Create current vs target state visual (docs/current-vs-target.html)**
 - Label: `content`
 - Milestone: `Phase 1 — Stabilise`
 - Body: Side-by-side or before/after visual showing current state (Flask, manual releases, no observability) versus target state. Should be compelling for a CTO who needs to understand the gap quickly.

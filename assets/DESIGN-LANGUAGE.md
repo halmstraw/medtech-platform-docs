@@ -17,7 +17,7 @@ Key characteristics:
 - Dense but readable — uses space efficiently
 - Every element earns its place — no decorative flourishes
 
-The `assets/platform-overview.html` produced in session 1 is the canonical example for this project. All new visuals must match it in tone, quality, and register.
+The `docs/platform-overview.html` produced in session 1 is the canonical example for this project. All new visuals must match it in tone, quality, and register.
 
 ---
 
@@ -44,58 +44,63 @@ The `assets/platform-overview.html` produced in session 1 is the canonical examp
 ```css
 /* Backgrounds */
 --white:        #ffffff;
---cream:        #fffdf4;   /* primary page background — warm off-white */
+--off-white:    #f7f8fa;   /* primary page background — clean white-grey */
 --grey-50:      #f1f3f6;
 --grey-100:     #d8dbde33; /* light borders, dividers (with transparency) */
 
 /* Text */
---ink:          #09213a;   /* body text — matches navy for cohesion */
---grey-700:     #7f8b97;   /* secondary text, labels */
---grey-400:     #7f8b97;   /* dim text (same as 700 for this palette) */
---grey-200:     #d8dbde;   /* borders, dividers */
+--ink:          #0d1b2a;   /* body text — deep charcoal */
+--grey-700:     #6b7280;   /* secondary text, labels */
+--grey-400:     #9ca3af;   /* dim text */
+--grey-200:     #d1d5db;   /* borders, dividers */
 
-/* Primary — Navy (GitHub ecosystem, headers, primary actions) */
---navy:         #09213a;
---navy-mid:     #0f2a4a;
---navy-light:   #dce8f5;
+/* Primary — Deep charcoal (headers, primary actions) */
+--navy:         #0d1b2a;
+--navy-mid:     #1a2940;
+--navy-light:   #e2e8f0;
+
+/* Brand green (Lifelight primary accent) */
+--brand:        #00c389;
+--brand-dark:   #00a074;
+--brand-light:  #e6fff5;
 
 /* Teal (Observability tools) */
---teal:         #07646a;   /* dark teal */
---teal-mid:     #04bca9;   /* bright teal accent */
+--teal:         #0b7a8a;
+--teal-mid:     #14b8a6;
 --teal-light:   #e0f4f0;
 
-/* Coral (Highlights, CTAs, active states, AI badges) */
---coral:        #ff9452;
---coral-light:  #fff0e6;
+/* Coral/Orange (Highlights, CTAs, AI badges) */
+--coral:        #f97316;
+--coral-light:  #fff7ed;
 
 /* Blue (Info, links, secondary accent) */
 --blue:         #3797c4;
 --blue-light:   #e4f2f8;
 
 /* Green (Regulated / QMS tools) */
---green:        #1a7a4a;
---green-light:  #d8f0e4;
---green-mid:    #4ab87a;
+--green:        #15803d;
+--green-light:  #dcfce7;
+--green-mid:    #22c55e;
 
 /* Amber (Infrastructure / Azure) */
---amber:        #8a5a00;
---amber-light:  #fef3d8;
---amber-mid:    #f0a830;
+--amber:        #92400e;
+--amber-light:  #fef3c7;
+--amber-mid:    #f59e0b;
 
 /* Purple (Design tools / AI agents) */
---purple:       #5a2a8a;
---purple-light: #ede8f8;
---purple-mid:   #9060d0;
+--purple:       #6d28d9;
+--purple-light: #ede9fe;
+--purple-mid:   #8b5cf6;
 
 /* Red (Security / Monitoring) */
---red:          #8a1a2a;
---red-light:    #fde8ea;
---red-mid:      #d04060;
+--red:          #991b1b;
+--red-light:    #fee2e2;
+--red-mid:      #ef4444;
 
 /* Trust zones */
---zone1:        #09213a;   /* Development — Navy */
---zone2:        #07646a;   /* Review/CI — Teal */
---zone3:        #1a5a3a;   /* Operations — Green */
+--zone1:        #0d1b2a;   /* Development — Charcoal */
+--zone2:        #0b7a8a;   /* Review/CI — Teal */
+--zone3:        #15803d;   /* Operations — Green */
 ```
 
 ---
@@ -143,7 +148,7 @@ Every tool reference in architecture diagrams uses a colour-coded pill. Colour i
 .t-purple .dot { background: var(--purple); }
 .t-red    { background: var(--red-light);    border-color: #d8a0a8; color: var(--red);    }
 .t-red    .dot { background: var(--red); }
-.t-coral  { background: var(--coral-light);  border-color: #f0c8a0; color: #b35a20;       }
+.t-coral  { background: var(--coral-light);  border-color: #f0c8a0; color: #9a3412;       }
 .t-coral  .dot { background: var(--coral); }
 .t-blue   { background: var(--blue-light);   border-color: #a0cce0; color: #1a6890;       }
 .t-blue   .dot { background: var(--blue); }
@@ -161,7 +166,7 @@ Every tool reference in architecture diagrams uses a colour-coded pill. Colour i
 | Infrastructure / Azure | Amber | Terraform, AKS, Azure Key Vault, ACR, Azure Monitor |
 | Design | Purple | Figma, Storybook |
 | Security / Monitoring | Red | Snyk, SonarCloud, SBOM tools |
-| AI / Agents | Coral | Claude, MCP servers, agent tooling |
+| AI / Agents | Brand Green | Claude, MCP servers, agent tooling |
 | Info / Links | Blue | Documentation links, informational callouts |
 
 ---
@@ -172,9 +177,9 @@ All single-page architecture documents follow this structure:
 
 ```
 ┌─────────────────────────────────────────────────────┐
-│  HEADER — dark navy (#09213a), white text, reg badges  │
-│  Title + subtitle + regulatory framework chips          │
-│  Teal accent (#04bca9) on eyebrow text                  │
+│  HEADER — deep charcoal (#0d1b2a), white text, reg badges  │
+│  Title + subtitle + regulatory framework chips                  │
+│  Brand green accent (#00c389) on eyebrow text                   │
 ├────────────────────────────────┬────────────────────┤
 │                                │                    │
 │  MAIN COLUMN (~75% width)      │  SIDEBAR (~25%)    │
@@ -189,7 +194,7 @@ All single-page architecture documents follow this structure:
 └─────────────────────────────────────────────────────┘
 ```
 
-Page width: 1100px, centred, cream background (`#fffdf4`), subtle shadow.
+Page width: 1100px, centred, white background (`#ffffff`), subtle shadow.
 
 ---
 
@@ -239,9 +244,9 @@ Monospace uppercase labels used to introduce sections:
 
 Three-column coloured band used to show the zone model:
 
-- Zone 1 (Development): `background: #09213a`
-- Zone 2 (Review/CI): `background: #07646a`
-- Zone 3 (Operations): `background: #1a5a3a`
+- Zone 1 (Development): `background: #0d1b2a`
+- Zone 2 (Review/CI): `background: #0b7a8a`
+- Zone 3 (Operations): `background: #15803d`
 
 All white text. Zone name in small monospace uppercase. Zone title in 12px semibold. Items as a list with `›` prefix.
 

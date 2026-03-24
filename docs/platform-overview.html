@@ -8,41 +8,70 @@
   @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap');
 
   :root {
+    /* Lifelight-aligned palette */
     --white: #ffffff;
-    --cream: #fffdf4;
+    --off-white: #f7f8fa;
     --grey-50: #f1f3f6;
     --grey-100: rgba(216,219,222,0.2);
-    --ink: #09213a;
-    --grey-700: #7f8b97;
-    --grey-200: #d8dbde;
-    --navy: #09213a;
-    --navy-mid: #0f2a4a;
-    --navy-light: #dce8f5;
-    --teal: #07646a;
-    --teal-mid: #04bca9;
+    --ink: #0d1b2a;
+    --grey-700: #6b7280;
+    --grey-400: #9ca3af;
+    --grey-200: #d1d5db;
+
+    /* Primary — Deep charcoal (headers, primary text) */
+    --navy: #0d1b2a;
+    --navy-mid: #1a2940;
+    --navy-light: #e2e8f0;
+
+    /* Brand green (Lifelight primary) */
+    --brand: #00c389;
+    --brand-dark: #00a074;
+    --brand-light: #e6fff5;
+
+    /* Teal (Observability tools) */
+    --teal: #0b7a8a;
+    --teal-mid: #14b8a6;
     --teal-light: #e0f4f0;
-    --coral: #ff9452;
-    --coral-light: #fff0e6;
+
+    /* Coral (Highlights, AI badges) */
+    --coral: #f97316;
+    --coral-light: #fff7ed;
+
+    /* Blue (Info, links) */
     --blue: #3797c4;
     --blue-light: #e4f2f8;
-    --green: #1a7a4a;
-    --green-light: #d8f0e4;
-    --amber: #8a5a00;
-    --amber-light: #fef3d8;
-    --purple: #5a2a8a;
-    --purple-light: #ede8f8;
-    --red: #8a1a2a;
-    --red-light: #fde8ea;
-    --zone1: #09213a;
-    --zone2: #07646a;
-    --zone3: #1a5a3a;
+
+    /* Green (Regulated / QMS tools) */
+    --green: #15803d;
+    --green-light: #dcfce7;
+    --green-mid: #22c55e;
+
+    /* Amber (Infrastructure / Azure) */
+    --amber: #92400e;
+    --amber-light: #fef3c7;
+    --amber-mid: #f59e0b;
+
+    /* Purple (Design tools) */
+    --purple: #6d28d9;
+    --purple-light: #ede9fe;
+    --purple-mid: #8b5cf6;
+
+    /* Red (Security / Monitoring) */
+    --red: #991b1b;
+    --red-light: #fee2e2;
+    --red-mid: #ef4444;
+
+    /* Trust zones */
+    --zone1: #0d1b2a;
+    --zone2: #0b7a8a;
+    --zone3: #15803d;
   }
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   body {
     font-family: 'DM Sans', system-ui, sans-serif;
-    background: #e8e5df;
+    background: #e8ecf0;
     color: var(--ink);
     line-height: 1.5;
     -webkit-font-smoothing: antialiased;
@@ -51,7 +80,7 @@
   .page {
     max-width: 1100px;
     margin: 40px auto;
-    background: var(--cream);
+    background: var(--white);
     box-shadow: 0 1px 8px rgba(0,0,0,0.08);
   }
 
@@ -60,13 +89,14 @@
     background: var(--navy);
     color: var(--white);
     padding: 36px 48px 32px;
+    border-bottom: 3px solid var(--brand);
   }
   .eyebrow {
     font-family: 'DM Mono', monospace;
     font-size: 10px;
     letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: var(--teal-mid);
+    color: var(--brand);
     margin-bottom: 10px;
   }
   .header h1 {
@@ -125,8 +155,9 @@
 
   /* ── CONTEXT BOX ── */
   .context-box {
-    background: var(--white);
+    background: var(--off-white);
     border: 1px solid var(--grey-200);
+    border-left: 3px solid var(--brand);
     border-radius: 3px;
     padding: 16px 20px;
     margin-bottom: 24px;
@@ -195,7 +226,7 @@
     font-family: 'DM Mono', monospace;
     font-size: 11px;
     font-weight: 500;
-    color: var(--grey-700);
+    color: var(--brand-dark);
     text-align: right;
     padding-top: 1px;
   }
@@ -243,14 +274,14 @@
   .t-purple .dot { background: var(--purple); }
   .t-red    { background: var(--red-light);    border-color: #d8a0a8; color: var(--red);    }
   .t-red    .dot { background: var(--red); }
-  .t-coral  { background: var(--coral-light);  border-color: #f0c8a0; color: #b35a20;       }
+  .t-coral  { background: var(--coral-light);  border-color: #f0c8a0; color: #9a3412;       }
   .t-coral  .dot { background: var(--coral); }
   .t-blue   { background: var(--blue-light);   border-color: #a0cce0; color: #1a6890;       }
   .t-blue   .dot { background: var(--blue); }
 
   /* ── SIDEBAR SECTIONS ── */
   .sb-card {
-    background: var(--white);
+    background: var(--off-white);
     border: 1px solid var(--grey-200);
     border-radius: 3px;
     padding: 14px 16px;
@@ -287,7 +318,7 @@
   .agent-dot {
     width: 7px; height: 7px;
     border-radius: 50%;
-    background: var(--coral);
+    background: var(--brand);
     flex-shrink: 0;
   }
   .agent-name {
@@ -310,7 +341,7 @@
     display: inline-block;
   }
   .badge-human { background: var(--navy-light); color: var(--navy); }
-  .badge-ai    { background: var(--coral-light); color: #b35a20; }
+  .badge-ai    { background: var(--brand-light); color: var(--brand-dark); }
   .badge-auto  { background: var(--teal-light); color: var(--teal); }
 
   /* ── COST TABLE ── */
@@ -336,7 +367,7 @@
   }
   .cost-table tr:last-child td { border-bottom: none; }
   .cost-highlight {
-    color: var(--teal);
+    color: var(--brand-dark);
     font-weight: 600;
   }
 
@@ -704,10 +735,10 @@
       <div class="legend-item"><div class="legend-dot" style="background:var(--amber)"></div>Infrastructure</div>
       <div class="legend-item"><div class="legend-dot" style="background:var(--purple)"></div>Design</div>
       <div class="legend-item"><div class="legend-dot" style="background:var(--red)"></div>Security</div>
-      <div class="legend-item"><div class="legend-dot" style="background:var(--coral)"></div>AI Agents</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--brand)"></div>AI Agents</div>
       <div class="legend-item"><div class="legend-dot" style="background:var(--blue)"></div>Info / Links</div>
     </div>
-    <div class="footer-status">DRAFT · FOR INTERNAL REVIEW · NOT A CONTROLLED DOCUMENT · v0.2</div>
+    <div class="footer-status">DRAFT · FOR INTERNAL REVIEW · NOT A CONTROLLED DOCUMENT · v0.3</div>
   </div>
 
 </div><!-- /page -->
