@@ -204,6 +204,29 @@
     font-weight: 600;
     color: var(--navy);
     margin-bottom: 3px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .layer-body h3 a {
+    color: inherit;
+    text-decoration: none;
+  }
+  .layer-body h3 a:hover {
+    text-decoration: underline;
+  }
+  .status-available {
+    font-family: 'DM Mono', monospace;
+    font-size: 8.5px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 2px 6px;
+    border-radius: 2px;
+    background: var(--blue-light);
+    color: #1a6890;
+    border: 1px solid #a0cce0;
+    flex-shrink: 0;
   }
   .layer-body p {
     font-size: 12px;
@@ -497,7 +520,7 @@
       <div class="layer">
         <div class="layer-num">05</div>
         <div class="layer-body">
-          <h3>Delivery Process</h3>
+          <h3><a href="layers/05-delivery-process.md">Delivery Process</a><span class="status-available">available</span></h3>
           <p>1-week sprints, every sprint produces a release candidate. Combined weekly show and tell and retrospective with the Product Owner. Definition of Done includes regulatory gates — risk class, traceability link, TestRail execution, PO acceptance.</p>
           <div class="pills">
             <span class="pill t-navy"><span class="dot"></span>GitHub Projects</span>
@@ -525,7 +548,7 @@
           <h3>ML Pipeline</h3>
           <p>MLflow for experiment tracking and model registry. Versioned model deployments with full change history — directly enables FDA controlled release evidence.</p>
           <div class="pills">
-            <span class="pill t-teal"><span class="dot"></span>MLflow</span>
+            <span class="pill t-amber"><span class="dot"></span>MLflow</span>
             <span class="pill t-amber"><span class="dot"></span>Azure ML</span>
             <span class="pill t-navy"><span class="dot"></span>GitHub Actions</span>
           </div>
@@ -581,7 +604,7 @@
           <div class="pills">
             <span class="pill t-purple"><span class="dot"></span>Swift / SwiftUI</span>
             <span class="pill t-purple"><span class="dot"></span>Kotlin</span>
-            <span class="pill t-coral"><span class="dot"></span>Fastlane</span>
+            <span class="pill t-navy"><span class="dot"></span>Fastlane</span>
             <span class="pill t-navy"><span class="dot"></span>GitHub Actions</span>
           </div>
         </div>
@@ -750,14 +773,14 @@
   <!-- FOOTER -->
   <div class="footer">
     <div class="legend">
-      <div class="legend-item"><div class="legend-dot" style="background:var(--navy)"></div>GitHub</div>
-      <div class="legend-item"><div class="legend-dot" style="background:var(--green)"></div>QMS / Regulated</div>
-      <div class="legend-item"><div class="legend-dot" style="background:var(--teal)"></div>Observability</div>
-      <div class="legend-item"><div class="legend-dot" style="background:var(--amber)"></div>Infrastructure</div>
-      <div class="legend-item"><div class="legend-dot" style="background:var(--purple)"></div>Design</div>
-      <div class="legend-item"><div class="legend-dot" style="background:var(--red)"></div>Security</div>
-      <div class="legend-item"><div class="legend-dot" style="background:var(--coral)"></div>AI Agents</div>
-      <div class="legend-item"><div class="legend-dot" style="background:var(--blue)"></div>Info / Links</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--navy)"></div>Source &amp; pipeline</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--green)"></div>QMS &amp; compliance</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--teal)"></div>Observability &amp; comms</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--amber)"></div>Cloud &amp; infrastructure</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--purple)"></div>Design &amp; mobile</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--red)"></div>Security &amp; analysis</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--coral)"></div>AI &amp; agents</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--blue)"></div>Developer experience</div>
     </div>
     <div class="footer-status">DRAFT · FOR INTERNAL REVIEW · NOT A CONTROLLED DOCUMENT · v0.3</div>
   </div>
