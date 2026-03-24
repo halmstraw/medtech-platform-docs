@@ -18,6 +18,12 @@ Each entry: **Decision** | **Date** | **Rationale** | **Alternatives considered*
 **Rationale:** The company is already running on Azure. Migrating cloud providers would be a major distraction with no clinical or regulatory benefit. Azure has strong healthcare compliance posture (ISO 27001, SOC 2, HIPAA BAA available).  
 **Alternatives considered:** AWS (rejected — migration cost, no existing footprint), GCP (rejected — same reasons).
 
+> ⚠️ **FLAG — AMENDMENTS-001:** The March 2026 JD specifies "Azure and AWS" as a
+> required skill. This may indicate the company is multi-cloud or planning to be.
+> Clarify with CTO before writing layer 09 (Infrastructure). If AWS is in active use,
+> this decision must be revised and layer 09 rewritten to cover both platforms.
+> Update this entry and remove this flag once clarified.
+
 ---
 
 ### DEC-002 — GitHub Actions as CI/CD, not Jenkins or Azure DevOps
@@ -33,7 +39,7 @@ Each entry: **Decision** | **Date** | **Rationale** | **Alternatives considered*
 ### DEC-003 — GitHub Issues + Projects, not Jira
 **Date:** Session 1  
 **Decision:** GitHub Issues with custom templates and GitHub Projects for planning.  
-**Rationale:** Keeps the entire traceability chain (issue → branch → PR → build → deploy) within one system with one audit trail. Jira is slow, adds separate user management, and requires synchronisation with GitHub. At 20 people the complexity is not justified. Tim's experience at HSBC confirms Jira's overhead at scale.  
+**Rationale:** Keeps the entire traceability chain (issue → branch → PR → build → deploy) within one system with one audit trail. Jira is slow, adds separate user management, and requires synchronisation with GitHub. At 20 people the complexity is not justified. Prior experience confirms Jira's overhead at scale.
 **Alternatives considered:** Jira (rejected — overhead, separate system, Tim's prior negative experience), Linear (rejected — less established compliance story).
 
 ---
@@ -70,11 +76,11 @@ Each entry: **Decision** | **Date** | **Rationale** | **Alternatives considered*
 
 ## Documentation and Developer Experience
 
-### DEC-007 — Generic repo framing, not Lifelight-branded
-**Date:** Session 1  
-**Decision:** All documents framed as reference architecture for "a Class IIa medical device company" not explicitly as Lifelight/xim Ltd documentation.  
-**Rationale:** The repo may be shared publicly or with the CTO before Tim has a formal role. Lifelight-branded internal documentation created externally could appear presumptuous. Generic framing allows the repo to function as a professional portfolio piece that happens to match Lifelight's exact situation.  
-**Alternatives considered:** Lifelight-branded (rejected — professional risk), fully anonymised with no specific details (rejected — too vague to be credible).
+### DEC-007 — Generic repo framing, company-agnostic
+**Date:** Session 1
+**Decision:** All documents framed as reference architecture for "a Class IIa medical device company" rather than naming a specific company.
+**Rationale:** The repo is intended as a shareable professional reference. Company-specific naming reduces reusability and may appear presumptuous if shared before a formal engagement. Generic framing allows the repo to function as a credible portfolio piece applicable to any company fitting the profile.
+**Alternatives considered:** Company-branded (rejected — reduces reusability, professional risk), fully anonymised with no specific details (rejected — too vague to be credible).
 
 ---
 

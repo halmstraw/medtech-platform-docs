@@ -38,16 +38,20 @@ The platform is designed for a small, specialist engineering team (approximately
 
 | Layer | Document |
 |---|---|
-| Requirements and risk | [01-requirements-risk.md](docs/layers/01-requirements-risk.md) |
-| Design and UX | [02-design-ux.md](docs/layers/02-design-ux.md) |
-| QMS and documentation | [03-qms-documentation.md](docs/layers/03-qms-documentation.md) |
-| Source control | [04-source-control.md](docs/layers/04-source-control.md) |
-| CI/CD pipeline | [05-ci-cd-pipeline.md](docs/layers/05-ci-cd-pipeline.md) |
-| ML pipeline | [06-ml-pipeline.md](docs/layers/06-ml-pipeline.md) |
-| Testing and verification | [07-testing-verification.md](docs/layers/07-testing-verification.md) |
-| Infrastructure (Azure) | [08-infrastructure.md](docs/layers/08-infrastructure.md) |
-| Observability | [09-observability.md](docs/layers/09-observability.md) |
-| Developer experience | [10-developer-experience.md](docs/layers/10-developer-experience.md) |
+| 01 Requirements and risk | [01-requirements-risk.md](docs/layers/01-requirements-risk.md) |
+| 02 Design and UX | [02-design-ux.md](docs/layers/02-design-ux.md) |
+| 03 QMS and documentation | [03-qms-documentation.md](docs/layers/03-qms-documentation.md) |
+| 04 Source control | [04-source-control.md](docs/layers/04-source-control.md) |
+| 05 Delivery process | [05-delivery-process.md](docs/layers/05-delivery-process.md) |
+| 06 CI/CD pipeline | [06-ci-cd-pipeline.md](docs/layers/06-ci-cd-pipeline.md) |
+| 07 ML pipeline | [07-ml-pipeline.md](docs/layers/07-ml-pipeline.md) |
+| 08 Testing and verification | [08-testing-verification.md](docs/layers/08-testing-verification.md) |
+| 09 Infrastructure | [09-infrastructure.md](docs/layers/09-infrastructure.md) |
+| 10 Observability | [10-observability.md](docs/layers/10-observability.md) |
+| 11 Mobile architecture | [11-mobile-architecture.md](docs/layers/11-mobile-architecture.md) |
+| 12 Security architecture | [12-security-architecture.md](docs/layers/12-security-architecture.md) |
+| 13 AI engineering strategy | [13-ai-engineering-strategy.md](docs/layers/13-ai-engineering-strategy.md) |
+| 14 Developer experience | [14-developer-experience.md](docs/layers/14-developer-experience.md) |
 
 ---
 

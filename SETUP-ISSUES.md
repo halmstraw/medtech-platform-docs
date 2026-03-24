@@ -39,7 +39,7 @@ In GitHub → Issues → Milestones, create:
 **#1 — Create platform overview visual (assets/platform-overview.html)**
 - Label: `content`
 - Milestone: `Phase 1 — Stabilise`
-- Body: Single-page HTML architecture diagram showing full target state stack. Current version exists from earlier session — needs refining to reflect Azure (not AWS), ML pipeline layer, and Lifelight-specific context. Reference the HSBC-style doc format.
+- Body: Single-page HTML architecture diagram showing full target state stack. Current version exists from earlier session — needs refining to reflect Azure (not AWS) and ML pipeline layer.
 
 **#2 — Create current vs target state visual (assets/current-vs-target.html)**
 - Label: `content`
@@ -97,7 +97,7 @@ In GitHub → Issues → Milestones, create:
 **#11 — Write layer 06: ML pipeline**
 - Label: `content`
 - Milestone: `Phase 3 — ML Pipeline`
-- Body: This is the most important and Lifelight-specific layer. Covers: current Flask/container-per-request pattern and its problems, MLflow for experiment tracking and model registry, Azure ML endpoints as inference service replacement, the 7p → <1p cost reduction target, on-device GPU inference as phase 4 option and its regulatory implications, ML Validation Agent. IEC 62304 Class C implications for the inference code.
+- Body: This is the most product-specific layer. Covers: current Flask/container-per-request pattern and its problems, MLflow for experiment tracking and model registry, Azure ML endpoints as inference service replacement, the 7p → <1p cost reduction target, on-device GPU inference as phase 4 option and its regulatory implications, ML Validation Agent. IEC 62304 Class C implications for the inference code.
 
 **#12 — Write layer 07: Testing and verification**
 - Label: `content`
@@ -117,7 +117,7 @@ In GitHub → Issues → Milestones, create:
 **#15 — Write layer 10: Developer experience**
 - Label: `content`
 - Milestone: `Phase 4 — Platform`
-- Body: Backstage (phase 4), GitHub Pages (phase 1), ADR process. B2B developer portal for SDK customers — this is a significant Lifelight-specific need given the SDK integration model.
+- Body: Backstage (phase 4), GitHub Pages (phase 1), ADR process. B2B developer portal for SDK customers — this is a significant need given the SDK integration model.
 
 ---
 
@@ -185,6 +185,63 @@ In GitHub → Issues → Milestones, create:
 - Label: `content`
 - Milestone: `Phase 1 — Stabilise`
 - Body: Phase 1 minimal cost vs full stack cost. Split by category. All GBP monthly. Based on existing tool decisions in DECISIONS.md.
+
+---
+
+**#31 — Write layer 05: Delivery process**
+- Label: `content`
+- Milestone: `Phase 1 — Stabilise`
+- Body: Scrum implementation, definition of done with regulatory checklist items,
+  velocity tracking, retrospectives as ISO 13485 CAPA input, connection between
+  sprints and GitHub Projects milestones. Key JD responsibility — sprint discipline
+  is named explicitly.
+
+**#32 — Write layer 11: Mobile architecture**
+- Label: `content`
+- Milestone: `Phase 2 — Cost & Resilience`
+- Body: iOS (Swift/SwiftUI) and Android (Kotlin) architectural standards. MVVM and
+  Clean Architecture patterns. rPPG signal capture abstraction layer. SDK versioning
+  strategy and B2B compatibility matrix. Mobile CI/CD (Fastlane, TestFlight, Play
+  internal track). Clinical-grade reliability expectations. Establish current codebase
+  structure during onboarding before writing.
+
+**#33 — Write layer 12: Security architecture**
+- Label: `content`
+- Milestone: `Phase 1 — Stabilise`
+- Body: Threat modelling (STRIDE) for the rPPG assessment flow. Data classification
+  framework. Encryption at rest and in transit. Anonymisation pipeline location.
+  Audit logging strategy. IAM for engineers, agents, and B2B partners. Vulnerability
+  management lifecycle. SBOM as security artefact. Pen testing cadence. Builds on
+  existing Cyber Essentials Plus baseline.
+
+**#34 — Write layer 13: AI engineering strategy**
+- Label: `content`
+- Milestone: `Phase 1 — Stabilise`
+- Body: LLM tooling selection criteria for regulated context. Agentic framework
+  evaluation (Anthropic API primary, LangChain/AutoGen alternatives). Guardrails for
+  AI-generated code entering a regulated product. Prompt engineering standards and
+  versioning. Trust zone model as governance framework. How AI augmentation multiplies
+  throughput for a small team. Longer-term vision. NOTE: this layer covers AI as a
+  tool for engineers — distinct from layer 07 (ML pipeline) which covers AI as the
+  clinical product.
+
+**#36 — Configure Slack workspace and GitHub integration**
+- Label: `content`
+- Milestone: `Phase 1 — Stabilise`
+- Body: Set up Slack channel structure per layer 05 conventions. Install GitHub Slack
+  app. Configure per-channel subscriptions: deployments, CI alerts, incidents, PR
+  reviews. Configure GitHub Actions → Slack webhook for deployment notifications.
+  Configure PagerDuty → Slack for incident alerts. Document channel conventions in
+  layer 05.
+
+**#35 — Decision: Azure-only vs Azure + AWS (revise DEC-001)**
+- Label: `decision`
+- Milestone: `Phase 1 — Stabilise`
+- Body: The JD specifies "Azure and AWS" as required cloud skills. DEC-001 assumed
+  Azure only based on interview context. Clarify with CTO: is AWS in active use today,
+  is it planned, or is it listed as a desirable skill only? Answer determines scope
+  of layer 09 (Infrastructure) and may require updating DEC-001. Block on writing
+  layer 09 until resolved.
 
 ---
 

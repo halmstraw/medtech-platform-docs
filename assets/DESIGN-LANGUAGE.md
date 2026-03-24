@@ -2,13 +2,13 @@
 
 Read this before creating or editing any file in `assets/`.
 
-All visuals in this project follow a consistent professional corporate register — the same style used in HSBC Mobile Platform documentation. The aesthetic is clean, structured, and information-dense. Not a slide deck. Not a marketing brochure. A document a senior engineer would hand to a CTO.
+All visuals in this project follow a consistent professional corporate register. The aesthetic is clean, structured, and information-dense. Not a slide deck. Not a marketing brochure. A document a senior engineer would hand to a CTO.
 
 ---
 
 ## Aesthetic reference
 
-The reference document is the HSBC Mobile Platform Definition screenshot shared in session 1. Key characteristics:
+Key characteristics:
 - Warm cream background (`#fffdf4`) with structured panel layout
 - Dark navy header bar (`#09213a`) with white text and teal accent (`#04bca9`)
 - Coral (`#ff9452`) for highlights, active states, and AI-related badges

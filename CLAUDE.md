@@ -10,9 +10,9 @@ Use this to begin any new session:
 
 ```
 Read CLAUDE.md, DECISIONS.md, and docs/SKILLS.md.
-Repo is at: /Users/timhalmshaw/dev/med-startup/medtech-platform-docs
-Use Desktop Commander for all file operations — not the filesystem tool.
-For edits to existing files use edit_block (str_replace), never rewrite the whole file.
+Repo is at: /home/automation/dev/training/medtech-platform-docs
+Use native Claude tools for all file operations (Read, Write, Edit, Glob, Grep, Bash).
+For edits to existing files use Edit (str_replace), never rewrite the whole file.
 We're working on: [paste GitHub Issue title and number]
 ```
 
@@ -20,28 +20,23 @@ We're working on: [paste GitHub Issue title and number]
 
 ## Tools and environment
 
-**Machine:** Tim's Mac (timhalmshaw). Claude has Desktop Commander MCP access.
+**Environment:** Remote Linux workspace (VS Code / code-server). Claude uses native built-in tools — no Desktop Commander MCP.
 
-**Allowed paths for Desktop Commander:**
-- `/Users/timhalmshaw/dev/` — primary working directory, repo lives here
-- `/Users/timhalmshaw/Documents/`
-
-**Do not use** the `filesystem` tool — it is locked to Desktop and Downloads only and will fail.
+**Repo path:** `/home/automation/dev/training/medtech-platform-docs`
 
 **File operation rules:**
-- Read files: `desktop-commander:read_file`
-- Write new files: `desktop-commander:write_file`
-- Edit existing files: `desktop-commander:edit_block` — surgical str_replace only. Never rewrite a whole file unless it is genuinely new or the change exceeds ~50% of content.
-- Create directories: `desktop-commander:create_directory`
-- List contents: `desktop-commander:list_directory`
-- Shell commands: `desktop-commander:execute_command`
+- Read files: `Read` tool
+- Write new files: `Write` tool
+- Edit existing files: `Edit` tool — surgical str_replace only. Never rewrite a whole file unless it is genuinely new or the change exceeds ~50% of content.
+- Search files: `Glob` and `Grep` tools
+- Shell commands: `Bash` tool
 
 **Critical editing discipline:**
-- Always `read_file` before editing — edit_block requires exact string matching and stale context causes failures
-- Make one focused change per edit_block call
+- Always read before editing — Edit requires exact string matching and stale context causes failures
+- Make one focused change per Edit call
 - Never rewrite a file to make a small change — find the exact block and replace only that
 
-**OptiPlex (homebridgehub):** Tim's home Debian server, Tailscale IP 100.80.15.123, code-server on port 8443. Not directly accessible from Claude — changes sync via GitHub push/pull.
+**OptiPlex (homebridgehub):** Tim's home Debian server, Tailscale IP 100.80.15.123. Not directly accessible from Claude — changes sync via GitHub push/pull.
 
 ---
 
@@ -49,23 +44,23 @@ We're working on: [paste GitHub Issue title and number]
 
 See `assets/DESIGN-LANGUAGE.md` for the full reference.
 
-Summary: All visuals use the professional corporate register established in the first session — dark navy header (`#09213a`), warm cream body (`#fffdf4`), teal accent (`#04bca9`), coral highlight (`#ff9452`), blue info (`#3797c4`), colour-coded tool pills, DM Sans / DM Mono typography, clean structured layout matching the HSBC platform documentation style. Any new HTML visual must match the existing `assets/platform-overview.html` in tone and quality.
+Summary: All visuals use the professional corporate register established in the first session — dark navy header (`#09213a`), warm cream body (`#fffdf4`), teal accent (`#04bca9`), coral highlight (`#ff9452`), blue info (`#3797c4`), colour-coded tool pills, DM Sans / DM Mono typography, clean structured layout. Any new HTML visual must match the existing `assets/platform-overview.html` in tone and quality.
 
 ---
 
 ## What this project is
 
-A professional reference architecture document set for a Class IIa medical device software company. It is being prepared by Tim Halmshaw (Principal Engineer, coming from HSBC Mobile Platform) as part of a CEO recruitment process at **Lifelight / xim Ltd**. The intended audience is the CTO, and potentially the wider engineering team.
+A professional reference architecture document set for a Class IIa medical device software company. The intended audience is the CTO and wider engineering team.
 
-The documents must be technically credible, professionally presented, and demonstrate that Tim understands both where the company currently is and where it needs to get to. This is not a theoretical exercise — it reflects real conversations from real interviews.
+The documents must be technically credible, professionally presented, and demonstrate a clear understanding of both where the company currently is and where it needs to get to. This is not a theoretical exercise — it reflects real conversations from real engineering contexts.
 
-The repo is framed generically (not Lifelight-branded) so it can be shared professionally without appearing presumptuous. All content should read as "reference architecture for a Class IIa medical device company with these characteristics" rather than "here is what Lifelight should do."
+The repo is framed generically (not company-branded) so it can be shared professionally without appearing presumptuous. All content should read as "reference architecture for a Class IIa medical device company with these characteristics."
 
 ---
 
 ## The company — what you need to know
 
-**Product:** Lifelight by xim Ltd, Southampton. A smartphone-based contactless blood pressure monitor. The phone camera captures micro colour changes in facial skin (remote photoplethysmography / rPPG) using the green colour spectrum. The RGB signal is sent to the cloud, processed by ML algorithms, and returns systolic/diastolic BP and pulse rate. No cuff, no hardware, no contact.
+**Product:** A smartphone-based contactless blood pressure monitor. The phone camera captures micro colour changes in facial skin (remote photoplethysmography / rPPG) using the green colour spectrum. The RGB signal is sent to the cloud, processed by ML algorithms, and returns systolic/diastolic BP and pulse rate. No cuff, no hardware, no contact.
 
 **Regulatory status:** CE Class IIa under EU MDR (BP and heart rate). Pursuing FDA 510(k) or De Novo in the US. ISO 13485:2016 QMS in place. NHS Digital Toolkit compliant. ORCHA certified. Cyber Essentials Plus.
 
@@ -102,7 +97,7 @@ See DECISIONS.md for the full log. Summary:
 - **Qualio for eQMS** — purpose-built for medical device companies, ISO 13485 ready, e-signatures
 - **TestRail for test management** — standalone, integrates with GitHub, regulated environment standard
 - **MLflow for ML experiment tracking** — open source, Azure-compatible, model registry capability
-- **Generic repo framing** — not Lifelight-branded, shareable as reference architecture
+- **Generic repo framing** — company-agnostic, shareable as reference architecture
 
 ---
 
@@ -154,7 +149,7 @@ Four agents, each with a fixed identity and scoped permissions:
 - **Tables:** Use for comparisons, tool choices with rationale, compliance mappings. Keep concise.
 - **Regulatory references:** Always cite the specific clause (e.g. IEC 62304 §8.1, ISO 13485 §4.2). Do not make vague regulatory claims.
 - **Current state:** Always describe honestly and without judgment. The science is proven — the engineering wrapper is what needs work.
-- **Lifelight specifics:** Reference as "the company" or "the product" not by name. Exception: ADRs and compliance docs where specificity matters.
+- **Company-specific context:** Reference as "the company" or "the product" not by name. Exception: ADRs and compliance docs where specificity matters.
 - **File length:** Keep individual files under 300 lines. If a section grows beyond that, split it.
 - **No duplication:** If something is covered in another file, link to it. Do not repeat it.
 
@@ -184,12 +179,17 @@ medtech-platform-docs/
 │   │   ├── 02-design-ux.md
 │   │   ├── 03-qms-documentation.md
 │   │   ├── 04-source-control.md
-│   │   ├── 05-ci-cd-pipeline.md
-│   │   ├── 06-ml-pipeline.md
-│   │   ├── 07-testing-verification.md
-│   │   ├── 08-infrastructure.md
-│   │   ├── 09-observability.md
-│   │   └── 10-developer-experience.md
+│   │   ├── 05-delivery-process.md
+│   │   ├── 06-ci-cd-pipeline.md
+│   │   ├── 07-ml-pipeline.md
+│   │   ├── 08-testing-verification.md
+│   │   ├── 09-infrastructure.md
+│   │   ├── 10-observability.md
+│   │   ├── 11-mobile-architecture.md
+│   │   ├── 12-security-architecture.md
+│   │   ├── 13-ai-engineering-strategy.md
+│   │   ├── 14-developer-experience.md
+│   │   └── 15-maintenance-automation.md
 │   ├── agents/
 │   │   ├── SKILLS.md
 │   │   ├── agent-code-review.md

@@ -42,6 +42,6 @@ Keep files under 300 lines. If a section needs more, split into sub-files and li
 
 Use tables for: tool comparisons, compliance mappings, human vs AI responsibility splits, cost breakdowns. Keep tables concise — if a cell needs more than two sentences, the content belongs in prose below the table.
 
-## Lifelight specifics
+## Company-specific context
 
 Refer to the company as "the company" and the product as "the product" or "the application" unless in a compliance or ADR document where specificity is required. The product characteristics (rPPG, BP measurement, Azure cloud, Python/Flask, iOS/Android SDK) can and should be referenced — just not by brand name.

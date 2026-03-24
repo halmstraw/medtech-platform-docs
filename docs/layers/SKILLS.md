@@ -43,4 +43,12 @@ The infrastructure is Azure, not AWS. When referencing cloud services use Azure 
 
 ## Layer numbering
 
-Layers are numbered 01–10. Do not renumber — GitHub Issues and cross-references use these numbers.
+Layers are numbered 01–15 following AMENDMENTS-001. Do not renumber further without
+creating a new amendments document. GitHub Issues and cross-references use these numbers.
+
+Current order:
+01 Requirements and risk · 02 Design and UX · 03 QMS and documentation
+04 Source control · 05 Delivery process · 06 CI/CD pipeline · 07 ML pipeline
+08 Testing and verification · 09 Infrastructure · 10 Observability
+11 Mobile architecture · 12 Security architecture · 13 AI engineering strategy
+14 Developer experience · 15 Maintenance and automation
