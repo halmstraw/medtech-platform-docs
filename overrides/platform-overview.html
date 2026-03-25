@@ -42,59 +42,57 @@
 }
 
 .po-wrap {
-  font-family: system-ui, sans-serif;
+  font-family: inherit;
   color: var(--ink);
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
-  margin: -24px;
 }
 
 .po-wrap .page {
-  max-width: 1100px;
-  margin: 32px auto;
-  background: var(--cream);
-  box-shadow: 0 1px 8px rgba(0,0,0,0.08);
+  background: transparent;
 }
 
-/* ── HEADER ── */
-.po-wrap .header {
-  background: var(--navy);
-  color: var(--white);
-  padding: 36px 48px 32px;
+/* ── PAGE TITLE ── */
+.po-wrap .po-title {
+  padding: 0 0 1.5rem;
+  border-bottom: 1px solid var(--grey-200);
+  margin-bottom: 0;
 }
 .po-wrap .eyebrow {
-  font-family: 'DM Mono', monospace;
-  font-size: 10px;
+  font-family: var(--md-code-font-family);
+  font-size: 0.6rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--teal-mid);
-  margin-bottom: 10px;
+  color: var(--teal);
+  margin-bottom: 0.5rem;
 }
-.po-wrap .header h1 {
-  font-size: 28px;
+.po-wrap .po-title h1 {
+  font-size: 1.6rem;
   font-weight: 700;
   letter-spacing: -0.02em;
-  margin-bottom: 6px;
+  color: var(--navy);
+  margin-bottom: 0.25rem;
 }
 .po-wrap .header-sub {
-  font-size: 14px;
-  font-weight: 300;
-  color: rgba(255,255,255,0.7);
-  margin-bottom: 18px;
+  font-size: 0.85rem;
+  font-weight: 400;
+  color: var(--grey-700);
+  margin-bottom: 0.875rem;
 }
 .po-wrap .reg-badges {
   display: flex;
-  gap: 8px;
+  gap: 0.375rem;
   flex-wrap: wrap;
 }
 .po-wrap .reg-chip {
-  font-family: 'DM Mono', monospace;
-  font-size: 9.5px;
-  padding: 3px 8px;
+  font-family: var(--md-code-font-family);
+  font-size: 0.6rem;
+  padding: 0.2rem 0.5rem;
   border-radius: 2px;
-  border: 1px solid rgba(255,255,255,0.25);
-  color: rgba(255,255,255,0.85);
+  border: 1px solid var(--grey-200);
+  color: var(--grey-700);
   letter-spacing: 0.06em;
+  background: var(--grey-50);
 }
 
 /* ── BODY GRID ── */
@@ -103,41 +101,41 @@
   grid-template-columns: 1fr 320px;
 }
 .po-wrap .po-main {
-  padding: 32px 40px 40px;
+  padding: 28px 40px 40px 0;
   border-right: 1px solid var(--grey-200);
 }
 .po-wrap .po-sidebar {
-  padding: 32px 28px 40px;
+  padding: 28px 0 40px 28px;
 }
 
 /* ── SECTION LABELS ── */
 .po-wrap .sl {
-  font-family: 'DM Mono', monospace;
-  font-size: 9px;
+  font-family: var(--md-code-font-family);
+  font-size: 0.6rem;
   font-weight: 500;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--grey-700);
-  margin-bottom: 12px;
-  padding-bottom: 6px;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.375rem;
   border-bottom: 1px solid var(--grey-200);
 }
-.po-wrap .sl:not(:first-child) { margin-top: 28px; }
+.po-wrap .sl:not(:first-child) { margin-top: 1.75rem; }
 
 /* ── CONTEXT BOX ── */
 .po-wrap .context-box {
   background: var(--white);
   border: 1px solid var(--grey-200);
   border-radius: 3px;
-  padding: 16px 20px;
-  margin-bottom: 24px;
+  padding: 1rem 1.25rem;
+  margin-bottom: 1.5rem;
 }
 .po-wrap .context-box p {
-  font-size: 12.5px;
+  font-size: 0.8rem;
   color: var(--grey-700);
   line-height: 1.6;
 }
-.po-wrap .context-box p + p { margin-top: 8px; }
+.po-wrap .context-box p + p { margin-top: 0.5rem; }
 .po-wrap .context-box strong { color: var(--ink); font-weight: 600; }
 
 /* ── TRUST ZONES ── */
@@ -157,26 +155,26 @@
 .po-wrap .zone-2 { background: var(--zone2); }
 .po-wrap .zone-3 { background: var(--zone3); }
 .po-wrap .zone-name {
-  font-family: 'DM Mono', monospace;
-  font-size: 9px;
+  font-family: var(--md-code-font-family);
+  font-size: 0.58rem;
   letter-spacing: 0.15em;
   text-transform: uppercase;
   color: rgba(255,255,255,0.6);
-  margin-bottom: 4px;
+  margin-bottom: 0.25rem;
 }
 .po-wrap .zone-title {
-  font-size: 12.5px;
+  font-size: 0.8rem;
   font-weight: 600;
-  margin-bottom: 8px;
+  margin-bottom: 0.5rem;
 }
 .po-wrap .zone ul {
   list-style: none;
   padding: 0;
 }
 .po-wrap .zone li {
-  font-size: 11px;
+  font-size: 0.7rem;
   color: rgba(255,255,255,0.85);
-  padding: 2px 0;
+  padding: 0.125rem 0;
   line-height: 1.4;
 }
 .po-wrap .zone li::before {
@@ -189,25 +187,25 @@
   display: grid;
   grid-template-columns: 30px 1fr;
   gap: 10px;
-  align-items: start;
+  align-items: baseline;
   margin-bottom: 16px;
 }
 .po-wrap .layer-num {
-  font-family: 'DM Mono', monospace;
-  font-size: 11px;
+  font-family: var(--md-code-font-family);
+  font-size: 0.7rem;
   font-weight: 500;
   color: var(--grey-700);
   text-align: right;
-  padding-top: 1px;
+  padding-top: 0.1rem;
 }
 .po-wrap .layer-body h3 {
-  font-size: 13.5px;
+  font-size: 0.875rem;
   font-weight: 600;
   color: var(--navy);
-  margin-bottom: 3px;
+  margin-bottom: 0.2rem;
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 0.5rem;
 }
 .po-wrap .layer-body h3 a {
   color: inherit;
@@ -227,22 +225,22 @@
 .po-wrap .status-dot.in-progress { background: var(--coral); }
 
 .po-wrap .layer-body p {
-  font-size: 12px;
+  font-size: 0.75rem;
   color: var(--grey-700);
   line-height: 1.55;
-  margin-bottom: 5px;
+  margin-bottom: 0.3rem;
 }
 
 /* ── TOOL PILLS ── */
-.po-wrap .pills { display: flex; flex-wrap: wrap; gap: 4px; }
+.po-wrap .pills { display: flex; flex-wrap: wrap; gap: 0.25rem; }
 .po-wrap .pill {
   display: inline-flex;
   align-items: center;
-  gap: 4px;
-  font-family: 'DM Mono', monospace;
-  font-size: 10.5px;
+  gap: 0.25rem;
+  font-family: var(--md-code-font-family);
+  font-size: 0.65rem;
   font-weight: 500;
-  padding: 3px 8px;
+  padding: 0.2rem 0.5rem;
   border-radius: 2px;
   border: 1px solid;
   white-space: nowrap;
@@ -265,13 +263,13 @@
   margin-bottom: 14px;
 }
 .po-wrap .sb-card h4 {
-  font-size: 12px;
+  font-size: 0.75rem;
   font-weight: 600;
   color: var(--navy);
-  margin-bottom: 8px;
+  margin-bottom: 0.5rem;
 }
 .po-wrap .sb-card p, .po-wrap .sb-card li {
-  font-size: 11.5px;
+  font-size: 0.72rem;
   color: var(--grey-700);
   line-height: 1.5;
 }
@@ -299,20 +297,20 @@
   flex-shrink: 0;
 }
 .po-wrap .agent-name {
-  font-size: 11.5px;
+  font-size: 0.72rem;
   font-weight: 500;
   color: var(--ink);
 }
 .po-wrap .agent-scope {
-  font-size: 10px;
+  font-size: 0.625rem;
   color: var(--grey-700);
 }
 
 /* Status badges */
 .po-wrap .po-badge {
-  font-family: 'DM Mono', monospace;
-  font-size: 9.5px;
-  padding: 2px 7px;
+  font-family: var(--md-code-font-family);
+  font-size: 0.6rem;
+  padding: 0.15rem 0.45rem;
   border-radius: 10px;
   font-weight: 500;
   display: inline-block;
@@ -325,20 +323,20 @@
 .po-wrap .cost-table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 11px;
+  font-size: 0.7rem;
 }
 .po-wrap .cost-table th {
-  font-family: 'DM Mono', monospace;
-  font-size: 9px;
+  font-family: var(--md-code-font-family);
+  font-size: 0.58rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--grey-700);
   text-align: left;
-  padding: 6px 8px;
+  padding: 0.375rem 0.5rem;
   border-bottom: 1px solid var(--grey-200);
 }
 .po-wrap .cost-table td {
-  padding: 6px 8px;
+  padding: 0.375rem 0.5rem;
   color: var(--ink);
   border-bottom: 1px solid var(--grey-100);
 }
@@ -353,7 +351,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 16px 48px;
+  padding: 16px 0;
   border-top: 1px solid var(--grey-200);
 }
 .po-wrap .legend {
@@ -364,8 +362,8 @@
 .po-wrap .legend-item {
   display: flex;
   align-items: center;
-  gap: 5px;
-  font-size: 10px;
+  gap: 0.3rem;
+  font-size: 0.65rem;
   color: var(--grey-700);
 }
 .po-wrap .legend-dot {
@@ -373,8 +371,8 @@
   border-radius: 2px;
 }
 .po-wrap .footer-status {
-  font-family: 'DM Mono', monospace;
-  font-size: 9px;
+  font-family: var(--md-code-font-family);
+  font-size: 0.58rem;
   color: var(--grey-700);
   letter-spacing: 0.08em;
 }
@@ -389,9 +387,8 @@
 <div class="po-wrap">
 <div class="page">
 
-  <!-- HEADER -->
-  <div class="header">
-    <div class="eyebrow">Reference Architecture</div>
+  <!-- PAGE TITLE -->
+  <div class="po-title">
     <h1>Medical Device Platform — On a Page</h1>
     <div class="header-sub">Class IIa rPPG-based vital signs monitoring · Azure · iOS &amp; Android SDK</div>
     <div class="reg-badges">
@@ -737,6 +734,45 @@
             </tr>
           </tbody>
         </table>
+      </div>
+
+      <div class="sl">Architecture Artefacts</div>
+      <div class="sb-card">
+        <div class="agent-row">
+          <div class="agent-dot" style="background:var(--green)"></div>
+          <div>
+            <div class="agent-name"><a href="architecture/decisions/ADR-001-azure-platform/" style="color:inherit">ADR-001 — Azure Platform</a></div>
+            <div class="agent-scope">Decision record · Available</div>
+          </div>
+        </div>
+        <div class="agent-row">
+          <div class="agent-dot"></div>
+          <div>
+            <div class="agent-name">C4 Diagrams</div>
+            <div class="agent-scope">Context · Container · Component · <a href="https://github.com/halmstraw/medtech-platform-docs/issues/37" style="color:inherit">#37</a></div>
+          </div>
+        </div>
+        <div class="agent-row">
+          <div class="agent-dot"></div>
+          <div>
+            <div class="agent-name">Quality Attributes</div>
+            <div class="agent-scope">Measurable targets · <a href="https://github.com/halmstraw/medtech-platform-docs/issues/38" style="color:inherit">#38</a></div>
+          </div>
+        </div>
+        <div class="agent-row">
+          <div class="agent-dot"></div>
+          <div>
+            <div class="agent-name">Architecture Significant Requirements</div>
+            <div class="agent-scope">ASRs · <a href="https://github.com/halmstraw/medtech-platform-docs/issues/39" style="color:inherit">#39</a></div>
+          </div>
+        </div>
+        <div class="agent-row">
+          <div class="agent-dot"></div>
+          <div>
+            <div class="agent-name">ADR-002 — ADR-007</div>
+            <div class="agent-scope">Remaining decisions · <a href="https://github.com/halmstraw/medtech-platform-docs/issues/40" style="color:inherit">#40</a></div>
+          </div>
+        </div>
       </div>
 
       <div class="sl">Compliance Mapping</div>

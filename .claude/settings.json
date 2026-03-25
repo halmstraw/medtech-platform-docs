@@ -32,7 +32,19 @@
       "Bash(__NEW_LINE_0bfe69706ede78be__ sed:*)",
       "Bash(__NEW_LINE_0bfe69706ede78be__ for:*)",
       "Bash(do)",
-      "Bash(sed -i \"s|<h3>$layer</h3>|<h3>$layer<span class=\"\"status-dot in-progress\"\" title=\"\"Not started\"\"></span></h3>|\" /home/automation/dev/training/medtech-platform-docs/docs/platform-overview.html)"
+      "Bash(sed -i \"s|<h3>$layer</h3>|<h3>$layer<span class=\"\"status-dot in-progress\"\" title=\"\"Not started\"\"></span></h3>|\" /home/automation/dev/training/medtech-platform-docs/docs/platform-overview.html)",
+      "Bash(pip show:*)",
+      "Bash(pip3 show:*)",
+      "Bash(pip3 --version)",
+      "Bash(brew list:*)",
+      "Bash(pip3 install:*)",
+      "Bash(pkill -f 'zensical serve')",
+      "Bash(lsof -ti:8000)",
+      "Bash(xargs kill:*)",
+      "Bash(gh repo:*)",
+      "Bash(brew install:*)",
+      "Bash(gh issue:*)",
+      "Bash(git add:*)"
     ]
   }
 }
