@@ -1,4 +1,4 @@
-# Layer: 06 ml pipeline
+# Layer 07 — ML Pipeline
 
 <!-- STATUS: STUB — not yet written -->
 <!-- Read docs/layers/SKILLS.md before writing this file -->

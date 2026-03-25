@@ -1,4 +1,4 @@
-# Layer: 08 infrastructure
+# Layer 09 — Infrastructure
 
 <!-- STATUS: STUB — not yet written -->
 <!-- Read docs/layers/SKILLS.md before writing this file -->

@@ -1,4 +1,4 @@
-# Layer: 07 testing verification
+# Layer 08 — Testing & Verification
 
 <!-- STATUS: STUB — not yet written -->
 <!-- Read docs/layers/SKILLS.md before writing this file -->

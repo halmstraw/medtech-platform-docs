@@ -1,6 +1,6 @@
-# Layer 11: Maintenance Automation
+# Layer 16 — Maintenance & Automation
 
-<!-- STATUS: DRAFT — tool choices need review before finalising -->
+<!-- STATUS: STUB — not yet written -->
 <!-- Read docs/layers/SKILLS.md before editing this file -->
 
 ---

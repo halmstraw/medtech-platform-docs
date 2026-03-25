@@ -1,4 +1,4 @@
-# Layer: 02 design ux
+# Layer 02 — Design & UX
 
 <!-- STATUS: STUB — not yet written -->
 <!-- Read docs/layers/SKILLS.md before writing this file -->

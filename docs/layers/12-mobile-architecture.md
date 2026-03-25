@@ -1,4 +1,4 @@
-# Layer: 11 — Mobile Architecture
+# Layer 12 — Mobile Architecture
 
 <!-- STATUS: STUB — not yet written -->
 <!-- Read docs/layers/SKILLS.md before writing this file -->

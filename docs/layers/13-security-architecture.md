@@ -1,4 +1,4 @@
-# Layer: 12 — Security Architecture
+# Layer 13 — Security Architecture
 
 <!-- STATUS: STUB — not yet written -->
 <!-- Read docs/layers/SKILLS.md before writing this file -->

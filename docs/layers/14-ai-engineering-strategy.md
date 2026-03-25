@@ -1,4 +1,4 @@
-# Layer: 13 — AI Engineering Strategy
+# Layer 14 — AI Engineering Strategy
 
 <!-- STATUS: STUB — not yet written -->
 <!-- Read docs/layers/SKILLS.md before writing this file -->
