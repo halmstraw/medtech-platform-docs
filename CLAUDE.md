@@ -184,12 +184,13 @@ medtech-platform-docs/
 │   │   ├── 07-ml-pipeline.md
 │   │   ├── 08-testing-verification.md
 │   │   ├── 09-infrastructure.md
-│   │   ├── 10-observability.md
-│   │   ├── 11-mobile-architecture.md
-│   │   ├── 12-security-architecture.md
-│   │   ├── 13-ai-engineering-strategy.md
-│   │   ├── 14-developer-experience.md
-│   │   └── 15-maintenance-automation.md
+│   │   ├── 10-cloud-backend-architecture.md
+│   │   ├── 11-observability.md
+│   │   ├── 12-mobile-architecture.md
+│   │   ├── 13-security-architecture.md
+│   │   ├── 14-ai-engineering-strategy.md
+│   │   ├── 15-developer-experience.md
+│   │   └── 16-maintenance-automation.md
 │   ├── agents/
 │   │   ├── SKILLS.md
 │   │   ├── agent-code-review.md

@@ -47,11 +47,13 @@ The platform is designed for a small, specialist engineering team (approximately
 | 07 ML pipeline | [07-ml-pipeline.md](docs/layers/07-ml-pipeline.md) |
 | 08 Testing and verification | [08-testing-verification.md](docs/layers/08-testing-verification.md) |
 | 09 Infrastructure | [09-infrastructure.md](docs/layers/09-infrastructure.md) |
-| 10 Observability | [10-observability.md](docs/layers/10-observability.md) |
-| 11 Mobile architecture | [11-mobile-architecture.md](docs/layers/11-mobile-architecture.md) |
-| 12 Security architecture | [12-security-architecture.md](docs/layers/12-security-architecture.md) |
-| 13 AI engineering strategy | [13-ai-engineering-strategy.md](docs/layers/13-ai-engineering-strategy.md) |
-| 14 Developer experience | [14-developer-experience.md](docs/layers/14-developer-experience.md) |
+| 10 Cloud & backend architecture | [10-cloud-backend-architecture.md](docs/layers/10-cloud-backend-architecture.md) |
+| 11 Observability | [11-observability.md](docs/layers/11-observability.md) |
+| 12 Mobile architecture | [12-mobile-architecture.md](docs/layers/12-mobile-architecture.md) |
+| 13 Security architecture | [13-security-architecture.md](docs/layers/13-security-architecture.md) |
+| 14 AI engineering strategy | [14-ai-engineering-strategy.md](docs/layers/14-ai-engineering-strategy.md) |
+| 15 Developer experience | [15-developer-experience.md](docs/layers/15-developer-experience.md) |
+| 16 Maintenance & automation | [16-maintenance-automation.md](docs/layers/16-maintenance-automation.md) |
 
 ---
 
