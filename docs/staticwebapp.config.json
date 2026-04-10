@@ -1,0 +1,17 @@
+{
+  "routes": [
+    {
+      "route": "/radar",
+      "redirect": "/radar/",
+      "statusCode": 301
+    }
+  ],
+  "navigationFallback": {
+    "rewrite": "/index.html",
+    "exclude": [
+      "/radar/*",
+      "/_next/*",
+      "/*.{css,js,ico,svg,png,jpg,gif,webp,woff,woff2,ttf,eot,map,json,xml,txt}"
+    ]
+  }
+}

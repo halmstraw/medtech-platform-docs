@@ -55,9 +55,6 @@ jobs:
       # ── Combine outputs ────────────────────────────────────────────────────
       # MkDocs outputs to site/ → served at /
       # AOE radar outputs to /tmp/aoe_radar/out/ → served at /radar/
-      # Debug: show what Next.js actually exported so we can confirm the path
-      - name: List radar output directory
-        run: ls -la /tmp/aoe_radar/out/ && echo "---" && ls -la /tmp/aoe_radar/out/radar/ 2>/dev/null || echo "(no out/radar/ subdirectory)"
       - name: Copy radar into docs site
         run: cp -r /tmp/aoe_radar/out site/radar
 
