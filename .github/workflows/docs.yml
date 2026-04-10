@@ -34,6 +34,8 @@ jobs:
         run: git clone --depth 1 --branch v4.6.1 https://github.com/AOEpeople/aoe_technology_radar.git /tmp/aoe_radar
       - name: Overlay our radar data
         run: cp -r radar/data/. /tmp/aoe_radar/data/
+      - name: Overlay our radar public assets
+        run: cp -r radar/public/. /tmp/aoe_radar/public/
       - name: Install radar dependencies
         run: npm ci
         working-directory: /tmp/aoe_radar

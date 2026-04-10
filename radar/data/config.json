@@ -3,7 +3,7 @@
   "baseUrl": "",
   "editUrl": "https://github.com/halmstraw/medtech-platform-docs/blob/main/radar/data/radar/{release}/{id}.md",
   "logoFile": "logo.svg",
-  "jsFile": "",
+  "jsFile": "back-link.js",
   "toggles": {
     "showSearch": true,
     "showChart": true,
