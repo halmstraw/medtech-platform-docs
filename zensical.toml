@@ -46,7 +46,7 @@ Copyright &copy; 2026 The authors
 # Read more: https://zensical.org/docs/setup/navigation/
 nav = [
   { "Overview" = "index.md" },
-  { "Technology Radar" = "https://lively-tree-004b4fc10.2.azurestaticapps.net/radar/" },
+  { "Technology Radar" = "radar/index.html" },
   { "Layers" = [
     { "01 — Requirements & Risk" = "layers/01-requirements-risk.md" },
     { "02 — Design & UX" = "layers/02-design-ux.md" },
