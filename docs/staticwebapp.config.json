@@ -1,7 +1,11 @@
 {
   "routes": [
     {
-      "route": "/radar/",
+      "route": "/radar",
+      "rewrite": "/radar/index.html"
+    },
+    {
+      "route": "/radar/*",
       "rewrite": "/radar/index.html"
     }
   ]
