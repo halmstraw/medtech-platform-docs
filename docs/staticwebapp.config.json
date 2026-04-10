@@ -1,11 +1,6 @@
 {
   "routes": [
     {
-      "route": "/radar",
-      "redirect": "/radar/",
-      "statusCode": 301
-    },
-    {
       "route": "/radar/",
       "rewrite": "/radar/index.html"
     }
