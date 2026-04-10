@@ -59,6 +59,8 @@ jobs:
       # to pass through non-markdown files.
       - name: Copy radar into docs site
         run: mkdir -p site/radar && cp -r /tmp/aoe_radar/out/. site/radar/
+      - name: Copy SWA routing config
+        run: cp docs/staticwebapp.config.json site/staticwebapp.config.json
       - name: Verify site structure
         run: |
           echo "=== site/ root ===" && ls site/
