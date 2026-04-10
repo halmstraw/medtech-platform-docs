@@ -1,0 +1,130 @@
+{
+  "basePath": "/radar",
+  "baseUrl": "",
+  "editUrl": "https://github.com/halmstraw/medtech-platform-docs/blob/main/radar/data/radar/{release}/{id}.md",
+  "logoFile": "logo.svg",
+  "jsFile": "",
+  "toggles": {
+    "showSearch": true,
+    "showChart": true,
+    "showTagFilter": true,
+    "showQuadrantList": true,
+    "showEmptyRings": false
+  },
+  "sections": ["radar", "tags", "list"],
+  "colors": {
+    "foreground": "#fffdf4",
+    "background": "#09213a",
+    "highlight": "#04bca9",
+    "content": "#ffffff",
+    "text": "#7f8b97",
+    "link": "#04bca9",
+    "border": "rgba(255, 255, 255, 0.1)",
+    "tag": "rgba(255, 255, 255, 0.1)"
+  },
+  "quadrants": [
+    {
+      "id": "tools",
+      "title": "Tools",
+      "description": "CI/CD, testing, analysis, and development tooling",
+      "color": "#3797c4"
+    },
+    {
+      "id": "platforms",
+      "title": "Platforms",
+      "description": "Cloud, hosting, and infrastructure platforms",
+      "color": "#f0a830"
+    },
+    {
+      "id": "languages-frameworks",
+      "title": "Languages & Frameworks",
+      "description": "Programming languages, application frameworks, and ML toolkits",
+      "color": "#04bca9"
+    },
+    {
+      "id": "techniques",
+      "title": "Techniques",
+      "description": "Engineering processes, governance models, and delivery practices",
+      "color": "#9060d0"
+    }
+  ],
+  "rings": [
+    {
+      "id": "adopt",
+      "title": "Adopt",
+      "description": "Decided and committed to — use with confidence",
+      "color": "#04bca9",
+      "radius": 0.5,
+      "strokeWidth": 5
+    },
+    {
+      "id": "trial",
+      "title": "Trial",
+      "description": "In active use but under evaluation — worth pursuing",
+      "color": "#4ab87a",
+      "radius": 0.69,
+      "strokeWidth": 3
+    },
+    {
+      "id": "assess",
+      "title": "Assess",
+      "description": "Open decision or deferred — worth understanding",
+      "color": "#3797c4",
+      "radius": 0.85,
+      "strokeWidth": 2
+    },
+    {
+      "id": "hold",
+      "title": "Hold",
+      "description": "Explicitly rejected or being phased out — do not start",
+      "color": "#ff9452",
+      "radius": 1,
+      "strokeWidth": 0.75
+    }
+  ],
+  "flags": {
+    "new": {
+      "color": "#04bca9",
+      "title": "New",
+      "titleShort": "N",
+      "description": "New in this version"
+    },
+    "changed": {
+      "color": "#3797c4",
+      "title": "Changed",
+      "titleShort": "C",
+      "description": "Recently changed"
+    },
+    "default": {
+      "description": "Unchanged"
+    }
+  },
+  "chart": {
+    "size": 800,
+    "blipSize": 12
+  },
+  "social": [],
+  "imprint": "",
+  "labels": {
+    "title": "Technology Radar",
+    "imprint": "",
+    "quadrant": "Quadrant",
+    "quadrantOverview": "Quadrant Overview",
+    "zoomIn": "Zoom in",
+    "filterByTag": "Filter by Tag",
+    "footer": "MedTech Platform — Internal Engineering Reference",
+    "notUpdated": "Items not updated in recent versions may have diminished relevance",
+    "notFound": "404 - Page not found",
+    "pageAbout": "How to use this Radar",
+    "pageOverview": "Technologies Overview",
+    "pageSearch": "Search",
+    "searchPlaceholder": "Search tools, platforms, techniques...",
+    "metaDescription": "Technology decisions for a Class IIa medical device platform"
+  },
+  "fuzzySearch": {
+    "threshold": 0.4,
+    "distance": 600,
+    "ignoreLocation": false,
+    "includeScore": true
+  }
+}
