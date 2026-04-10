@@ -11,8 +11,8 @@ Use this to begin any new session:
 ```
 Read CLAUDE.md, DECISIONS.md, and AMENDMENTS-001.md.
 Repo is at: /Users/timhalmshaw/dev/med-startup/medtech-platform-docs
-Use Desktop Commander MCP for all file operations.
-For edits to existing files use edit_block (surgical str_replace only), never rewrite the whole file.
+Use native Claude tools for all file operations (Read, Write, Edit, Glob, Grep, Bash).
+For edits to existing files use Edit (str_replace), never rewrite the whole file.
 We're working on: [paste GitHub Issue title and number]
 ```
 
@@ -20,24 +20,23 @@ We're working on: [paste GitHub Issue title and number]
 
 ## Tools and environment
 
-**Environment:** macOS local dev machine. Claude uses Desktop Commander MCP for all file and shell operations.
+**Environment:** VS Code with Claude extension. Claude uses native built-in tools for all file and shell operations.
 
 **Repo path:** `/Users/timhalmshaw/dev/med-startup/medtech-platform-docs`
 
 **GitHub:** owner is `halmstraw` — always use this value, not `timhalmshaw`. Using the wrong owner returns silent 404s.
 
 **File operation rules:**
-- Read files: `desktop-commander:read_file` or `read_multiple_files`
-- Write new files: `desktop-commander:write_file`
-- Edit existing files: `desktop-commander:edit_block` — surgical str_replace only. Never rewrite a whole file unless it is genuinely new or the change exceeds ~50% of content.
-- Search/list: `desktop-commander:list_directory`, `desktop-commander:execute_command` with find/grep
-- Shell commands: `desktop-commander:execute_command`
+- Read files: `Read` tool
+- Write new files: `Write` tool
+- Edit existing files: `Edit` tool — surgical str_replace only. Never rewrite a whole file unless it is genuinely new or the change exceeds ~50% of content.
+- Search files: `Glob` and `Grep` tools
+- Shell commands: `Bash` tool
 
 **Critical editing discipline:**
-- Always read before editing — edit_block requires exact string matching and stale context causes failures
-- Make one focused change per edit_block call
+- Always read before editing — Edit requires exact string matching and stale context causes failures
+- Make one focused change per Edit call
 - Never rewrite a file to make a small change — find the exact block and replace only that
-- `filesystem` MCP is locked to Desktop and Downloads — always use Desktop Commander for repo operations
 
 **Live site:** Azure Static Web Apps — `https://lively-tree-004b4fc10.2.azurestaticapps.net`
 
