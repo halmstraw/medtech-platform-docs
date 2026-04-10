@@ -37,6 +37,15 @@ jobs:
       - name: Install radar dependencies
         run: npm ci
         working-directory: /tmp/aoe_radar
+      # v4.6.1 build script is just `next build` — data generation must be
+      # run explicitly before it. build:icons generates React icon components
+      # from SVGs; build:data parses our markdown into data.json/about.json.
+      - name: Generate radar icon components
+        run: npm run build:icons
+        working-directory: /tmp/aoe_radar
+      - name: Generate radar data from markdown
+        run: npm run build:data
+        working-directory: /tmp/aoe_radar
       - name: Build radar
         run: npm run build
         working-directory: /tmp/aoe_radar
