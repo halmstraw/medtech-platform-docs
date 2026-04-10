@@ -1,30 +1,82 @@
-name: Documentation
+name: Deploy Docs to Azure Static Web Apps
+
 on:
-  workflow_dispatch: # disabled: re-enable when GitHub Pages is configured
-  # push:
-  #   branches:
-  #     - master
-  #     - main
-permissions:
-  contents: read
-  pages: write
-  id-token: write
+  push:
+    branches: [main]
+  pull_request:
+    types: [opened, synchronize, reopened, closed]
+    branches: [main]
+
 jobs:
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+  build_and_deploy:
     runs-on: ubuntu-latest
+    name: Build and Deploy
     steps:
-      - uses: actions/configure-pages@v5
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v4
+
+      # ── Build MkDocs/Zensical docs site ───────────────────────────────────
       - uses: actions/setup-python@v5
         with:
-          python-version: 3.x
-      - run: pip install zensical
-      - run: zensical build --clean
-      - uses: actions/upload-pages-artifact@v4
+          python-version: "3.x"
+      - name: Build docs
+        run: |
+          pip install zensical
+          zensical build --clean
+
+      # ── Build AOE Tech Radar ───────────────────────────────────────────────
+      # The AOE radar source is cloned at a pinned release. Our customised
+      # data lives in radar/data/ — it is overlaid onto the cloned source
+      # before building. Only radar/data/ is committed to this repo.
+      - uses: actions/setup-node@v4
         with:
-          path: site
-      - uses: actions/deploy-pages@v4
-        id: deployment
+          node-version: "20"
+      - name: Clone AOE Tech Radar source (v4.6.1)
+        run: git clone --depth 1 --branch v4.6.1 https://github.com/AOEpeople/aoe_technology_radar.git /tmp/aoe_radar
+      - name: Overlay our radar data
+        run: cp -r radar/data/. /tmp/aoe_radar/data/
+      - name: Install radar dependencies
+        run: npm ci
+        working-directory: /tmp/aoe_radar
+      # v4.6.1 build script is just `next build` — data generation must be
+      # run explicitly before it. build:icons generates React icon components
+      # from SVGs; build:data parses our markdown into data.json/about.json.
+      - name: Generate radar icon components
+        run: npm run build:icons
+        working-directory: /tmp/aoe_radar
+      - name: Generate radar data from markdown
+        run: npm run build:data
+        working-directory: /tmp/aoe_radar
+      - name: Build radar
+        run: npm run build
+        working-directory: /tmp/aoe_radar
+        env:
+          NEXT_TELEMETRY_DISABLED: 1
+
+      # ── Combine outputs ────────────────────────────────────────────────────
+      # MkDocs outputs to site/ → served at /
+      # AOE radar outputs to /tmp/aoe_radar/out/ → served at /radar/
+      # staticwebapp.config.json is copied explicitly — don't rely on Zensical
+      # to pass through non-markdown files.
+      - name: Copy radar into docs site
+        run: mkdir -p site/radar && cp -r /tmp/aoe_radar/out/. site/radar/
+      - name: Copy SWA routing config
+        run: cp docs/staticwebapp.config.json site/staticwebapp.config.json
+      - name: Verify site structure
+        run: |
+          echo "=== site/ root ===" && ls site/
+          echo "=== site/radar/ ===" && ls site/radar/
+          echo "=== radar index exists ===" && ls -lh site/radar/index.html
+          echo "=== staticwebapp.config ===" && cat site/staticwebapp.config.json
+
+      # ── Deploy to Azure Static Web Apps ───────────────────────────────────
+      # Secret: AZURE_STATIC_WEB_APPS_API_TOKEN
+      # Retrieve from: Azure portal → Static Web App → Settings → Deployment token
+      # Add to: GitHub repo → Settings → Secrets → Actions
+      - name: Deploy to Azure Static Web Apps
+        uses: Azure/static-web-apps-deploy@v1
+        with:
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN }}
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          action: "upload"
+          app_location: "site"
+          skip_app_build: true

@@ -84,11 +84,13 @@ Each entry: **Decision** | **Date** | **Rationale** | **Alternatives considered*
 
 ---
 
-### DEC-008 — Backstage as phase 2, GitHub Pages as phase 1
-**Date:** Session 1  
-**Decision:** GitHub Pages for immediate documentation publishing. Backstage introduced in phase 4 when team size and service count justify it.  
-**Rationale:** Backstage requires real infrastructure and operational overhead. At phase 1 with a small team and few services, the value doesn't justify the setup cost. GitHub Pages is immediate, free, and the TechDocs content is the same markdown — so Backstage can be introduced later without rewriting anything.  
-**Alternatives considered:** Backstage from day one (rejected — overhead not justified at phase 1), Confluence (rejected — separate system, DEC-004 gives Qualio that role for controlled docs).
+### DEC-008 — Azure Static Web Apps for docs, Backstage deferred to phase 4
+**Date:** Session 1 (revised April 2026)
+**Decision:** Azure Static Web Apps (single resource) for all documentation publishing — MkDocs site at root, AOE Tech Radar at `/radar/`. Backstage introduced in phase 4 when team size and service count justify it.
+**Rationale:** Azure subscription is being created for Phase 2 infrastructure (AKS, Key Vault, Container Instances). Hosting docs on the same platform removes a split and avoids a second provider. Azure SWA free tier covers all requirements. Key advantages over GitHub Pages: Azure AD access control (docs are internal-only), PR preview deployments (staging URL per PR), and consistent platform story. TechDocs content is still the same markdown — Backstage migration in Phase 4 unchanged.
+**Alternatives considered:** GitHub Pages (rejected at revision — no access control, no PR previews, splits hosting across two platforms once Azure subscription exists), Backstage from day one (rejected — operational overhead not justified at phase 1 team size), Vercel (viable but not on the Azure stack), Confluence (rejected — DEC-004 gives Qualio the controlled-docs role).
+**Deployment token:** Secret name `AZURE_STATIC_WEB_APPS_API_TOKEN` in GitHub repo settings. Token retrieved from Azure portal → Static Web App resource → Settings → Deployment token.
+**Live URL:** https://lively-tree-004b4fc10.2.azurestaticapps.net
 
 ---
 

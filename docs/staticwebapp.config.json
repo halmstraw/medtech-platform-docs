@@ -1,0 +1,16 @@
+{
+  "routes": [
+    {
+      "route": "/radar/",
+      "rewrite": "/radar/index.html"
+    }
+  ],
+  "navigationFallback": {
+    "rewrite": "/index.html",
+    "exclude": [
+      "/radar/*",
+      "/_next/*",
+      "/*.{js,css,png,jpg,svg,ico,json}"
+    ]
+  }
+}
