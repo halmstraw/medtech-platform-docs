@@ -54,7 +54,7 @@ jobs:
       # MkDocs outputs to site/ → served at /
       # AOE radar outputs to /tmp/aoe_radar/build/ → served at /radar/
       - name: Copy radar into docs site
-        run: cp -r /tmp/aoe_radar/build site/radar
+        run: cp -r /tmp/aoe_radar/out site/radar
 
       # ── Deploy to Azure Static Web Apps ───────────────────────────────────
       # Secret: AZURE_STATIC_WEB_APPS_API_TOKEN
