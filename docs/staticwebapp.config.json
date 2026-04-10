@@ -8,10 +8,6 @@
     {
       "route": "/radar/",
       "rewrite": "/radar/index.html"
-    },
-    {
-      "route": "/radar/*",
-      "rewrite": "/radar/index.html"
     }
   ],
   "navigationFallback": {
