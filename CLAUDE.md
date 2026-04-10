@@ -9,10 +9,10 @@ Read this at the start of every session before touching any file.
 Use this to begin any new session:
 
 ```
-Read CLAUDE.md, DECISIONS.md, and docs/SKILLS.md.
-Repo is at: /home/automation/dev/training/medtech-platform-docs
-Use native Claude tools for all file operations (Read, Write, Edit, Glob, Grep, Bash).
-For edits to existing files use Edit (str_replace), never rewrite the whole file.
+Read CLAUDE.md, DECISIONS.md, and AMENDMENTS-001.md.
+Repo is at: /Users/timhalmshaw/dev/med-startup/medtech-platform-docs
+Use Desktop Commander MCP for all file operations.
+For edits to existing files use edit_block (surgical str_replace only), never rewrite the whole file.
 We're working on: [paste GitHub Issue title and number]
 ```
 
@@ -20,21 +20,28 @@ We're working on: [paste GitHub Issue title and number]
 
 ## Tools and environment
 
-**Environment:** Remote Linux workspace (VS Code / code-server). Claude uses native built-in tools — no Desktop Commander MCP.
+**Environment:** macOS local dev machine. Claude uses Desktop Commander MCP for all file and shell operations.
 
-**Repo path:** `/home/automation/dev/training/medtech-platform-docs`
+**Repo path:** `/Users/timhalmshaw/dev/med-startup/medtech-platform-docs`
+
+**GitHub:** owner is `halmstraw` — always use this value, not `timhalmshaw`. Using the wrong owner returns silent 404s.
 
 **File operation rules:**
-- Read files: `Read` tool
-- Write new files: `Write` tool
-- Edit existing files: `Edit` tool — surgical str_replace only. Never rewrite a whole file unless it is genuinely new or the change exceeds ~50% of content.
-- Search files: `Glob` and `Grep` tools
-- Shell commands: `Bash` tool
+- Read files: `desktop-commander:read_file` or `read_multiple_files`
+- Write new files: `desktop-commander:write_file`
+- Edit existing files: `desktop-commander:edit_block` — surgical str_replace only. Never rewrite a whole file unless it is genuinely new or the change exceeds ~50% of content.
+- Search/list: `desktop-commander:list_directory`, `desktop-commander:execute_command` with find/grep
+- Shell commands: `desktop-commander:execute_command`
 
 **Critical editing discipline:**
-- Always read before editing — Edit requires exact string matching and stale context causes failures
-- Make one focused change per Edit call
+- Always read before editing — edit_block requires exact string matching and stale context causes failures
+- Make one focused change per edit_block call
 - Never rewrite a file to make a small change — find the exact block and replace only that
+- `filesystem` MCP is locked to Desktop and Downloads — always use Desktop Commander for repo operations
+
+**Live site:** Azure Static Web Apps — `https://lively-tree-004b4fc10.2.azurestaticapps.net`
+
+**Local preview:** `python3 -m http.server 8765 &` from `site/` then `http://localhost:8765/`
 
 **OptiPlex (homebridgehub):** Tim's home Debian server, Tailscale IP 100.80.15.123. Not directly accessible from Claude — changes sync via GitHub push/pull.
 
@@ -161,56 +168,31 @@ Four agents, each with a fixed identity and scoped permissions:
 medtech-platform-docs/
 ├── CLAUDE.md                          ← you are here
 ├── DECISIONS.md                       ← key decisions log
+├── AMENDMENTS-001.md                  ← additional layers added after initial scope
 ├── README.md                          ← human entry point
-├── SETUP-ISSUES.md                    ← GitHub Issues to create
+├── SETUP-ISSUES.md                    ← GitHub Issues backlog
+├── zensical.toml                      ← MkDocs/Zensical site config and nav
+├── radar/
+│   ├── data/
+│   │   ├── config.json                ← AOE radar config (quadrants, rings, colours)
+│   │   └── radar/
+│   │       └── 2026-04-09/            ← dated release folder — add .md files here
+│   └── public/
+│       └── back-link.js               ← injected on all radar pages — back to docs
 ├── docs/
+│   ├── staticwebapp.config.json       ← Azure SWA routing config
 │   ├── SKILLS.md                      ← general docs conventions
 │   ├── platform-overview.html         ← narrative "on a page"
-│   ├── current-vs-target.html               ← honest current assessment
+│   ├── current-vs-target.html         ← honest current assessment
 │   ├── roadmap.md                     ← prioritised path to target
 │   ├── zones/
-│   │   ├── SKILLS.md
-│   │   ├── zone-1-development.md
-│   │   ├── zone-2-review-gate.md
-│   │   └── zone-3-operations.md
 │   ├── layers/
-│   │   ├── SKILLS.md
-│   │   ├── 01-requirements-risk.md
-│   │   ├── 02-design-ux.md
-│   │   ├── 03-qms-documentation.md
-│   │   ├── 04-source-control.md
-│   │   ├── 05-delivery-process.md
-│   │   ├── 06-ci-cd-pipeline.md
-│   │   ├── 07-ml-pipeline.md
-│   │   ├── 08-testing-verification.md
-│   │   ├── 09-infrastructure.md
-│   │   ├── 10-cloud-backend-architecture.md
-│   │   ├── 11-observability.md
-│   │   ├── 12-mobile-architecture.md
-│   │   ├── 13-security-architecture.md
-│   │   ├── 14-ai-engineering-strategy.md
-│   │   ├── 15-developer-experience.md
-│   │   └── 16-maintenance-automation.md
 │   ├── agents/
-│   │   ├── SKILLS.md
-│   │   ├── agent-code-review.md
-│   │   ├── agent-compliance.md
-│   │   ├── agent-documentation.md
-│   │   ├── agent-ops.md
-│   │   └── agent-ml-validation.md
 │   ├── compliance/
-│   │   ├── SKILLS.md
-│   │   ├── iso-13485-mapping.md
-│   │   ├── fda-510k-readiness.md
-│   │   ├── iec-62304-mapping.md
-│   │   └── gdpr-dsp-toolkit.md
 │   └── architecture/
-│       ├── SKILLS.md
-│       ├── cost-model.md
-│       └── decisions/
-│           └── ADR-001-azure-platform.md
 └── assets/
     ├── DESIGN-LANGUAGE.md
+    └── platform-overview.html
 ```
 
 ---

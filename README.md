@@ -1,10 +1,18 @@
 # AI-Native Regulated Software Platform
 
-Disclaimer - This site is created as a proof of knowledge to aide job applications.  It is not intended to be used.
-
-## Reference Architecture for a Class IIa Medical Device Company
-
 > A professional reference architecture covering end-to-end software delivery for a regulated medical device company — compliance, AI augmentation, and least-privilege access control integrated from day one.
+
+**Disclaimer:** This repository is created as a proof of knowledge to aid job applications. It is not intended for production use.
+
+---
+
+## Live site
+
+**[halmstraw.github.io/medtech-platform-docs](https://lively-tree-004b4fc10.2.azurestaticapps.net)** — hosted on Azure Static Web Apps, built and deployed via GitHub Actions on every merge to `main`.
+
+The site includes:
+- Full architecture documentation (Zensical/MkDocs)
+- [Technology Radar](https://lively-tree-004b4fc10.2.azurestaticapps.net/radar/) — live view of all tool decisions, powered by AOE Tech Radar
 
 ---
 
@@ -19,7 +27,7 @@ This repository contains the architecture, tooling decisions, process documentat
 - 21 CFR Part 11 (Electronic records — FDA)
 - FDA Cybersecurity Guidance 2023
 
-The platform is designed for a small, specialist engineering team (approximately 20 people) with a proven product moving from research-led delivery toward FDA submission readiness and commercial scale.
+The platform is designed for a small, specialist engineering team (~20 people) with a proven product moving from research-led delivery toward FDA submission readiness and commercial scale.
 
 ---
 
@@ -90,6 +98,64 @@ The platform is designed for a small, specialist engineering team (approximately
 
 ---
 
+## Technology Radar
+
+The radar is a live view of all technology decisions across the platform — what is adopted, what is being evaluated, and what has been parked.
+
+Powered by [AOE Tech Radar](https://github.com/AOEpeople/aoe_technology_radar) (open source, MIT licence). Built as a Next.js static export and served alongside the MkDocs docs site on Azure Static Web Apps.
+
+**Quadrants:** Tools · Platforms · Languages & Frameworks · Techniques
+
+**Rings:** Adopt (decided) · Trial (in evaluation) · Assess (shortlisted) · Hold (parked)
+
+### Updating the radar
+
+Every entry is a single markdown file in `radar/data/radar/YYYY-MM-DD/`:
+
+```markdown
+---
+title: "Tool Name"
+ring: adopt | trial | assess | hold
+quadrant: tools | platforms | languages-frameworks | techniques
+tags: [tag1, tag2]
+---
+
+Description of the tool and why it is placed here.
+Reference relevant ADRs where applicable.
+```
+
+Add the file, commit, push — CI rebuilds and deploys automatically.
+
+### Radar bot (Phase 2 — in design)
+
+An AI-assisted update flow is being designed to make radar contributions conversational:
+
+```
+You (Telegram) → Azure Function → Claude API (web search + reasoning)
+                                → GitHub API (reads context, raises PR)
+                                → Telegram (confirmation + PR link)
+```
+
+**Flow:** Message the bot with a technology suggestion. Claude researches it, recommends a quadrant and ring with reasoning, asks for your confirmation, then raises a GitHub PR with the `.md` entry. You review and merge.
+
+**Access:** Allowlist-controlled by Telegram user ID — trusted contributors only.
+
+**Stack:** Azure Functions (Python) · Azure Key Vault · Telegram Bot API · Anthropic Claude API · GitHub API
+
+---
+
+## Infrastructure
+
+| Component | Technology |
+|---|---|
+| Docs build | Zensical (MkDocs-based) |
+| Radar build | AOE Tech Radar (Next.js static export) |
+| Hosting | Azure Static Web Apps (free tier) |
+| CI/CD | GitHub Actions |
+| PR previews | Azure SWA staging environments |
+
+---
+
 ## Visual assets
 
 - [Platform overview diagram](assets/platform-overview.html) — single-page architecture reference
@@ -101,7 +167,7 @@ The platform is designed for a small, specialist engineering team (approximately
 
 - [CLAUDE.md](CLAUDE.md) — project briefing for AI-assisted sessions
 - [DECISIONS.md](DECISIONS.md) — log of key architectural decisions
-- [SETUP-ISSUES.md](SETUP-ISSUES.md) — GitHub Issues to create for task tracking
+- [AMENDMENTS-001.md](AMENDMENTS-001.md) — additional layers added after initial scope
 
 ---
 
