@@ -49,6 +49,8 @@ jobs:
       - name: Build radar
         run: npm run build
         working-directory: /tmp/aoe_radar
+        env:
+          NEXT_TELEMETRY_DISABLED: 1
 
       # ── Combine outputs ────────────────────────────────────────────────────
       # MkDocs outputs to site/ → served at /
