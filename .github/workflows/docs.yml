@@ -59,14 +59,12 @@ jobs:
       # to pass through non-markdown files.
       - name: Copy radar into docs site
         run: mkdir -p site/radar && cp -r /tmp/aoe_radar/out/. site/radar/
-      - name: Copy SWA routing config
-        run: cp docs/staticwebapp.config.json site/staticwebapp.config.json
       - name: Verify site structure
         run: |
           echo "=== site/ root ===" && ls site/
           echo "=== site/radar/ ===" && ls site/radar/
           echo "=== radar index exists ===" && ls -lh site/radar/index.html
-          echo "=== staticwebapp.config ===" && cat site/staticwebapp.config.json
+          echo "=== staticwebapp.config present ===" && ls -lh site/staticwebapp.config.json 2>/dev/null || echo "(none — relying on SWA default directory serving)"
 
       # ── Deploy to Azure Static Web Apps ───────────────────────────────────
       # Secret: AZURE_STATIC_WEB_APPS_API_TOKEN
