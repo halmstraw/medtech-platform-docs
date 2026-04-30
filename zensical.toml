@@ -80,6 +80,7 @@ nav = [
   ]},
   { "Architecture" = [
     { "Cost Model" = "architecture/cost-model.md" },
+    { "Interview Deck" = "architecture/lifelight-interview.md" },
     { "ADR-001 — Azure Platform" = "architecture/decisions/ADR-001-azure-platform.md" },
   ]},
 ]

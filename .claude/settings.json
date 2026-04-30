@@ -56,7 +56,10 @@
       "Bash(sed -i '' '1s/.*/# Layer 03 — QMS \\\\& Documentation/' /Users/timhalmshaw/dev/med-startup/medtech-platform-docs/docs/layers/03-qms-documentation.md)",
       "Bash(sed -i '' '1s/.*/# Layer 04 — Source Control/' /Users/timhalmshaw/dev/med-startup/medtech-platform-docs/docs/layers/04-source-control.md)",
       "Bash(sed -i '' '1s/.*/# Layer 13 — Security Architecture/' /Users/timhalmshaw/dev/med-startup/medtech-platform-docs/docs/layers/13-security-architecture.md)",
-      "Bash(sed -i '' '1s/.*/# Layer 14 — AI Engineering Strategy/' /Users/timhalmshaw/dev/med-startup/medtech-platform-docs/docs/layers/14-ai-engineering-strategy.md)"
+      "Bash(sed -i '' '1s/.*/# Layer 14 — AI Engineering Strategy/' /Users/timhalmshaw/dev/med-startup/medtech-platform-docs/docs/layers/14-ai-engineering-strategy.md)",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "Bash(git fetch:*)"
     ]
   }
 }

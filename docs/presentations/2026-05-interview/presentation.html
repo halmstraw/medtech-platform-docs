@@ -1,0 +1,821 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Platform Blueprint — Principal Architect & AI Lead</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.6.1/reveal.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.6.1/theme/black.min.css">
+<style>
+  :root {
+    --navy: #0d1b2a;
+    --navy-mid: #132233;
+    --navy-light: #1a2f45;
+    --green: #00c389;
+    --green-dim: #00a374;
+    --orange: #f97316;
+    --white: #ffffff;
+    --off-white: #e8edf2;
+    --muted: #8fa3b8;
+    --mono: 'DM Mono', monospace;
+  }
+  .reveal-viewport { background: var(--navy); }
+  .reveal { font-family: 'DM Sans', sans-serif; font-size: 36px; color: var(--white); }
+  .reveal .slides section { background: var(--navy); height: 100%; padding: 0; text-align: left; }
+  .slide-body { padding: 48px 60px; height: 100%; box-sizing: border-box; display: flex; flex-direction: column; }
+  .reveal h1 { font-size: 2em; font-weight: 700; color: var(--white); margin: 0 0 0.2em; line-height: 1.1; }
+  .reveal h2 { font-size: 1.1em; font-weight: 500; color: var(--green); margin: 0 0 0.15em; text-transform: uppercase; letter-spacing: 0.08em; font-family: var(--mono); }
+  .reveal h3 { font-size: 1.35em; font-weight: 600; color: var(--white); margin: 0 0 0.4em; line-height: 1.2; }
+  .reveal p { font-size: 0.7em; line-height: 1.6; color: var(--off-white); margin: 0 0 0.4em; }
+  .reveal ul { font-size: 0.65em; line-height: 1.65; color: var(--off-white); margin: 0 0 0.4em; padding-left: 1.2em; }
+  .reveal ul li { margin-bottom: 0.28em; }
+  .reveal ul li strong { color: var(--white); }
+  .accent-bar { width: 44px; height: 4px; background: var(--green); margin-bottom: 16px; border-radius: 2px; }
+  .section-label { font-family: var(--mono); font-size: 0.42em; color: var(--muted); text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 6px; }
+  .assumption { background: rgba(249,115,22,0.12); border-left: 3px solid var(--orange); padding: 7px 12px; margin-top: 10px; font-size: 0.54em; color: #fbd4b0; border-radius: 0 4px 4px 0; line-height: 1.5; }
+  .assumption strong { color: var(--orange); }
+  .tradeoff { background: rgba(0,195,137,0.08); border-left: 3px solid var(--green-dim); padding: 7px 12px; margin-top: 10px; font-size: 0.54em; color: #a8e8d8; border-radius: 0 4px 4px 0; line-height: 1.5; }
+  .tradeoff strong { color: var(--green); }
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; flex: 1; }
+  .col-box { background: var(--navy-light); border-radius: 8px; padding: 16px 20px; }
+  .col-box h4 { font-size: 0.6em; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; font-family: var(--mono); margin: 0 0 10px; }
+  .col-box.target h4 { color: var(--green); }
+  .col-box ul { font-size: 0.58em; margin: 0; }
+  .three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; flex: 1; }
+  .three-col .col-box { padding: 16px 18px; }
+  .four-quad { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 14px; flex: 1; }
+  .quad { background: var(--navy-light); border-radius: 8px; padding: 20px 22px; border-top: 3px solid var(--green); display: flex; flex-direction: column; justify-content: center; }
+  .quad.orange { border-top-color: var(--orange); }
+  .quad.teal { border-top-color: #38bdf8; }
+  .quad.purple { border-top-color: #a78bfa; }
+  .quad h4 { font-size: 0.7em; font-weight: 600; color: var(--white); margin: 0 0 6px; }
+  .quad p { font-size: 0.54em; color: var(--muted); margin: 0; line-height: 1.5; }
+  .quad .theme-label { font-family: var(--mono); font-size: 0.48em; color: var(--green); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 5px; }
+  .quad.orange .theme-label { color: var(--orange); }
+  .quad.teal .theme-label { color: #38bdf8; }
+  .quad.purple .theme-label { color: #a78bfa; }
+  .reveal table { width: 100%; font-size: 0.58em; border-collapse: collapse; margin-top: 8px; }
+  .reveal table thead th { background: var(--navy-light); color: var(--green); font-family: var(--mono); font-size: 0.88em; text-transform: uppercase; letter-spacing: 0.08em; padding: 9px 12px; text-align: left; border-bottom: 2px solid var(--green); }
+  .reveal table tbody td { padding: 8px 12px; border-bottom: 1px solid rgba(255,255,255,0.06); color: var(--off-white); vertical-align: top; line-height: 1.5; }
+  .reveal table tbody tr:last-child td { border-bottom: none; }
+  .reveal table tbody td:first-child { color: var(--white); font-weight: 500; }
+  .zone-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; flex: 1; }
+  .zone { background: var(--navy-light); border-radius: 8px; padding: 16px 18px; display: flex; flex-direction: column; }
+  .zone h4 { font-size: 0.62em; font-weight: 600; color: var(--white); margin: 0 0 3px; }
+  .zone .zone-where { font-family: var(--mono); font-size: 0.46em; color: var(--muted); margin-bottom: 10px; }
+  .zone ul { font-size: 0.53em; margin: 0; padding-left: 1em; }
+  .zone-num { font-family: var(--mono); font-size: 1.5em; font-weight: 700; margin-bottom: 4px; }
+  .z1 .zone-num { color: var(--green); }
+  .z2 .zone-num { color: var(--orange); }
+  .z3 .zone-num { color: #38bdf8; }
+  .agent-list { display: flex; flex-direction: column; gap: 7px; margin-top: 10px; }
+  .agent-row { display: flex; align-items: center; gap: 10px; background: var(--navy-light); border-radius: 6px; padding: 7px 12px; }
+  .agent-zone { font-family: var(--mono); font-size: 0.48em; padding: 2px 7px; border-radius: 4px; min-width: 56px; text-align: center; }
+  .z2-tag { background: rgba(249,115,22,0.15); color: var(--orange); }
+  .z3-tag { background: rgba(56,189,248,0.15); color: #38bdf8; }
+  .agent-name { font-size: 0.58em; font-weight: 600; color: var(--white); min-width: 150px; }
+  .agent-desc { font-size: 0.52em; color: var(--muted); }
+  .phase-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; flex: 1; margin-top: 8px; }
+  .phase { background: var(--navy-light); border-radius: 8px; padding: 14px 16px; border-top: 3px solid var(--green); }
+  .phase:nth-child(2) { border-top-color: var(--orange); }
+  .phase:nth-child(3) { border-top-color: #38bdf8; }
+  .phase:nth-child(4) { border-top-color: #a78bfa; }
+  .phase h4 { font-size: 0.6em; font-weight: 600; color: var(--white); margin: 0 0 3px; }
+  .phase .phase-time { font-family: var(--mono); font-size: 0.46em; color: var(--muted); margin-bottom: 9px; }
+  .phase ul { font-size: 0.53em; margin: 0; padding-left: 1em; }
+  .metric-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 8px; }
+  .metric-card { background: var(--navy-light); border-radius: 8px; padding: 12px 14px; }
+  .metric-card .metric-name { font-size: 0.55em; font-weight: 600; color: var(--white); margin-bottom: 4px; }
+  .metric-card .metric-desc { font-size: 0.48em; color: var(--muted); line-height: 1.45; }
+  .close-item { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 12px; }
+  .close-num { font-family: var(--mono); font-size: 0.68em; font-weight: 700; color: var(--green); min-width: 26px; padding-top: 2px; }
+  .close-text { font-size: 0.62em; color: var(--off-white); line-height: 1.55; }
+  .close-text strong { color: var(--white); }
+  .platform-url { font-family: var(--mono); font-size: 0.58em; color: var(--green); background: var(--navy-light); padding: 8px 14px; border-radius: 6px; display: inline-block; margin-top: 12px; word-break: break-all; }
+  .reveal .slide-number { font-family: var(--mono); font-size: 0.38em; color: var(--muted); background: transparent; bottom: 14px; right: 20px; }
+  .instr-box { background: var(--navy-light); border-radius: 8px; padding: 14px 16px; }
+  .instr-box h4 { font-family: var(--mono); font-size: 0.52em; color: var(--green); text-transform: uppercase; letter-spacing: 0.08em; margin: 0 0 8px; }
+  .instr-box ul { font-size: 0.53em; margin: 0; padding-left: 1em; }
+</style>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+
+<!-- SLIDE 1 — TITLE -->
+<section style="background:var(--navy)!important;">
+<div class="slide-body" style="justify-content:center;">
+  <div style="font-family:var(--mono);font-size:0.42em;color:var(--green);text-transform:uppercase;letter-spacing:0.12em;margin-bottom:14px;">Principal Architect &amp; AI Lead — Interview Presentation</div>
+  <h1 style="font-size:1.55em;margin-bottom:20px;">A Platform Blueprint for a<br><span style="color:var(--green)">Regulated AI Medical Device</span></h1>
+  <div style="font-size:0.62em;color:var(--muted);margin-bottom:40px;line-height:1.5;">A structured thought exercise — reasoning, trade-offs, and open questions</div>
+  <div style="font-size:0.68em;font-weight:600;color:var(--off-white);">Tim Halmshaw &nbsp;·&nbsp; May 2026</div>
+  <div style="margin-top:28px;background:rgba(249,115,22,0.1);border-left:3px solid var(--orange);padding:10px 16px;font-size:0.46em;color:#fbd4b0;border-radius:0 4px 4px 0;max-width:700px;line-height:1.6;">
+    <strong style="color:var(--orange)">Framing:</strong> Current state descriptions are based on public information and prior conversations. They may be inaccurate — day one begins with an onboarding audit to validate or correct every assumption made here.
+  </div>
+</div>
+</section>
+
+<!-- SLIDE 2 — THE PROBLEM -->
+<section>
+<div class="slide-body">
+  <div class="section-label">Product Understanding · 1 of 2</div>
+  <div class="accent-bar"></div>
+  <h3>The Problem Worth Solving</h3>
+  <p style="font-size:0.75em;color:var(--green);font-weight:500;margin-bottom:16px;">A cuffless, contactless blood pressure monitor. No hardware. Just a phone.</p>
+  <div class="three-col">
+    <div class="col-box">
+      <h4>The science</h4>
+      <ul>
+        <li>rPPG captures micro colour changes in facial skin</li>
+        <li>Extracts blood volume pulse signal</li>
+        <li>Derives HR and blood pressure</li>
+        <li>~1% colour change from ambient light</li>
+      </ul>
+    </div>
+    <div class="col-box">
+      <h4>Where we are</h4>
+      <ul>
+        <li>CE Class IIa — EU MDR certified</li>
+        <li>Deployed in NHS primary care</li>
+        <li>FDA 510(k) / De Novo in progress</li>
+        <li>B2B SDK — embedded in partner clinical apps</li>
+      </ul>
+    </div>
+    <div class="col-box">
+      <h4>The tension</h4>
+      <ul>
+        <li>Engineering wrapper must mature to FDA-submission standard</li>
+        <li>Small team, high regulatory bar</li>
+        <li>Scale economics need to improve</li>
+        <li>BP estimation: the hard frontier</li>
+      </ul>
+    </div>
+  </div>
+  <div class="assumption"><strong>Assumption:</strong> B2B SDK delivery model assumed. If the primary route is direct-to-clinician app, some mobile architecture framing shifts.</div>
+</div>
+</section>
+
+<!-- SLIDE 3 — THREE HARD PROBLEMS -->
+<section>
+<div class="slide-body">
+  <div class="section-label">Product Understanding · 2 of 2</div>
+  <div class="accent-bar"></div>
+  <h3>Three Hard Problems, Running Simultaneously</h3>
+  <div class="three-col" style="margin-top:10px;">
+    <div class="col-box">
+      <div style="font-family:var(--mono);font-size:0.48em;color:var(--green);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:7px;">Signal Fidelity</div>
+      <ul>
+        <li>~1% colour change masked by ISP, motion, skin tone bias</li>
+        <li>Video compression destroys morphology features</li>
+        <li>BP needs waveform detail — a higher bar than HR</li>
+        <li>SBP the persistent unsolved problem</li>
+      </ul>
+    </div>
+    <div class="col-box">
+      <div style="font-family:var(--mono);font-size:0.48em;color:var(--orange);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:7px;">Regulatory Provenance</div>
+      <ul>
+        <li>IEC 62304, ISO 14971, GDPR, NHS DSPT</li>
+        <li>FDA cybersecurity guidance 2023</li>
+        <li>Every artefact: requirement → code → test → release traceable</li>
+        <li>The architecture <em>is</em> evidence</li>
+      </ul>
+    </div>
+    <div class="col-box">
+      <div style="font-family:var(--mono);font-size:0.48em;color:#38bdf8;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:7px;">Scale Economics</div>
+      <ul>
+        <li>Current cost ~7p per assessment</li>
+        <li>Target &lt;1p per assessment</li>
+        <li>Small team × AI tooling</li>
+        <li>Engineering model must scale before headcount does</li>
+      </ul>
+    </div>
+  </div>
+  <div class="assumption"><strong>Assumption:</strong> ~7p current cost is from public information — may not reflect latest infrastructure state.</div>
+</div>
+</section>
+
+<!-- SLIDE 4 — BLUEPRINT OVERVIEW -->
+<section>
+<div class="slide-body">
+  <div class="section-label">Blueprint Overview</div>
+  <div class="accent-bar"></div>
+  <h3>The Blueprint: Four Themes</h3>
+  <div class="four-quad" style="margin-top:10px;">
+    <div class="quad">
+      <div class="theme-label">Theme A</div>
+      <h4>Cloud Architecture</h4>
+      <p>Decoupled, event-driven, scalable platform. Assessment lifecycle design. Service boundaries drawn by regulatory concerns.</p>
+    </div>
+    <div class="quad orange">
+      <div class="theme-label">Theme B</div>
+      <h4>Engineering Governance</h4>
+      <p>Quality gates, ADRs, testing strategy, CI/CD, release management, and instrumentation across cloud and mobile.</p>
+    </div>
+    <div class="quad teal">
+      <div class="theme-label">Theme C</div>
+      <h4>Client-Side Performance</h4>
+      <p>Mobile SDK architecture, GPU acceleration, on-device signal extraction vs cloud inference trade-offs.</p>
+    </div>
+    <div class="quad purple">
+      <div class="theme-label">Theme D</div>
+      <h4>Agentic AI in the SDLC</h4>
+      <p>Trust zone model, five agent specifications, and measuring whether AI tooling is actually delivering value.</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- SLIDE 5 — PLATFORM FOUNDATION PRINCIPLES -->
+<section>
+<div class="slide-body">
+  <div class="section-label">Theme A — Cloud Architecture · 1 of 3</div>
+  <div class="accent-bar"></div>
+  <h3>Platform Foundation Principles</h3>
+  <p style="font-size:0.6em;color:var(--muted);margin-bottom:12px;">Decoupled, event-driven, and auditable by default</p>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;flex:1;">
+    <div class="col-box">
+      <h4>Immutable Infrastructure</h4>
+      <ul>
+        <li>Terraform IaC — nothing hand-configured in production</li>
+        <li>Every environment reproducible from source</li>
+        <li>Regulated environments cannot tolerate drift</li>
+      </ul>
+    </div>
+    <div class="col-box">
+      <h4>Event-Driven Assessment Lifecycle</h4>
+      <ul>
+        <li>Assessment request as an event, not a synchronous call chain</li>
+        <li>Enables replay, retry, and audit natively</li>
+        <li>Decouples ingestion from inference latency</li>
+      </ul>
+    </div>
+    <div class="col-box">
+      <h4>Audit Trail as Design Constraint</h4>
+      <ul>
+        <li>Not bolt-on logging — structured events at every boundary</li>
+        <li>The audit log <em>is</em> the compliance record</li>
+        <li>Required for IEC 62304 traceability</li>
+      </ul>
+    </div>
+    <div class="col-box">
+      <h4>API Contract as First-Class Artefact</h4>
+      <ul>
+        <li>OpenAPI spec versioned alongside code</li>
+        <li>Breaking changes require an ADR before implementation</li>
+        <li>SDK stability is a commercial commitment</li>
+      </ul>
+    </div>
+  </div>
+  <div class="tradeoff"><strong>Trade-off:</strong> Event-driven adds operational complexity. I'd apply it to the assessment pipeline — where auditability is a regulatory requirement — not as a blanket pattern across every internal service.</div>
+</div>
+</section>
+
+<!-- SLIDE 6 — CURRENT TO TARGET -->
+<section>
+<div class="slide-body">
+  <div class="section-label">Theme A — Cloud Architecture · 2 of 3</div>
+  <div class="accent-bar"></div>
+  <h3>Assessment Architecture: Current → Target</h3>
+  <div class="two-col" style="margin-top:10px;align-items:stretch;">
+    <div class="col-box">
+      <h4>Assumed current — to be validated</h4>
+      <ul>
+        <li>Flask inference service</li>
+        <li>New container per assessment, load-balanced</li>
+        <li>~7p per assessment</li>
+        <li>No formal API contract documented</li>
+        <li>Single deployable, no internal service boundaries</li>
+      </ul>
+    </div>
+    <div class="col-box target">
+      <h4>Target state</h4>
+      <ul>
+        <li>AKS warm inference pool, horizontal pod autoscaling</li>
+        <li>Async queue (Azure Service Bus) — decouples SDK from inference</li>
+        <li>OpenAPI contract between mobile SDK and backend</li>
+        <li>Service boundaries: ingestion / inference / results / audit</li>
+        <li style="color:var(--green);font-weight:600">&lt;1p per assessment target</li>
+      </ul>
+    </div>
+  </div>
+  <div class="tradeoff" style="margin-top:10px;"><strong>Trade-off:</strong> AKS adds operational surface area. Azure Container Apps is a simpler managed alternative for phase 1 — migrate to AKS when orchestration complexity justifies it. Team Kubernetes familiarity worth establishing on day one.</div>
+</div>
+</section>
+
+<!-- SLIDE 7 — SERVICE BOUNDARIES -->
+<section>
+<div class="slide-body">
+  <div class="section-label">Theme A — Cloud Architecture · 3 of 3</div>
+  <div class="accent-bar"></div>
+  <h3>Service Boundaries: Where and Why Not</h3>
+  <p style="font-size:0.58em;color:var(--muted);">Decompose where it reduces regulatory blast radius — not for its own sake</p>
+  <table style="margin-top:10px;">
+    <thead>
+      <tr><th>Service</th><th>Responsibility</th><th>Why a boundary here?</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span style="font-family:var(--mono);font-size:0.88em;color:var(--green)">signal-api</span></td>
+        <td>Ingestion, validation, anonymisation</td>
+        <td>PII boundary — raw video decisions isolated here</td>
+      </tr>
+      <tr>
+        <td><span style="font-family:var(--mono);font-size:0.88em;color:var(--green)">inference-service</span></td>
+        <td>ML model invocation, versioned via MLflow</td>
+        <td>Independent deployability for model updates</td>
+      </tr>
+      <tr>
+        <td><span style="font-family:var(--mono);font-size:0.88em;color:var(--green)">results-service</span></td>
+        <td>BP/HR output, audit event emission</td>
+        <td>Clinical output isolated for validation scope</td>
+      </tr>
+      <tr>
+        <td><span style="font-family:var(--mono);font-size:0.88em;color:var(--green)">identity-service</span></td>
+        <td>SDK authentication, API key lifecycle</td>
+        <td>Security boundary, independent rotation</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="tradeoff" style="margin-top:10px;"><strong>What I'd keep coherent:</strong> inference-service internals. Splitting pre-processing, inference, and post-processing into separate services creates distributed complexity with no regulatory benefit.<br><br><strong>Trade-off:</strong> Four services = four deployables to operate. I'd sequence their separation across phases — not land all four simultaneously.</div>
+</div>
+</section>
+
+<!-- SLIDE 8 — ARCHITECTURE GOVERNANCE -->
+<section>
+<div class="slide-body">
+  <div class="section-label">Theme B — Engineering Governance · 1 of 3</div>
+  <div class="accent-bar"></div>
+  <h3>Architecture Governance Model</h3>
+  <p style="font-size:0.58em;color:var(--muted);">Quality gates and decision records — the layer above delivery process. Sprint discipline and team shape sit with the Head of Engineering.</p>
+  <div class="two-col" style="margin-top:10px;">
+    <div class="col-box">
+      <h4>Architecture Decision Records (ADRs)</h4>
+      <ul>
+        <li>Written before implementation — not retrospectively</li>
+        <li>Format: context → decision → rationale → alternatives rejected</li>
+        <li>Stored in repo, reviewed via PR, immutable once merged</li>
+        <li>"Why did we choose this?" has a legal answer in a regulated context</li>
+      </ul>
+    </div>
+    <div class="col-box">
+      <h4>CI-Enforced Quality Gates</h4>
+      <ul>
+        <li>Static analysis (SonarCloud)</li>
+        <li>Security gate (Snyk) — no critical vulnerabilities ship</li>
+        <li>SBOM generation (Syft) — FDA cybersecurity artefact, every build</li>
+        <li>Traceability gate — PR links to Issue with risk class before merge</li>
+      </ul>
+    </div>
+  </div>
+  <div style="margin-top:10px;background:var(--navy-light);border-radius:8px;padding:12px 16px;">
+    <p style="font-size:0.57em;color:var(--off-white);margin:0;line-height:1.6;">
+      <strong style="color:var(--white)">Change control:</strong> Scope of change = scope of re-validation. Surgical changes reduce regulatory burden. Architecture-significant changes require an ADR before a PR is raised.<br><br>
+      <strong style="color:var(--white)">People and governance:</strong> Governance frameworks only work if the team believes in them. I invest in people understanding <em>why</em> a gate exists — not just that it does. Engineers who understand the regulatory consequence of a missing traceability link make better decisions than those following a checklist. That comes from coaching, not compliance.
+    </p>
+  </div>
+</div>
+</section>
+
+<!-- SLIDE 9 — TESTING STRATEGY -->
+<section>
+<div class="slide-body">
+  <div class="section-label">Theme B — Engineering Governance · 2 of 3</div>
+  <div class="accent-bar"></div>
+  <h3>Testing Strategy</h3>
+  <p style="font-size:0.58em;color:var(--muted);">Shaped by IEC 62304 software safety class</p>
+  <div class="three-col" style="margin-top:10px;">
+    <div class="col-box">
+      <div style="font-family:var(--mono);font-size:0.47em;color:var(--green);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:7px;">Layer 1 — Unit &amp; Integration</div>
+      <ul>
+        <li>GitHub Actions, pytest</li>
+        <li>Standard coverage gates</li>
+        <li>AI-assisted test generation welcome</li>
+        <li style="color:#ef9090;">AI-merged tests are not</li>
+        <li>Fast, automated, developer-owned</li>
+      </ul>
+    </div>
+    <div class="col-box">
+      <div style="font-family:var(--mono);font-size:0.47em;color:var(--orange);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:7px;">Layer 2 — System Verification</div>
+      <ul>
+        <li>TestRail as test management</li>
+        <li>Requirement → test case → execution → result</li>
+        <li>Third-party tester submissions</li>
+        <li>IEC 62304 §5.7 artefact</li>
+        <li>Appears in regulatory submission</li>
+      </ul>
+    </div>
+    <div class="col-box">
+      <div style="font-family:var(--mono);font-size:0.47em;color:#38bdf8;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:7px;">Layer 3 — Clinical Performance</div>
+      <ul>
+        <li>Separate from software verification</li>
+        <li>Bland-Altman vs auscultatory reference</li>
+        <li>Fitzpatrick I–VI skin tone stratification</li>
+        <li>Longitudinal stability required</li>
+        <li>FDA De Novo submission artefact</li>
+      </ul>
+    </div>
+  </div>
+  <div class="tradeoff" style="margin-top:10px;"><strong>Trade-off:</strong> The temptation is to let test evidence accumulate informally and back-fill before submission. The cost of back-filling is always higher than the cost of discipline. The compliance agent enforces traceability linkage at PR time — making drift visible before it becomes a problem.</div>
+</div>
+</section>
+
+<!-- SLIDE 10 — CICD AND INSTRUMENTATION -->
+<section>
+<div class="slide-body">
+  <div class="section-label">Theme B — Engineering Governance · 3 of 3</div>
+  <div class="accent-bar"></div>
+  <h3>CI/CD, Release Management &amp; Instrumentation</h3>
+  <div class="two-col" style="margin-top:10px;gap:16px;">
+    <div style="display:flex;flex-direction:column;gap:10px;">
+      <div class="col-box" style="flex:1;">
+        <h4>Pipeline Gates</h4>
+        <ul>
+          <li>Build + unit tests</li>
+          <li>SonarCloud quality gate</li>
+          <li>Snyk dependency + container scan</li>
+          <li>SBOM generation (Syft) — every build</li>
+          <li>TestRail execution trigger</li>
+          <li style="color:var(--green);">Human approval gate to production — always</li>
+        </ul>
+      </div>
+      <div class="col-box">
+        <h4>Release Model</h4>
+        <ul>
+          <li>Every sprint → release candidate</li>
+          <li>Production: PO sign-off + QA gate + regulatory checklist</li>
+          <li>Immutable artefact registry (ACR)</li>
+        </ul>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:10px;">
+      <div class="instr-box">
+        <h4>Cloud Instrumentation</h4>
+        <ul>
+          <li>Grafana + Prometheus: infra &amp; service metrics</li>
+          <li>Loki: structured log aggregation</li>
+          <li>Sentry: error tracking + release correlation</li>
+          <li>Key metrics: assessment success rate, inference latency p50/p95/p99, queue depth</li>
+        </ul>
+      </div>
+      <div class="instr-box">
+        <h4>Mobile Instrumentation</h4>
+        <ul>
+          <li>Signal quality: SNR per ROI, motion artefact rate, rejection rate</li>
+          <li>Outcome: HR/BP confidence scores, uncertainty bounds</li>
+          <li>Sentry mobile: crash rate, ANR rate, B2B SDK integration errors</li>
+          <li>Key metric: % assessments with signal sufficient for clinical output</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="tradeoff" style="margin-top:8px;"><strong>Trade-off:</strong> Mobile telemetry must be privacy-preserving — signal quality metrics sent as aggregated numbers, not raw biometric values. Needs explicit definition in the data classification framework.</div>
+</div>
+</section>
+
+<!-- SLIDE 11 — MOBILE ARCHITECTURE -->
+<section>
+<div class="slide-body">
+  <div class="section-label">Theme C — Client-Side Performance · 1 of 2</div>
+  <div class="accent-bar"></div>
+  <h3>Mobile Architecture</h3>
+  <p style="font-size:0.62em;color:var(--muted);">The SDK is the primary integration surface. Treat it like a product.</p>
+  <div class="two-col" style="margin-top:10px;">
+    <div class="col-box">
+      <h4>Architecture Patterns</h4>
+      <ul>
+        <li>MVVM + Clean Architecture — iOS (Swift/SwiftUI) and Android (Kotlin)</li>
+        <li>rPPG signal capture behind a platform-agnostic abstraction layer</li>
+        <li>Camera/spectrum pipeline swappable without touching business logic</li>
+        <li>Shared patterns across platforms, platform-native quality preserved</li>
+      </ul>
+    </div>
+    <div class="col-box">
+      <h4>SDK as a Product</h4>
+      <ul>
+        <li>Semantic versioning with explicit deprecation policy</li>
+        <li>Compatibility matrix: SDK version × OS version × camera capability</li>
+        <li>B2B partner developer experience is a commercial concern</li>
+        <li>Partner onboarding documentation owned alongside the SDK</li>
+      </ul>
+    </div>
+  </div>
+  <div class="assumption"><strong>Assumption:</strong> Current iOS/Android codebase structure unknown — UIKit vs SwiftUI, shared abstractions vs parallel codebases. Architecture confirmed after onboarding audit on day one.</div>
+</div>
+</section>
+
+<!-- SLIDE 12 — ON-DEVICE COMPUTE -->
+<section>
+<div class="slide-body">
+  <div class="section-label">Theme C — Client-Side Performance · 2 of 2</div>
+  <div class="accent-bar"></div>
+  <h3>On-Device Compute: What's Realistic</h3>
+  <p style="font-size:0.62em;color:var(--muted);">Signal extraction on-device. BP inference in the cloud. For now.</p>
+  <div class="two-col" style="margin-top:10px;">
+    <div class="col-box target">
+      <h4>Runs on-device (target)</h4>
+      <ul>
+        <li>Face detection + landmarks: MediaPipe — production-proven</li>
+        <li>ROI extraction: forehead + left and right cheeks</li>
+        <li>POS + CHROM extraction, SNR-weighted fusion</li>
+        <li>Signal quality scoring — reject low-SNR before transmission</li>
+        <li style="color:var(--green);">Anonymisation — raw RGB never leaves the device</li>
+      </ul>
+    </div>
+    <div class="col-box">
+      <h4>Stays in the cloud (for now)</h4>
+      <ul>
+        <li>BP estimation model — complex, updated frequently</li>
+        <li>MLflow model registry — versioned deployments</li>
+        <li>Easier to audit and version-control centrally</li>
+        <li>FDA controlled release evidence maintained cloud-side</li>
+      </ul>
+    </div>
+  </div>
+  <div style="margin-top:10px;background:var(--navy-light);border-radius:8px;padding:10px 16px;font-size:0.54em;color:var(--off-white);line-height:1.55;">
+    <strong style="color:var(--white)">GPU acceleration:</strong> Metal (iOS) · Vulkan (Android) &nbsp;|&nbsp;
+    <strong style="color:var(--white)">ME-rPPG (2025):</strong> 3.6 MB, 9.46 ms latency — on-device DL benchmark &nbsp;|&nbsp;
+    <strong style="color:var(--white)">Pruning + quantisation:</strong> up to 46× size reduction
+  </div>
+  <div class="tradeoff" style="margin-top:8px;"><strong>Trade-off:</strong> On-device extraction reduces cost, improves privacy, enables offline operation. Trade-off: mobile CI/CD complexity and validation across a fragmented device/OS matrix. Phase 2 priority, not day one.</div>
+</div>
+</section>
+
+<!-- SLIDE 13 — TRUST ZONE MODEL -->
+<section>
+<div class="slide-body">
+  <div class="section-label">Theme D — Agentic AI in the SDLC · 1 of 2</div>
+  <div class="accent-bar"></div>
+  <h3>The Trust Zone Model</h3>
+  <p style="font-size:0.62em;color:var(--muted);">AI as a force multiplier. Not a decision maker.</p>
+  <div class="zone-grid" style="margin-top:10px;">
+    <div class="zone z1">
+      <div class="zone-num">Z1</div>
+      <h4>Development</h4>
+      <div class="zone-where">Feature branches only</div>
+      <ul>
+        <li>Read/write code</li>
+        <li>Generate tests</li>
+        <li>Draft ADRs</li>
+        <li>Coding assistance</li>
+      </ul>
+      <div style="margin-top:auto;padding-top:9px;font-size:0.47em;color:#ef9090;border-top:1px solid rgba(255,255,255,0.08);">Cannot touch main or release</div>
+    </div>
+    <div class="zone z2">
+      <div class="zone-num">Z2</div>
+      <h4>Review &amp; CI Gate</h4>
+      <div class="zone-where">PR open</div>
+      <ul>
+        <li>Read code, read tests</li>
+        <li>Write structured PR comments</li>
+        <li>CRITICAL / WARNING / INFO</li>
+        <li>Traceability checks</li>
+      </ul>
+      <div style="margin-top:auto;padding-top:9px;font-size:0.47em;color:#ef9090;border-top:1px solid rgba(255,255,255,0.08);">Cannot approve or block merge</div>
+    </div>
+    <div class="zone z3">
+      <div class="zone-num">Z3</div>
+      <h4>Operations</h4>
+      <div class="zone-where">Alert / incident</div>
+      <ul>
+        <li>Read metrics and logs</li>
+        <li>Write GitHub Issues only</li>
+        <li>Summarise incident context</li>
+      </ul>
+      <div style="margin-top:auto;padding-top:9px;font-size:0.47em;color:#ef9090;border-top:1px solid rgba(255,255,255,0.08);">Cannot remediate, silence alerts, or push to any branch</div>
+    </div>
+  </div>
+  <div class="agent-list" style="margin-top:10px;">
+    <div class="agent-row"><span class="agent-zone z2-tag">Z2</span><span class="agent-name">Code Review</span><span class="agent-desc">PR triggered · structured CRITICAL / WARNING / INFO review</span></div>
+    <div class="agent-row"><span class="agent-zone z2-tag">Z2</span><span class="agent-name">Compliance</span><span class="agent-desc">Traceability check · IEC 62304 requirement linkage at PR time</span></div>
+    <div class="agent-row"><span class="agent-zone z2-tag">Z2</span><span class="agent-name">ML Validation</span><span class="agent-desc">ML file changes trigger · flags model design drift</span></div>
+    <div class="agent-row"><span class="agent-zone z3-tag">Z3</span><span class="agent-name">Ops</span><span class="agent-desc">Alert triggered · summarised GitHub Issue created</span></div>
+  </div>
+</div>
+</section>
+
+<!-- SLIDE 14 — MEASURING AI ROI -->
+<section>
+<div class="slide-body">
+  <div class="section-label">Theme D — Agentic AI in the SDLC · 2 of 2</div>
+  <div class="accent-bar"></div>
+  <h3>Measuring Whether It's Delivering Value</h3>
+  <p style="font-size:0.6em;color:var(--muted);">Instrument the tooling. Don't fly blind on AI ROI.</p>
+  <div class="metric-grid" style="margin-top:8px;">
+    <div class="metric-card">
+      <div class="metric-name">PR cycle time (open → merge)</div>
+      <div class="metric-desc">Baseline before rollout, tracked weekly after. The headline productivity signal.</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-name">Review comment action rate</div>
+      <div class="metric-desc">% of AI-generated comments resulting in a code change. Proxy for signal quality.</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-name">Traceability coverage at PR time</div>
+      <div class="metric-desc">% of PRs with complete requirement → test linkage before merge. Compliance agent contribution.</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-name">False positive rate</div>
+      <div class="metric-desc">High false positives → noise → engineers route around agents. Monitor and tune continuously.</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-name">Engineer satisfaction (quarterly)</div>
+      <div class="metric-desc">Lightweight survey. Are people using the tooling, or working around it?</div>
+    </div>
+    <div class="metric-card" style="background:rgba(0,195,137,0.07);border:1px solid rgba(0,195,137,0.2);">
+      <div class="metric-name" style="color:var(--green);">Governance</div>
+      <div class="metric-desc">All prompts version-controlled. LLM tooling: data residency compliant, no training on proprietary code. Quarterly review cycle.</div>
+    </div>
+  </div>
+  <div class="tradeoff" style="margin-top:8px;"><strong>Trade-off:</strong> Agents add latency to the PR cycle. Prompt quality and tuning is an ongoing investment — not a one-time setup cost. Budget for it explicitly.</div>
+</div>
+</section>
+
+<!-- SLIDE 15 — ROADMAP PHASING -->
+<section>
+<div class="slide-body">
+  <div class="section-label">Forward Look · 1 of 3</div>
+  <div class="accent-bar"></div>
+  <h3>Roadmap: Four Phases</h3>
+  <p style="font-size:0.6em;color:var(--muted);">First 90 days: make what exists auditable.</p>
+  <div class="phase-grid">
+    <div class="phase">
+      <h4>Stabilise</h4>
+      <div class="phase-time">Months 1–3</div>
+      <ul>
+        <li>Source control discipline</li>
+        <li>CI/CD to production-grade</li>
+        <li>TestRail established</li>
+        <li>ADRs 001–007 written</li>
+        <li>Assessment queue in place</li>
+      </ul>
+    </div>
+    <div class="phase">
+      <h4>Scale &amp; Cost</h4>
+      <div class="phase-time">Months 2–4</div>
+      <ul>
+        <li>AKS warm inference pool</li>
+        <li>On-device signal extraction</li>
+        <li>API contract formalised</li>
+        <li>&lt;1p assessment target</li>
+      </ul>
+    </div>
+    <div class="phase">
+      <h4>ML Maturity</h4>
+      <div class="phase-time">Months 3–6</div>
+      <ul>
+        <li>MLflow model registry</li>
+        <li>Model versioning pipeline</li>
+        <li>Clinical validation pipeline</li>
+        <li>FDA evidence base building</li>
+      </ul>
+    </div>
+    <div class="phase">
+      <h4>Platform</h4>
+      <div class="phase-time">Months 4–8</div>
+      <ul>
+        <li>Backstage IDP</li>
+        <li>SDK developer portal</li>
+        <li>Multi-partner onboarding</li>
+        <li>De Novo submission support</li>
+      </ul>
+    </div>
+  </div>
+  <div class="assumption" style="margin-top:10px;"><strong>Assumption:</strong> Phase overlaps are intentional — the team cannot pause for 3 months of infrastructure work. Sequencing reflects prioritisation, not exclusivity.</div>
+</div>
+</section>
+
+<!-- SLIDE 16 — THREE INVESTMENTS -->
+<section>
+<div class="slide-body">
+  <div class="section-label">Forward Look · 2 of 3</div>
+  <div class="accent-bar"></div>
+  <h3>Three Investments Worth Making</h3>
+  <p style="font-size:0.6em;color:var(--muted);">Beyond the blueprint — where I'd place longer bets</p>
+  <div class="three-col" style="margin-top:10px;">
+    <div class="col-box">
+      <div style="font-family:var(--mono);font-size:0.47em;color:var(--green);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:6px;">Long game</div>
+      <h4 style="font-size:0.72em;margin-bottom:7px;">On-Device BP Inference</h4>
+      <ul>
+        <li>Literature is pre-clinical on calibration-free BP</li>
+        <li>Architecture should be ready when science catches up</li>
+        <li>Build on-device/cloud abstraction now — model location swappable later</li>
+        <li>ME-rPPG shows &lt;10ms on-device inference achievable</li>
+      </ul>
+    </div>
+    <div class="col-box">
+      <div style="font-family:var(--mono);font-size:0.47em;color:var(--orange);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:6px;">Competitive moat</div>
+      <h4 style="font-size:0.72em;margin-bottom:7px;">Proprietary Clinical Dataset</h4>
+      <ul>
+        <li>No public dataset sufficient for clinical-grade BP across diverse populations</li>
+        <li>Best public benchmark (MMPD): only 33 subjects</li>
+        <li>Diverse, longitudinal, smartphone-captured dataset</li>
+        <li>A differentiator no competitor can quickly replicate</li>
+      </ul>
+    </div>
+    <div class="col-box">
+      <div style="font-family:var(--mono);font-size:0.47em;color:#38bdf8;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:6px;">Data leverage</div>
+      <h4 style="font-size:0.72em;margin-bottom:7px;">Self-Supervised Pre-Training</h4>
+      <ul>
+        <li>Contrastive learning on unlabelled facial video</li>
+        <li>Bootstraps models before fine-tuning on scarce labelled BP data</li>
+        <li>Doesn't require expensive label collection to start</li>
+        <li>Likely necessary step toward clinical-grade BP accuracy</li>
+      </ul>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- SLIDE 17 — PLATFORM REFERENCE -->
+<section>
+<div class="slide-body">
+  <div class="section-label">Forward Look · 3 of 3</div>
+  <div class="accent-bar"></div>
+  <h3>The Platform Reference Architecture</h3>
+  <p style="font-size:0.62em;color:var(--muted);">This thinking is documented. Here's where to review it.</p>
+  <div class="two-col" style="margin-top:12px;">
+    <div style="display:flex;flex-direction:column;gap:10px;">
+      <div class="col-box" style="flex:1;">
+        <h4>What's documented</h4>
+        <ul>
+          <li>16-layer reference architecture for a regulated AI medical device SDLC</li>
+          <li>Compliance mappings: IEC 62304, ISO 13485, FDA 510(k) / De Novo, GDPR, NHS DSPT</li>
+          <li>Agent specifications and trust zone model</li>
+          <li>ADR format and decision log</li>
+          <li>Cost model and technology radar</li>
+        </ul>
+      </div>
+      <div class="col-box" style="background:rgba(0,195,137,0.07);border:1px solid rgba(0,195,137,0.2);">
+        <h4 style="color:var(--green);">Live reference</h4>
+        <div class="platform-url">https://lively-tree-004b4fc10.2.azurestaticapps.net/</div>
+        <p style="font-size:0.52em;margin-top:8px;color:var(--muted);">Built as a structured thought exercise ahead of this interview. Assumptions to be validated on day one.</p>
+      </div>
+    </div>
+    <div class="col-box" style="display:flex;flex-direction:column;justify-content:center;align-items:center;min-height:200px;">
+      <div style="text-align:center;color:var(--muted);font-size:0.6em;line-height:2;">
+        <div style="font-size:2.2em;margin-bottom:10px;color:var(--green);">⬡</div>
+        <div style="font-family:var(--mono);font-size:0.88em;color:var(--muted);margin-bottom:4px;">16 Layers · Technology Radar · ADR Log</div>
+        <div style="color:var(--off-white);font-size:0.9em;">Platform overview · Compliance mappings<br>Agent specs · Cost model</div>
+        <div style="margin-top:14px;font-size:0.82em;color:var(--muted);font-style:italic;">Worth a review after this session</div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- SLIDE 18 — CLOSE -->
+<section>
+<div class="slide-body">
+  <div class="section-label">Close</div>
+  <div class="accent-bar"></div>
+  <h3>The Architecture Is Defined.<br>The Question Is Sequencing and Discipline.</h3>
+  <div style="margin-top:18px;flex:1;display:flex;flex-direction:column;gap:9px;">
+    <div class="close-item">
+      <div class="close-num">01</div>
+      <div class="close-text"><strong>Onboarding audit</strong> — understand the actual codebase. Mobile architecture, Flask service internals, existing test evidence, current decision record state.</div>
+    </div>
+    <div class="close-item">
+      <div class="close-num">02</div>
+      <div class="close-text"><strong>ADRs 001–007</strong> — remaining architectural decisions documented before more code is written. Decisions before content, every time.</div>
+    </div>
+    <div class="close-item">
+      <div class="close-num">03</div>
+      <div class="close-text"><strong>CI/CD to production-grade</strong> — immutable artefacts, approval gates, SBOM generation. The foundation everything else depends on.</div>
+    </div>
+    <div class="close-item">
+      <div class="close-num">04</div>
+      <div class="close-text"><strong>Understand the team</strong> — where people are, where they want to go, and what's getting in their way. The architecture only executes if the people delivering it are growing and motivated.</div>
+    </div>
+  </div>
+  <div style="background:var(--navy-light);border-radius:8px;padding:14px 18px;margin-top:10px;">
+    <p style="font-size:0.57em;margin:0;line-height:1.6;color:var(--off-white);">
+      <strong style="color:var(--white)">One honest uncertainty:</strong> BP estimation from rPPG is not a solved problem. DBP approaches clinical thresholds in controlled conditions; SBP does not. Most defensible near-term position: HR regulated to clinical grade, BP advisory with confidence bounds — with a credible path to clinical-grade BP as the evidence base grows.
+    </p>
+  </div>
+  <div style="margin-top:14px;text-align:center;">
+    <span style="font-family:var(--mono);font-size:0.52em;color:var(--green);letter-spacing:0.12em;text-transform:uppercase;">Questions welcome</span>
+  </div>
+</div>
+</section>
+
+</div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.6.1/reveal.min.js"></script>
+<script>
+  Reveal.initialize({
+    hash: true,
+    slideNumber: 'c/t',
+    controls: true,
+    progress: true,
+    center: false,
+    transition: 'fade',
+    transitionSpeed: 'fast',
+    width: 1280,
+    height: 720,
+    margin: 0,
+  });
+</script>
+</body>
+</html>
